@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .modal {
+            transition: all 0.3s ease;
+        }
+        
+        .modal-content {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="py-16 px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 gradient-text animate-fade-in">
+            My Projects
+        </h1>
+        <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto animate-fade-in delay-100">
+            A collection of my best work across web development, design, and more.
+        </p>
+    </header>
+
+    <!-- Filter Section -->
+    <section class="px-4 sm:px-6 lg:px-8 mb-12 max-w-7xl mx-auto">
+        <div class="flex flex-wrap justify-center gap-3 mb-8 animate-fade-in delay-200">
+            <button class="filter-btn px-4 py-2 rounded-full bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-300" data-filter="all">All</button>
+            <button class="filter-btn px-4 py-2 rounded-full bg-slate-200 hover:bg-slate-300 transition-all duration-300" data-filter="web">Web Development</button>
+            <button class="filter-btn px-4 py-2 rounded-full bg-slate-200 hover:bg-slate-300 transition-all duration-300" data-filter="app">Mobile Apps</button>
+            <button class="filter-btn px-4 py-2 rounded-full bg-slate-200 hover:bg-slate-300 transition-all duration-300" data-filter="design">UI/UX Design</button>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="max-w-md mx-auto mb-12 animate-fade-in delay-300">
+            <div class="relative">
+                <input type="text" id="search" placeholder="Search projects..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                <button class="absolute right-3 top-3 text-slate-400 hover:text-indigo-600">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="px-4 sm:px-6 lg:px-8 mb-16 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-100" data-category="web">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 1" class="w-full h-48 object-cover">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
+                        <div>
+                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="1">
+                                View Details
+                            </button>
+                            <div class="flex gap-2">
+                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
+                                    Live Demo
+                                </a>
+                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
+                                    <i class="fab fa-github mr-2"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">E-commerce Website</h3>
+                    <p class="text-slate-600 mb-4">A full-featured online store with cart functionality and payment processing.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">React</span>
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">Node.js</span>
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-200" data-category="app">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 2" class="w-full h-48 object-cover">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
+                        <div>
+                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="2">
+                                View Details
+                            </button>
+                            <div class="flex gap-2">
+                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
+                                    Live Demo
+                                </a>
+                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
+                                    <i class="fab fa-github mr-2"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">Fitness Tracker App</h3>
+                    <p class="text-slate-600 mb-4">Mobile application for tracking workouts, nutrition, and progress.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">Flutter</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">Firebase</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">Dart</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-300" data-category="design">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Project 3" class="w-full h-48 object-cover">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
+                        <div>
+                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="3">
+                                View Details
+                            </button>
+                            <div class="flex gap-2">
+                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
+                                    Live Demo
+                                </a>
+                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
+                                    <i class="fab fa-github mr-2"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">Portfolio UI Design</h3>
+                    <p class="text-slate-600 mb-4">Modern and clean UI design for a creative professional portfolio.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Figma</span>
+                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Adobe XD</span>
+                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Illustrator</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-400" data-category="web">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1555421689-3f034debb7a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 4" class="w-full h-48 object-cover">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
+                        <div>
+                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="4">
+                                View Details
+                            </button>
+                            <div class="flex gap-2">
+                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
+                                    Live Demo
+                                </a>
+                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
+                                    <i class="fab fa-github mr-2"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">Task Management System</h3>
+                    <p class="text-slate-600 mb-4">Collaborative platform for teams to manage projects and tasks.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">Vue.js</span>
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">Laravel</span>
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">MySQL</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-500" data-category="app">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1555774698-0f77e70ac5f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 5" class="w-full h-48 object-cover">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
+                        <div>
+                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="5">
+                                View Details
+                            </button>
+                            <div class="flex gap-2">
+                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
+                                    Live Demo
+                                </a>
+                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
+                                    <i class="fab fa-github mr-2"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">Recipe Sharing App</h3>
+                    <p class="text-slate-600 mb-4">Discover and share your favorite recipes with the community.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">React Native</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">GraphQL</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-500" data-category="design">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 6" class="w-full h-48 object-cover">
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
+                        <div>
+                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="6">
+                                View Details
+                            </button>
+                            <div class="flex gap-2">
+                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
+                                    Live Demo
+                                </a>
+                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
+                                    <i class="fab fa-github mr-2"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">E-learning Platform UI</h3>
+                    <p class="text-slate-600 mb-4">User interface design for an online education platform.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Sketch</span>
+                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Figma</span>
+                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Photoshop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-12 animate-fade-in delay-500">
+            <button id="load-more" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg">
+                Load More Projects
+            </button>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black/50 invisible opacity-0 transition-all duration-300">
+        <div class="modal-content bg-white rounded-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="relative">
+                <button id="close-modal" class="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md hover:bg-slate-100 z-10">
+                    <i class="fas fa-times text-slate-700"></i>
+                </button>
+                <img id="modal-image" src="" alt="Project" class="w-full h-64 md:h-80 object-cover rounded-t-xl">
+            </div>
+            <div class="p-6 md:p-8">
+                <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
+                <p id="modal-description" class="text-slate-600 mb-6"></p>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold mb-3">Key Features</h4>
+                    <ul id="modal-features" class="list-disc pl-5 space-y-2 text-slate-700">
+                        <!-- Features will be added by JavaScript -->
+                    </ul>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold mb-3">Technologies Used</h4>
+                    <div id="modal-tech" class="flex flex-wrap gap-2">
+                        <!-- Tech badges will be added by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a id="modal-live-link" href="#" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i> Live Demo
+                    </a>
+                    <a id="modal-code-link" href="#" class="px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors flex items-center">
+                        <i class="fab fa-github mr-2"></i> View Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-100 py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-slate-600">© 2023 My Portfolio. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="text-slate-500 hover:text-indigo-600">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="#" class="text-slate-500 hover:text-indigo-600">
+                    <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="#" class="text-slate-500 hover:text-indigo-600">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="text-slate-500 hover:text-indigo-600">
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Project data for modals
+            const projects = {
+                1: {
+                    title: "E-commerce Website",
+                    description: "A full-featured online store built with modern web technologies. This project includes product listings, shopping cart functionality, user authentication, and secure payment processing.",
+                    features: [
+                        "Product catalog with categories and filters",
+                        "Shopping cart with persistent storage",
+                        "User authentication and profiles",
+                        "Secure checkout with Stripe integration",
+                        "Admin dashboard for inventory management"
+                    ],
+                    tech: ["React", "Node.js", "Express", "MongoDB", "Redux", "Stripe"],
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    liveLink: "#",
+                    codeLink: "#"
+                },
+                2: {
+                    title: "Fitness Tracker App",
+                    description: "A comprehensive mobile application for fitness enthusiasts to track their workouts, nutrition, and progress over time. The app includes personalized recommendations and social features.",
+                    features: [
+                        "Workout logging with exercise database",
+                        "Nutrition tracking with barcode scanning",
+                        "Progress charts and statistics",
+                        "Personalized workout plans",
+                        "Social features to connect with friends"
+                    ],
+                    tech: ["Flutter", "Firebase", "Dart", "Google Fit API", "Firestore"],
+                    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    liveLink: "#",
+                    codeLink: "#"
+                },
+                3: {
+                    title: "Portfolio UI Design",
+                    description: "A modern and clean UI design for a creative professional's portfolio. The design focuses on showcasing work in an elegant, minimalist way while maintaining strong visual impact.",
+                    features: [
+                        "Responsive layout for all devices",
+                        "Interactive project showcases",
+                        "Minimalist navigation",
+                        "Dark mode support",
+                        "Micro-interactions for engagement"
+                    ],
+                    tech: ["Figma", "Adobe XD", "Illustrator", "Photoshop", "After Effects"],
+                    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80",
+                    liveLink: "#",
+                    codeLink: "#"
+                },
+                4: {
+                    title: "Task Management System",
+                    description: "A collaborative platform for teams to manage projects, tasks, and deadlines. The system includes real-time updates, file sharing, and progress tracking.",
+                    features: [
+                        "Project boards with drag-and-drop tasks",
+                        "Team collaboration with real-time updates",
+                        "File attachments and comments",
+                        "Time tracking and reporting",
+                        "Customizable workflows"
+                    ],
+                    tech: ["Vue.js", "Laravel", "MySQL", "WebSockets", "TailwindCSS"],
+                    image: "https://images.unsplash.com/photo-1555421689-3f034debb7a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    liveLink: "#",
+                    codeLink: "#"
+                },
+                5: {
+                    title: "Recipe Sharing App",
+                    description: "A community-driven platform for discovering and sharing recipes. Users can save favorites, create meal plans, and get personalized recommendations.",
+                    features: [
+                        "Recipe database with search and filters",
+                        "User profiles with saved recipes",
+                        "Meal planning tools",
+                        "Grocery list generation",
+                        "Rating and review system"
+                    ],
+                    tech: ["React Native", "GraphQL", "MongoDB", "Node.js", "Apollo"],
+                    image: "https://images.unsplash.com/photo-1555774698-0f77e70ac5f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    liveLink: "#",
+                    codeLink: "#"
+                },
+                6: {
+                    title: "E-learning Platform UI",
+                    description: "User interface design for an online education platform. The design focuses on creating an engaging learning experience with intuitive navigation.",
+                    features: [
+                        "Course browsing and filtering",
+                        "Interactive video player",
+                        "Progress tracking",
+                        "Discussion forums",
+                        "Mobile-first responsive design"
+                    ],
+                    tech: ["Sketch", "Figma", "Photoshop", "Principle", "After Effects"],
+                    image: "https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    liveLink: "#",
+                    codeLink: "#"
+                }
+            };
+
+            // Filter projects
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-indigo-600', 'text-white');
+                        btn.classList.add('bg-slate-200', 'hover:bg-slate-300');
+                    });
+                    
+                    button.classList.remove('bg-slate-200', 'hover:bg-slate-300');
+                    button.classList.add('bg-indigo-600', 'text-white');
+                    
+                    const filter = button.dataset.filter;
+                    
+                    // Filter projects
+                    projectCards.forEach(card => {
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.getElementById('search');
+            
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                projectCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const description = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            // Modal functionality
+            const modal = document.getElementById('project-modal');
+            const closeModal = document.getElementById('close-modal');
+            const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+            
+            viewDetailsButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const projectId = button.dataset.project;
+                    const project = projects[projectId];
+                    
+                    // Populate modal with project data
+                    document.getElementById('modal-image').src = project.image;
+                    document.getElementById('modal-title').textContent = project.title;
+                    document.getElementById('modal-description').textContent = project.description;
+                    
+                    const featuresList = document.getElementById('modal-features');
+                    featuresList.innerHTML = '';
+                    project.features.forEach(feature => {
+                        const li = document.createElement('li');
+                        li.textContent = feature;
+                        featuresList.appendChild(li);
+                    });
+                    
+                    const techContainer = document.getElementById('modal-tech');
+                    techContainer.innerHTML = '';
+                    project.tech.forEach(tech => {
+                        const span = document.createElement('span');
+                        span.className = 'px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full';
+                        span.textContent = tech;
+                        techContainer.appendChild(span);
+                    });
+                    
+                    document.getElementById('modal-live-link').href = project.liveLink;
+                    document.getElementById('modal-code-link').href = project.codeLink;
+                    
+                    // Show modal
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Load more projects (simulated)
+            const loadMoreButton = document.getElementById('load-more');
+            let loadedProjects = 6;
+            
+            loadMoreButton.addEventListener('click', () => {
+                // In a real implementation, you would fetch more projects from an API
+                // Here we'll just simulate loading more projects
+                loadMoreButton.textContent = 'Loading...';
+                loadMoreButton.disabled = true;
+                
+                setTimeout(() => {
+                    // Simulate loading delay
+                    loadMoreButton.textContent = 'No More Projects';
+                    loadMoreButton.disabled = true;
+                    loadMoreButton.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+                    loadMoreButton.classList.add('bg-slate-400', 'cursor-not-allowed');
+                }, 1000);
+            });
+
+            // Dark mode toggle (optional)
+            const darkModeToggle = document.createElement('button');
+            darkModeToggle.className = 'fixed bottom-4 right-4 bg-slate-800 text-white p-3 rounded-full shadow-lg hover:bg-slate-700 z-50';
+            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            document.body.appendChild(darkModeToggle);
+            
+            let darkMode = false;
+            
+            darkModeToggle.addEventListener('click', () => {
+                darkMode = !darkMode;
+                
+                if (darkMode) {
+                    document.body.classList.add('bg-slate-900');
+                    document.body.classList.remove('bg-slate-50');
+                    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    darkModeToggle.classList.remove('bg-slate-800');
+                    darkModeToggle.classList.add('bg-amber-400', 'text-slate-900');
+                } else {
+                    document.body.classList.remove('bg-slate-900');
+                    document.body.classList.add('bg-slate-50');
+                    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                    darkModeToggle.classList.add('bg-slate-800');
+                    darkModeToggle.classList.remove('bg-amber-400', 'text-slate-900');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
