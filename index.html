@@ -3,346 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kennedy | Web Developer Portfolio</title>
+    <title>Wambia Kennedy | Web Developer & Designer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        poppins: ['Poppins', 'sans-serif'],
-                    },
-                    colors: {
-                        primary: {
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                        },
-                        secondary: {
-                            500: '#06b6d4',
-                            600: '#0891b2',
-                        },
-                        dark: {
-                            900: '#0f172a',
-                            800: '#1e293b',
-                            700: '#334155',
-                        }
-                    },
                     animation: {
+                        'text-gradient': 'text-gradient 1.5s linear infinite',
                         'fade-in': 'fadeIn 1s ease-in-out',
-                        'slide-up': 'slideUp 0.5s ease-out',
-                        'slide-left': 'slideLeft 0.5s ease-out',
-                        'slide-right': 'slideRight 0.5s ease-out',
-                        'typing': 'typing 3.5s steps(40, end), blink-caret .75s step-end infinite',
+                        'slide-up': 'slideUp 0.5s ease-out'
                     },
                     keyframes: {
-                        fadeIn: {
+                        'text-gradient': {
+                            'to': { 'background-position': '200% center' }
+                        },
+                        'fadeIn': {
                             '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
+                            '100%': { opacity: '1' }
                         },
-                        slideUp: {
+                        'slideUp': {
                             '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        slideLeft: {
-                            '0%': { transform: 'translateX(20px)', opacity: '0' },
-                            '100%': { transform: 'translateX(0)', opacity: '1' },
-                        },
-                        slideRight: {
-                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
-                            '100%': { transform: 'translateX(0)', opacity: '1' },
-                        },
-                        typing: {
-                            'from': { width: '0' },
-                            'to': { width: '100%' },
-                        },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
                     }
                 }
             }
         }
     </script>
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f8fafc;
             transition: background-color 0.3s ease;
         }
+        
         .dark body {
             background-color: #0f172a;
         }
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        .dark .glass-effect {
-            background: rgba(15, 23, 42, 0.7);
-        }
+        
         .gradient-text {
-            background-image: linear-gradient(to right, #6366f1, #06b6d4);
-            -webkit-background-clip: text;
-            background-clip: text;
+            background-image: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+            background-size: 200% auto;
             color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
         }
-        .typing-cursor {
-            border-right: 2px solid;
-            animation: blink-caret 0.75s step-end infinite;
+        
+        .gradient-bg {
+            background-image: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
         }
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #06b6d4; }
-        }
-        .skill-bar {
-            height: 8px;
-            border-radius: 4px;
-            background: #e2e8f0;
-            overflow: hidden;
-        }
-        .dark .skill-bar {
-            background: #334155;
-        }
-        .skill-progress {
-            height: 100%;
-            border-radius: 4px;
-            background: linear-gradient(to right, #6366f1, #06b6d4);
-            transition: width 1.5s ease-out;
-        }
-        .project-card {
-            transition: all 0.3s ease;
-        }
-        .project-card:hover {
+        
+        .service-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .project-overlay {
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
+        
         .project-card:hover .project-overlay {
             opacity: 1;
+            transform: translateY(0);
         }
-        .floating-label {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+        
+        .animate-role {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger span {
             transition: all 0.3s ease;
-            pointer-events: none;
-            color: #64748b;
         }
-        .dark .floating-label {
-            color: #94a3b8;
+        
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
         }
-        .form-input:focus + .floating-label,
-        .form-input:not(:placeholder-shown) + .floating-label {
-            top: 0;
-            left: 10px;
-            font-size: 12px;
-            background: #f8fafc;
-            padding: 0 5px;
-            color: #6366f1;
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
         }
-        .dark .form-input:focus + .floating-label,
-        .dark .form-input:not(:placeholder-shown) + .floating-label {
-            background: #0f172a;
+        
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        
+        .progress-bar {
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .floating-label {
+            transition: all 0.3s ease;
+        }
+        
+        .floating-input:focus + .floating-label,
+        .floating-input:not(:placeholder-shown) + .floating-label {
+            transform: translateY(-24px);
+            font-size: 0.75rem;
+            color: #3b82f6;
+        }
+        
+        .dark .floating-input:focus + .floating-label,
+        .dark .floating-input:not(:placeholder-shown) + .floating-label {
+            color: #8b5cf6;
+        }
+        
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .service-details-btn {
+            transition: all 0.3s ease;
+        }
+
+        #service-modal {
+            transition: opacity 0.3s ease;
         }
     </style>
 </head>
-<body class="font-poppins text-slate-800 dark:text-slate-200">
+<body class="text-gray-800 dark:text-gray-200">
     <!-- Header & Navigation -->
     <header class="fixed w-full z-50 transition-all duration-300" id="header">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <a href="#" class="text-2xl font-bold gradient-text">Kennedy</a>
-                
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link hover:text-primary-500 transition-colors">Home</a>
-                    <a href="#about" class="nav-link hover:text-primary-500 transition-colors">About</a>
-                    <a href="#skills" class="nav-link hover:text-primary-500 transition-colors">Skills</a>
-                    <a href="#projects" class="nav-link hover:text-primary-500 transition-colors">Projects</a>
-                    <a href="#contact" class="nav-link hover:text-primary-500 transition-colors">Contact</a>
-                </nav>
-                
-                <!-- Dark Mode Toggle -->
-                <button id="theme-toggle" type="button" title="Toggle dark mode" class="p-2 rounded-full focus:outline-none">
-                    <i class="fas fa-moon text-xl text-slate-700 dark:text-yellow-300"></i>
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">Wambia</a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link font-medium">Home</a>
+                <a href="#about" class="nav-link font-medium">About</a>
+                <a href="#skills" class="nav-link font-medium">Skills</a>
+                <a href="#services" class="nav-link font-medium">Services</a>
+                <a href="#projects" class="nav-link font-medium">Projects</a>
+                <a href="#contact" class="nav-link font-medium">Contact</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" type="button" title="Toggle dark mode" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <i class="fas fa-moon" id="icon-moon"></i>
+                    <i class="fas fa-sun hidden" id="icon-sun"></i>
                 </button>
                 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" type="button" title="Open mobile menu" class="md:hidden p-2 rounded-full focus:outline-none">
-                    <i class="fas fa-bars text-xl"></i>
+                <button class="md:hidden hamburger" id="menu-toggle" type="button" title="Open mobile menu">
+                    <span class="block w-6 h-0.5 bg-gray-800 dark:bg-white mb-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-800 dark:bg-white mb-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-800 dark:bg-white"></span>
                 </button>
             </div>
-        </div>
+        </nav>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 right-0 bg-white dark:bg-dark-800 shadow-lg rounded-lg mx-4 py-4 transition-all duration-300">
-            <div class="flex flex-col space-y-4 px-6">
-                <a href="#home" class="nav-link hover:text-primary-500 transition-colors">Home</a>
-                <a href="#about" class="nav-link hover:text-primary-500 transition-colors">About</a>
-                <a href="#skills" class="nav-link hover:text-primary-500 transition-colors">Skills</a>
-                <a href="#projects" class="nav-link hover:text-primary-500 transition-colors">Projects</a>
-                <a href="#contact" class="nav-link hover:text-primary-500 transition-colors">Contact</a>
+        <div class="md:hidden fixed inset-0 bg-white dark:bg-gray-900 z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-300" id="mobile-menu">
+            <div class="flex flex-col items-center space-y-8">
+                <a href="#home" class="text-xl font-medium nav-link">Home</a>
+                <a href="#about" class="text-xl font-medium nav-link">About</a>
+                <a href="#skills" class="text-xl font-medium nav-link">Skills</a>
+                <a href="#services" class="text-xl font-medium nav-link">Services</a>
+                <a href="#projects" class="text-xl font-medium nav-link">Projects</a>
+                <a href="#contact" class="text-xl font-medium nav-link">Contact</a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-cyan-50 dark:from-dark-900 dark:to-dark-800 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 dark:opacity-5">
-            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgwLDAsMCwwLjAyKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')]"></div>
-        </div>
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <div class="absolute inset-0 gradient-bg opacity-10"></div>
+        <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        
         <div class="container mx-auto px-6 z-10">
-            <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="md:w-1/2 mb-12 md:mb-0 animate-fade-in">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4">
-                        <span class="gradient-text">Hi, I'm Kennedy</span>
-                    </h1>
-                    <div class="text-2xl md:text-3xl font-semibold mb-6">
-                        <span class="typing-text inline-block overflow-hidden whitespace-nowrap border-r-2 border-primary-500" id="typing-text"></span>
+            <div class="flex flex-col items-center text-center md:text-left md:items-start md:flex-row md:justify-between">
+                <div class="md:w-1/2 animate-fade-in">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span class="gradient-text">Wambia Kennedy</span></h1>
+                    <div class="text-xl md:text-2xl mb-8 h-8">
+                        <span id="role-text" class="animate-role font-medium">Web Developer | Graphic Designer | Tech Enthusiast</span>
                     </div>
-                    <p class="text-lg text-slate-600 dark:text-slate-300 mb-8 max-w-lg">
-                        I craft exceptional digital experiences with clean, efficient code and intuitive designs. Let's build something amazing together.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#projects" class="px-8 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-full font-medium hover:shadow-lg transition-all duration-300 hover:scale-105">
-                            View My Work
-                        </a>
-                        <a href="#contact" class="px-8 py-3 border-2 border-primary-500 text-primary-500 dark:text-primary-400 rounded-full font-medium hover:bg-primary-500 hover:text-white dark:hover:text-white transition-all duration-300 hover:scale-105">
-                            Contact Me
-                        </a>
+                    <p class="text-lg mb-8 max-w-lg">I create beautiful, functional digital experiences that help businesses grow and individuals shine online.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-medium hover:opacity-90 transition-opacity shadow-lg">Hire Me</a>
+                        <a href="#services" class="px-8 py-3 border-2 border-blue-500 text-blue-500 dark:text-blue-400 dark:border-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-colors">View Services</a>
+                        <a href="portfolio.html" class="px-8 py-3 border-2 border-blue-500 text-blue-500 dark:text-blue-400 dark:border-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-colors">View Portfolio</a>
                     </div>
                 </div>
-                <div class="md:w-1/2 flex justify-center animate-slide-up">
+                
+                <div class="mt-12 md:mt-0 md:w-2/5 relative">
                     <div class="relative">
-                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white dark:border-dark-700 shadow-xl">
-                            <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Kennedy" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                        </div>
-                        <div class="absolute -bottom-5 -right-5 bg-white dark:bg-dark-800 p-3 rounded-full shadow-lg">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center text-white">
-                                <i class="fas fa-code text-xl"></i>
+                        <img src="images/profile.png" alt="Wambia Kennedy" class="w-100 h-[30rem] md:h-[34rem] rounded-2xl overflow-hidden shadow-xl">
+                        <div class="absolute -bottom-4 -right-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-xl">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3">
+                                    <i class="fas fa-code text-blue-500 dark:text-blue-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold">5+ Years</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Experience</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <a href="#about" class="text-slate-600 dark:text-slate-300 hover:text-primary-500 transition-colors">
-                <i class="fas fa-chevron-down text-2xl"></i>
-            </a>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-white dark:bg-dark-900">
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-900 section">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    <span class="gradient-text">About Me</span>
-                </h2>
-                <div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
-            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">About Me</h2>
             
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2 animate-slide-left">
-                    <div class="relative">
-                        <div class="w-full h-80 md:h-96 rounded-2xl overflow-hidden shadow-xl">
-                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Kennedy working" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                        </div>
-                        <div class="absolute -bottom-5 -right-5 bg-white dark:bg-dark-800 p-4 rounded-xl shadow-lg glass-effect">
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center text-white mr-3">
-                                    <i class="fas fa-medal text-xl"></i>
-                                </div>
-                                <div>
-                                    <p class="font-bold text-sm">5+ Years</p>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400">Experience</p>
-                                </div>
-                            </div>
-                        </div>
+            <div class="flex flex-col lg:flex-row items-center lg:items-start lg:justify-between">
+                <div class="lg:w-5/12 mb-12 lg:mb-0">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-4">Who am I?</h3>
+                        <p class="mb-6">I'm a passionate web developer and designer with over 5 years of experience creating digital solutions that make an impact. I specialize in building responsive, user-friendly websites and applications that help businesses and individuals establish their online presence.</p>
+                        <p class="mb-6">My approach combines technical expertise with creative design thinking to deliver solutions that are not only functional but also visually appealing and engaging for users.</p>
+                        <p>When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or mentoring aspiring developers.</p>
                     </div>
                 </div>
                 
-                <div class="md:w-1/2 animate-slide-right">
-                    <h3 class="text-2xl font-bold mb-6">Personal Details</h3>
-                    
-                    <div class="grid grid-cols-2 gap-4 mb-8">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center mr-3">
-                                <i class="fas fa-user text-primary-500"></i>
+                <div class="lg:w-6/12">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6">Personal Info</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div>
+                                <p class="text-gray-500 dark:text-gray-400 mb-1">Full Name</p>
+                                <p class="font-medium">Wambia Kennedy</p>
                             </div>
                             <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400">Full Name</p>
-                                <p class="font-medium">Kennedy Smith</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center mr-3">
-                                <i class="fas fa-calendar text-primary-500"></i>
+                                <p class="text-gray-500 dark:text-gray-400 mb-1">Email</p>
+                                <p class="font-medium">kennyleyy0@gmail.com</p>
                             </div>
                             <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400">Date of Birth</p>
-                                <p class="font-medium">15 March 1992</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center mr-3">
-                                <i class="fas fa-map-marker-alt text-primary-500"></i>
+                                <p class="text-gray-500 dark:text-gray-400 mb-1">Location</p>
+                                <p class="font-medium">Kisumu, Kenya</p>
                             </div>
                             <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400">Location</p>
-                                <p class="font-medium">San Francisco, USA</p>
+                                <p class="text-gray-500 dark:text-gray-400 mb-1">Languages</p>
+                                <p class="font-medium">English, Swahili</p>
                             </div>
                         </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center mr-3">
-                                <i class="fas fa-envelope text-primary-500"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400">Email</p>
-                                <p class="font-medium">hello@kennedy.dev</p>
+                        
+                        <div class="mb-8">
+                            <h4 class="text-lg font-semibold mb-4">Education</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="bg-blue-100 dark:bg-blue-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 mt-1">
+                                        <i class="fas fa-graduation-cap text-blue-500 dark:text-blue-400"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">Bachelor's in Computer Science</p>
+                                        <p class="text-gray-500 dark:text-gray-400">University of Nairobi, 2018</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-purple-100 dark:bg-purple-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 mt-1">
+                                        <i class="fas fa-certificate text-purple-500 dark:text-purple-400"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">Advanced Web Development</p>
+                                        <p class="text-gray-500 dark:text-gray-400">Moringa School, 2020</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-green-100 dark:bg-green-900 w-10 h-10 rounded-full flex items-center justify-center mr-4 mt-1">
+                                        <i class="fas fa-laptop-code text-green-500 dark:text-green-400"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium">Advanced Web Full-stack Development</p>
+                                        <p class="text-gray-500 dark:text-gray-400">STVC, 2025</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center mr-3">
-                                <i class="fas fa-phone text-primary-500"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400">Phone</p>
-                                <p class="font-medium">+1 (555) 123-4567</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center mr-3">
-                                <i class="fas fa-language text-primary-500"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400">Languages</p>
-                                <p class="font-medium">English, Spanish</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <p class="text-slate-600 dark:text-slate-300 mb-6">
-                        I'm a passionate web developer with over 5 years of experience creating modern, responsive websites and web applications. My expertise lies in front-end development with React and Vue.js, but I'm also proficient in back-end technologies like Node.js and Django.
-                    </p>
-                    <p class="text-slate-600 dark:text-slate-300 mb-8">
-                        When I'm not coding, you can find me hiking in the mountains, reading sci-fi novels, or experimenting with new recipes in the kitchen. I believe in continuous learning and staying updated with the latest web technologies.
-                    </p>
-                    
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#" class="px-6 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-full font-medium hover:shadow-lg transition-all duration-300 hover:scale-105 flex items-center">
-                            <i class="fas fa-download mr-2"></i> Download CV
-                        </a>
-                        <a href="#contact" class="px-6 py-3 border border-primary-500 text-primary-500 dark:text-primary-400 rounded-full font-medium hover:bg-primary-500 hover:text-white dark:hover:text-white transition-all duration-300 hover:scale-105 flex items-center">
-                            <i class="fas fa-paper-plane mr-2"></i> Hire Me
+                        
+                        <a href="#" class="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-medium hover:opacity-90 transition-opacity shadow-lg">
+                            Download CV <i class="fas fa-download ml-2"></i>
                         </a>
                     </div>
                 </div>
@@ -351,501 +308,794 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-slate-50 dark:bg-dark-800">
+    <section id="skills" class="py-20 section">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    <span class="gradient-text">My Skills</span>
-                </h2>
-                <div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
-            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">My Skills</h2>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Skill 1 -->
-                <div class="bg-white dark:bg-dark-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in">
-                    <div class="w-16 h-16 bg-indigo-100 dark:bg-dark-600 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fab fa-html5 text-3xl text-orange-500"></i>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
+                            <i class="fab fa-html5 text-blue-500 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">HTML5</h3>
                     </div>
-                    <h3 class="text-center font-bold mb-2">HTML5</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 95%"></div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Semantic markup, accessibility standards, SEO optimization.</p>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar bg-blue-500 h-2.5 rounded-full" style="width: 95%"></div>
                     </div>
                 </div>
                 
                 <!-- Skill 2 -->
-                <div class="bg-white dark:bg-dark-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in">
-                    <div class="w-16 h-16 bg-indigo-100 dark:bg-dark-600 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fab fa-css3-alt text-3xl text-blue-500"></i>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mr-4">
+                            <i class="fab fa-css3-alt text-purple-500 dark:text-purple-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">CSS3</h3>
                     </div>
-                    <h3 class="text-center font-bold mb-2">CSS3</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%"></div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Responsive design, animations, Flexbox, Grid, TailwindCSS.</p>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar bg-purple-500 h-2.5 rounded-full" style="width: 90%"></div>
                     </div>
                 </div>
                 
                 <!-- Skill 3 -->
-                <div class="bg-white dark:bg-dark-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in">
-                    <div class="w-16 h-16 bg-indigo-100 dark:bg-dark-600 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fab fa-js text-3xl text-yellow-400"></i>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center mr-4">
+                            <i class="fab fa-js text-yellow-500 dark:text-yellow-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">JavaScript</h3>
                     </div>
-                    <h3 class="text-center font-bold mb-2">JavaScript</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 85%"></div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">ES6+, DOM manipulation, async programming, APIs.</p>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar bg-yellow-500 h-2.5 rounded-full" style="width: 85%"></div>
                     </div>
                 </div>
                 
                 <!-- Skill 4 -->
-                <div class="bg-white dark:bg-dark-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in">
-                    <div class="w-16 h-16 bg-indigo-100 dark:bg-dark-600 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fab fa-react text-3xl text-blue-400"></i>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
+                            <i class="fab fa-react text-blue-500 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">React</h3>
                     </div>
-                    <h3 class="text-center font-bold mb-2">React</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 80%"></div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Hooks, Context API, Redux, Next.js, component architecture.</p>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
                     </div>
                 </div>
                 
                 <!-- Skill 5 -->
-                <div class="bg-white dark:bg-dark-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in">
-                    <div class="w-16 h-16 bg-indigo-100 dark:bg-dark-600 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fab fa-vuejs text-3xl text-green-500"></i>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-pink-100 dark:bg-pink-900 flex items-center justify-center mr-4">
+                            <i class="fab fa-figma text-pink-500 dark:text-pink-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Figma</h3>
                     </div>
-                    <h3 class="text-center font-bold mb-2">Vue.js</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 75%"></div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">UI/UX design, prototyping, design systems, wireframing.</p>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar bg-pink-500 h-2.5 rounded-full" style="width: 75%"></div>
                     </div>
                 </div>
                 
                 <!-- Skill 6 -->
-                <div class="bg-white dark:bg-dark-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in">
-                    <div class="w-16 h-16 bg-indigo-100 dark:bg-dark-600 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fab fa-node-js text-3xl text-green-600"></i>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mr-4">
+                            <i class="fas fa-server text-green-500 dark:text-green-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Backend</h3>
                     </div>
-                    <h3 class="text-center font-bold mb-2">Node.js</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 70%"></div>
-                    </div>
-                </div>
-                
-                <!-- Skill 7 -->
-                <div class="bg-white dark:bg-dark-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in">
-                    <div class="w-16 h-16 bg-indigo-100 dark:bg-dark-600 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fab fa-python text-3xl text-blue-600"></i>
-                    </div>
-                    <h3 class="text-center font-bold mb-2">Python</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 65%"></div>
-                    </div>
-                </div>
-                
-                <!-- Skill 8 -->
-                <div class="bg-white dark:bg-dark-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in">
-                    <div class="w-16 h-16 bg-indigo-100 dark:bg-dark-600 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-database text-3xl text-blue-700"></i>
-                    </div>
-                    <h3 class="text-center font-bold mb-2">MongoDB</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 60%"></div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">MySQL, Node.js, Express, MongoDB, REST APIs, authentication.</p>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar bg-green-500 h-2.5 rounded-full" style="width: 70%"></div>
                     </div>
                 </div>
 
-                <!-- Skill 9 - Graphic Design -->
-                <div class="bg-white dark:bg-dark-700 p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in">
-                    <div class="w-16 h-16 bg-indigo-100 dark:bg-dark-600 rounded-full flex items-center justify-center mb-4 mx-auto">
-                        <i class="fas fa-paint-brush text-3xl text-purple-500"></i>
+                <!-- Skill 7 -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
+                            <i class="fab fa-python text-blue-500 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Python/Django</h3>
                     </div>
-                    <h3 class="text-center font-bold mb-2">Graphic Design</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 75%"></div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Django framework, ORM, REST APIs, authentication.</p>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
                     </div>
+                </div>
+
+                <!-- Skill 8 -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mr-4">
+                            <i class="fab fa-php text-purple-500 dark:text-purple-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">PHP/Laravel</h3>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Laravel framework, Eloquent ORM, Blade templating.</p>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar bg-purple-500 h-2.5 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 9 -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
+                            <i class="fab fa-css3-alt text-blue-500 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Tailwind/Bootstrap</h3>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Responsive design, utility-first CSS, component libraries.</p>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar bg-blue-500 h-2.5 rounded-full" style="width: 90%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 10 -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center mr-4">
+                            <i class="fab fa-github text-gray-500 dark:text-gray-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Git/GitHub</h3>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Version control, collaboration workflows, CI/CD pipelines.</p>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar bg-gray-500 h-2.5 rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+
+                <!-- Skill 11 -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mr-4">
+                            <i class="fas fa-code-branch text-green-500 dark:text-green-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">REST APIs</h3>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Design, development, documentation, and integration.</p>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                        <div class="progress-bar bg-green-500 h-2.5 rounded-full" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50 dark:bg-gray-900 section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">My Services</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-all duration-300">
+                    <div class="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-6">
+                        <i class="fas fa-file-invoice-dollar text-blue-500 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">KRA Services</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Comprehensive tax registration and filing services to keep you compliant with Kenyan regulations.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-blue-500 dark:text-blue-400 mr-2"></i>
+                            <span>KRA PIN Registration</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-blue-500 dark:text-blue-400 mr-2"></i>
+                            <span>Filing Returns</span>
+                        </li>
+                    </ul>
+                    <button class="mt-4 px-4 py-2 border border-blue-500 text-blue-500 dark:text-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-colors service-details-btn">
+                        View Details
+                    </button>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mb-6">
+                        <i class="fas fa-graduation-cap text-purple-500 dark:text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">HELB Assistance</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Expert guidance through the HELB application process for both new and returning applicants.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-purple-500 dark:text-purple-400 mr-2"></i>
+                            <span class="relative">
+                                First-time Applications
+                            </span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-purple-500 dark:text-purple-400 mr-2"></i>
+                            <span class="relative">
+                                Subsequent Applications
+                            </span>
+                        </li>
+                    </ul>
+                    <button class="mt-4 px-4 py-2 border border-blue-500 text-blue-500 dark:text-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-colors service-details-btn">
+                        View Details
+                    </button>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-all duration-300">
+                    <div class="w-14 h-14 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mb-6">
+                        <i class="fas fa-laptop-code text-green-500 dark:text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Computer Maintenance</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Keep your systems running smoothly with professional maintenance and optimization services.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i>
+                            <span>OS Installation</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i>
+                            <span>Software Installations</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 dark:text-green-400 mr-2"></i>
+                            <span>Updates</span>
+                        </li>
+                    </ul>
+                    <button class="mt-4 px-4 py-2 border border-blue-500 text-blue-500 dark:text-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-colors service-details-btn">
+                        View Details
+                    </button>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-all duration-300">
+                    <div class="w-14 h-14 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center mb-6">
+                        <i class="fas fa-project-diagram text-yellow-500 dark:text-yellow-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">System Development</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Custom software solutions tailored to your specific needs and requirements.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-500 dark:text-yellow-400 mr-2"></i>
+                            <span>Fullstack Development</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-500 dark:text-yellow-400 mr-2"></i>
+                            <span>School Project Development</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-500 dark:text-yellow-400 mr-2"></i>
+                            <span>Custom Projects for Students</span>
+                        </li>
+                    </ul>
+                    <button class="mt-4 px-4 py-2 border border-blue-500 text-blue-500 dark:text-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-colors service-details-btn">
+                        View Details
+                    </button>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-all duration-300">
+                    <div class="w-14 h-14 rounded-full bg-pink-100 dark:bg-pink-900 flex items-center justify-center mb-6">
+                        <i class="fas fa-globe text-pink-500 dark:text-pink-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Web Development</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Modern, responsive websites that showcase your brand and engage your audience.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-pink-500 dark:text-pink-400 mr-2"></i>
+                            <span>UI/UX Design</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-pink-500 dark:text-pink-400 mr-2"></i>
+                            <span>Personal Website / Portfolio</span>
+                        </li>
+                    </ul>
+                    <button class="mt-4 px-4 py-2 border border-blue-500 text-blue-500 dark:text-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-colors service-details-btn">
+                        View Details
+                    </button>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-all duration-300">
+                    <div class="w-14 h-14 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center mb-6">
+                        <i class="fas fa-paint-brush text-indigo-500 dark:text-indigo-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Graphic Design</h3>
+                    <p class="text-gray-500 dark:text-gray-400 mb-4">Creative visual solutions that communicate your message effectively.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-indigo-500 dark:text-indigo-400 mr-2"></i>
+                            <span>Logo Design</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-indigo-500 dark:text-indigo-400 mr-2"></i>
+                            <span>Birthday/Wedding Cards</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-indigo-500 dark:text-indigo-400 mr-2"></i>
+                            <span>Posters</span>
+                        </li>
+                    </ul>
+                    <button class="mt-4 px-4 py-2 border border-blue-500 text-blue-500 dark:text-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-colors service-details-btn">
+                        View Details
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-white dark:bg-dark-900">
+    <section id="projects" class="py-20 section">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    <span class="gradient-text">My Projects</span>
-                </h2>
-                <div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
-            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">My Projects</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project 1 -->
-                <div class="project-card bg-white dark:bg-dark-800 rounded-xl shadow-md overflow-hidden animate-fade-in">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="E-commerce Dashboard" class="w-full h-48 object-cover transition-transform duration-500">
-                        <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
-                            <div>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs px-2 py-1 bg-primary-500/10 text-primary-500 dark:text-primary-400 rounded">React</span>
-                                    <span class="text-xs px-2 py-1 bg-primary-500/10 text-primary-500 dark:text-primary-400 rounded">Node.js</span>
-                                    <span class="text-xs px-2 py-1 bg-primary-500/10 text-primary-500 dark:text-primary-400 rounded">MongoDB</span>
-                                </div>
-                                <a href="#" class="px-4 py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-full text-sm font-medium inline-block hover:shadow-lg transition-all duration-300">
-                                    View Project
-                                </a>
-                            </div>
-                        </div>
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="E-commerce Platform" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">E-commerce Dashboard</h3>
-                        <p class="text-slate-600 dark:text-slate-300 mb-4">A comprehensive dashboard for managing online stores with analytics, inventory, and order management.</p>
+                        <h3 class="text-xl font-bold mb-2">E-commerce Platform</h3>
+                        <p class="text-gray-500 dark:text-gray-400 mb-4">A full-featured online store with product management, cart functionality, and secure payments.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-500 dark:text-blue-400 text-sm rounded-full">React</span>
+                            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-500 dark:text-purple-400 text-sm rounded-full">Node.js</span>
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-500 dark:text-green-400 text-sm rounded-full">MongoDB</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300">
+                        <div class="w-full">
+                            <a href="#" class="block w-full mb-3 px-4 py-2 bg-white text-gray-800 rounded-full text-center font-medium hover:bg-gray-100 transition-colors">
+                                Live Demo <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                            <a href="#" class="block w-full px-4 py-2 bg-gray-800 text-white rounded-full text-center font-medium hover:bg-gray-700 transition-colors">
+                                GitHub <i class="fab fa-github ml-2"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Project 2 -->
-                <div class="project-card bg-white dark:bg-dark-800 rounded-xl shadow-md overflow-hidden animate-fade-in">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Travel App" class="w-full h-48 object-cover transition-transform duration-500">
-                        <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
-                            <div>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs px-2 py-1 bg-primary-500/10 text-primary-500 dark:text-primary-400 rounded">Vue.js</span>
-                                    <span class="text-xs px-2 py-1 bg-primary-500/10 text-primary-500 dark:text-primary-400 rounded">Firebase</span>
-                                    <span class="text-xs px-2 py-1 bg-primary-500/10 text-primary-500 dark:text-primary-400 rounded">Mapbox</span>
-                                </div>
-                                <a href="#" class="px-4 py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-full text-sm font-medium inline-block hover:shadow-lg transition-all duration-300">
-                                    View Project
-                                </a>
-                            </div>
-                        </div>
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Portfolio Website" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Travel Companion App</h3>
-                        <p class="text-slate-600 dark:text-slate-300 mb-4">An interactive travel app that helps users discover and plan trips with real-time weather and local recommendations.</p>
+                        <h3 class="text-xl font-bold mb-2">Portfolio Website</h3>
+                        <p class="text-gray-500 dark:text-gray-400 mb-4">A sleek, responsive portfolio showcasing creative work with smooth animations.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-500 dark:text-blue-400 text-sm rounded-full">HTML</span>
+                            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-500 dark:text-purple-400 text-sm rounded-full">CSS</span>
+                            <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-500 dark:text-yellow-400 text-sm rounded-full">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300">
+                        <div class="w-full">
+                            <a href="#" class="block w-full mb-3 px-4 py-2 bg-white text-gray-800 rounded-full text-center font-medium hover:bg-gray-100 transition-colors">
+                                Live Demo <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                            <a href="#" class="block w-full px-4 py-2 bg-gray-800 text-white rounded-full text-center font-medium hover:bg-gray-700 transition-colors">
+                                GitHub <i class="fab fa-github ml-2"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Project 3 -->
-                <div class="project-card bg-white dark:bg-dark-800 rounded-xl shadow-md overflow-hidden animate-fade-in">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Task Manager" class="w-full h-48 object-cover transition-transform duration-500">
-                        <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
-                            <div>
-                                <div class="flex flex-wrap gap-2 mb-3">
-                                    <span class="text-xs px-2 py-1 bg-primary-500/10 text-primary-500 dark:text-primary-400 rounded">React</span>
-                                    <span class="text-xs px-2 py-1 bg-primary-500/10 text-primary-500 dark:text-primary-400 rounded">Redux</span>
-                                    <span class="text-xs px-2 py-1 bg-primary-500/10 text-primary-500 dark:text-primary-400 rounded">TailwindCSS</span>
-                                </div>
-                                <a href="#" class="px-4 py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-full text-sm font-medium inline-block hover:shadow-lg transition-all duration-300">
-                                    View Project
-                                </a>
-                            </div>
-                        </div>
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden relative">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Task Management App" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">Task Management System</h3>
-                        <p class="text-slate-600 dark:text-slate-300 mb-4">A collaborative task management tool with drag-and-drop functionality, team assignments, and progress tracking.</p>
+                        <h3 class="text-xl font-bold mb-2">Task Management App</h3>
+                        <p class="text-gray-500 dark:text-gray-400 mb-4">A productivity tool for organizing tasks with drag-and-drop functionality and team collaboration.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-500 dark:text-blue-400 text-sm rounded-full">React</span>
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-500 dark:text-green-400 text-sm rounded-full">Firebase</span>
+                            <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-500 dark:text-red-400 text-sm rounded-full">Redux</span>
+                        </div>
+                    </div>
+                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300">
+                        <div class="w-full">
+                            <a href="#" class="block w-full mb-3 px-4 py-2 bg-white text-gray-800 rounded-full text-center font-medium hover:bg-gray-100 transition-colors">
+                                Live Demo <i class="fas fa-external-link-alt ml-2"></i>
+                            </a>
+                            <a href="#" class="block w-full px-4 py-2 bg-gray-800 text-white rounded-full text-center font-medium hover:bg-gray-700 transition-colors">
+                                GitHub <i class="fab fa-github ml-2"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div class="text-center mt-12">
-                <a href="#" class="px-8 py-3 border-2 border-primary-500 text-primary-500 dark:text-primary-400 rounded-full font-medium hover:bg-primary-500 hover:text-white dark:hover:text-white transition-all duration-300 hover:scale-105 inline-flex items-center">
-                    <i class="fas fa-eye mr-2"></i> View All Projects
+                <a href="#" class="inline-block px-6 py-3 border-2 border-blue-500 text-blue-500 dark:text-blue-400 dark:border-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-colors">
+                    View All Projects <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-slate-50 dark:bg-dark-800">
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-900 section">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                    <span class="gradient-text">Get In Touch</span>
-                </h2>
-                <div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
-            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">Get In Touch</h2>
             
             <div class="flex flex-col lg:flex-row gap-12">
-                <div class="lg:w-1/2 animate-slide-left">
-                    <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
-                    <p class="text-slate-600 dark:text-slate-300 mb-8">
-                        Feel free to reach out to me for any questions or opportunities. I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
-                    </p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-map-marker-alt text-primary-500 text-xl"></i>
+                <div class="lg:w-1/2">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-blue-500 dark:text-blue-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 dark:text-gray-400 mb-1">Email</p>
+                                    <p class="font-medium">hello@wambiadev.com</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Location</h4>
-                                <p class="text-slate-600 dark:text-slate-300">San Francisco, California</p>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone-alt text-purple-500 dark:text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 dark:text-gray-400 mb-1">Phone</p>
+                                    <p class="font-medium">+254 712 345 678</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-green-500 dark:text-green-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 dark:text-gray-400 mb-1">Location</p>
+                                    <p class="font-medium">Nairobi, Kenya</p>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-envelope text-primary-500 text-xl"></i>
+                        <div class="mt-8">
+                            <h4 class="text-lg font-semibold mb-4">Follow Me</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="social-icon w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-500 dark:text-blue-400 hover:text-white hover:bg-blue-500 transition-all">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="social-icon w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-500 dark:text-blue-400 hover:text-white hover:bg-blue-600 transition-all">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="social-icon w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-white hover:bg-gray-800 transition-all">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="#" class="social-icon w-10 h-10 rounded-full bg-pink-100 dark:bg-pink-900 flex items-center justify-center text-pink-500 dark:text-pink-400 hover:text-white hover:bg-pink-500 transition-all">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
                             </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Email</h4>
-                                <p class="text-slate-600 dark:text-slate-300">hello@kennedy.dev</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-phone text-primary-500 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold mb-1">Phone</h4>
-                                <p class="text-slate-600 dark:text-slate-300">+1 (555) 123-4567</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-8">
-                        <h4 class="font-bold mb-4">Follow Me</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-primary-500 hover:text-white transition-colors duration-300">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-blue-500 hover:text-white transition-colors duration-300">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-blue-400 hover:text-white transition-colors duration-300">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-indigo-100 dark:bg-dark-700 flex items-center justify-center text-slate-700 dark:text-slate-300 hover:bg-pink-500 hover:text-white transition-colors duration-300">
-                                <i class="fab fa-dribbble"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="lg:w-1/2 animate-slide-right">
-                    <form class="bg-white dark:bg-dark-700 p-8 rounded-xl shadow-md">
-                        <div class="mb-6 relative">
-                            <input type="text" id="name" class="form-input w-full px-4 py-3 border border-slate-300 dark:border-dark-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder=" ">
-                            <label for="name" class="floating-label">Your Name</label>
-                        </div>
+                <div class="lg:w-1/2">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6">Send Me a Message</h3>
                         
-                        <div class="mb-6 relative">
-                            <input type="email" id="email" class="form-input w-full px-4 py-3 border border-slate-300 dark:border-dark-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder=" ">
-                            <label for="email" class="floating-label">Your Email</label>
-                        </div>
-                        
-                        <div class="mb-6 relative">
-                            <input type="text" id="subject" class="form-input w-full px-4 py-3 border border-slate-300 dark:border-dark-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder=" ">
-                            <label for="subject" class="floating-label">Subject</label>
-                        </div>
-                        
-                        <div class="mb-6 relative">
-                            <textarea id="message" rows="5" class="form-input w-full px-4 py-3 border border-slate-300 dark:border-dark-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent" placeholder=" "></textarea>
-                            <label for="message" class="floating-label">Your Message</label>
-                        </div>
-                        
-                        <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-lg font-medium hover:shadow-lg transition-all duration-300 hover:scale-105">
-                            Send Message
-                        </button>
-                    </form>
+                        <form id="contact-form" class="space-y-6">
+                            <div class="relative">
+                                <input type="text" id="name" class="floating-input w-full px-4 py-2 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent focus:border-blue-500 dark:focus:border-blue-400 outline-none" placeholder=" ">
+                                <label for="name" class="floating-label absolute left-4 top-2 text-gray-500 dark:text-gray-400 pointer-events-none">Your Name</label>
+                            </div>
+                            
+                            <div class="relative">
+                                <input type="email" id="email" class="floating-input w-full px-4 py-2 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent focus:border-blue-500 dark:focus:border-blue-400 outline-none" placeholder=" ">
+                                <label for="email" class="floating-label absolute left-4 top-2 text-gray-500 dark:text-gray-400 pointer-events-none">Your Email</label>
+                            </div>
+                            
+                            <div class="relative">
+                                <input type="text" id="subject" class="floating-input w-full px-4 py-2 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent focus:border-blue-500 dark:focus:border-blue-400 outline-none" placeholder=" ">
+                                <label for="subject" class="floating-label absolute left-4 top-2 text-gray-500 dark:text-gray-400 pointer-events-none">Subject</label>
+                            </div>
+                            
+                            <div class="relative">
+                                <textarea id="message" rows="4" class="floating-input w-full px-4 py-2 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent focus:border-blue-500 dark:focus:border-blue-400 outline-none" placeholder=" "></textarea>
+                                <label for="message" class="floating-label absolute left-4 top-2 text-gray-500 dark:text-gray-400 pointer-events-none">Your Message</label>
+                            </div>
+                            
+                            <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-medium hover:opacity-90 transition-opacity shadow-lg">
+                                Send Message <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark-900 text-white py-12">
+    <footer class="py-12 bg-gray-100 dark:bg-gray-800">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-6 md:mb-0">
-                    <a href="#" class="text-2xl font-bold gradient-text">Kennedy</a>
-                    <p class="text-slate-400 mt-2">© 2023 Kennedy. All rights reserved.</p>
+                    <a href="#" class="text-2xl font-bold gradient-text">Wambia</a>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">Creating digital solutions that make an impact.</p>
                 </div>
                 
-                <div class="flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0">
-                    <div>
-                        <h4 class="font-bold mb-4">Quick Links</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#home" class="text-slate-400 hover:text-white transition-colors">Home</a></li>
-                            <li><a href="#about" class="text-slate-400 hover:text-white transition-colors">About</a></li>
-                            <li><a href="#skills" class="text-slate-400 hover:text-white transition-colors">Skills</a></li>
-                            <li><a href="#projects" class="text-slate-400 hover:text-white transition-colors">Projects</a></li>
-                            <li><a href="#contact" class="text-slate-400 hover:text-white transition-colors">Contact</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-bold mb-4">Services</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Web Development</a></li>
-                            <li><a href="#" class="text-slate-400 hover:text-white transition-colors">App Development</a></li>
-                            <li><a href="#" class="text-slate-400 hover:text-white transition-colors">UI/UX Design</a></li>
-                            <li><a href="#" class="text-slate-400 hover:text-white transition-colors">Consulting</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-bold mb-4">Connect</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-10 h-10 rounded-full bg-dark-700 flex items-center justify-center text-slate-300 hover:bg-primary-500 hover:text-white transition-colors duration-300">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-dark-700 flex items-center justify-center text-slate-300 hover:bg-blue-500 hover:text-white transition-colors duration-300">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-dark-700 flex items-center justify-center text-slate-300 hover:bg-blue-400 hover:text-white transition-colors duration-300">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-dark-700 flex items-center justify-center text-slate-300 hover:bg-pink-500 hover:text-white transition-colors duration-300">
-                                <i class="fab fa-dribbble"></i>
-                            </a>
-                        </div>
-                    </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 dark:text-gray-400 mb-4 md:mb-0">© 2023 Wambia Kennedy. All rights reserved.</p>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Service Modals -->
+    <div id="service-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <h3 class="text-2xl font-bold mb-2" id="modal-title">Service Title</h3>
+            <div class="text-blue-500 dark:text-blue-400 font-medium mb-4" id="modal-price">Price: Ksh 0</div>
+            <p class="text-gray-700 dark:text-gray-300 mb-4" id="modal-description">Service description</p>
+            <ul class="space-y-2 mb-6" id="modal-features"></ul>
+            <buttonbutton onclick="window.location.href='book_service.html'" class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-medium hover:opacity-90 transition-opacity">
+                Book This Service <i class="fas fa-calendar-check ml-2"></i>
+            </button>
+        </div>
+    </div>
+
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const iconMoon = document.getElementById('icon-moon');
+        const iconSun = document.getElementById('icon-sun');
+
+        function updateThemeIcons() {
+            if (html.classList.contains('dark')) {
+                iconMoon.classList.add('hidden');
+                iconSun.classList.remove('hidden');
+            } else {
+                iconMoon.classList.remove('hidden');
+                iconSun.classList.add('hidden');
+            }
+        }
+
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+        updateThemeIcons();
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            updateThemeIcons();
+        });
+        
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('opacity-0');
+            mobileMenu.classList.toggle('pointer-events-none');
         });
         
         // Close mobile menu when clicking a link
         document.querySelectorAll('#mobile-menu a').forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.add('opacity-0');
+                mobileMenu.classList.add('pointer-events-none');
             });
         });
         
-        // Dark Mode Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        
-        // Check for saved user preference, if any, on load of the website
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-            themeToggle.innerHTML = '<i class="fas fa-sun text-xl text-yellow-300"></i>';
-        } else {
-            html.classList.remove('dark');
-            themeToggle.innerHTML = '<i class="fas fa-moon text-xl text-slate-700"></i>';
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                themeToggle.innerHTML = '<i class="fas fa-moon text-xl text-slate-700"></i>';
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                themeToggle.innerHTML = '<i class="fas fa-sun text-xl text-yellow-300"></i>';
-            }
-        });
-        
-        // Sticky Header on Scroll
+        // Sticky header
         const header = document.getElementById('header');
         
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('bg-white', 'dark:bg-dark-800', 'shadow-md');
+            if (window.scrollY > 100) {
+                header.classList.add('bg-white', 'dark:bg-gray-800', 'shadow-md');
             } else {
-                header.classList.remove('bg-white', 'dark:bg-dark-800', 'shadow-md');
+                header.classList.remove('bg-white', 'dark:bg-gray-800', 'shadow-md');
             }
         });
         
-        // Typing Effect
-        const typingText = document.getElementById('typing-text');
-        const professions = ['Web Developer', 'UI/UX Designer', 'Frontend Engineer', 'JavaScript Expert'];
-        let professionIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingSpeed = 100;
+        // Animated role text
+        const roles = ["Web Developer", "Graphic Designer", "Tech Enthusiast"];
+        let currentRole = 0;
+        const roleElement = document.getElementById('role-text');
         
-        function type() {
-            const currentProfession = professions[professionIndex];
-            
-            if (isDeleting) {
-                typingText.textContent = currentProfession.substring(0, charIndex - 1);
-                charIndex--;
-                typingSpeed = 50;
-            } else {
-                typingText.textContent = currentProfession.substring(0, charIndex + 1);
-                charIndex++;
-                typingSpeed = 100;
-            }
-            
-            if (!isDeleting && charIndex === currentProfession.length) {
-                isDeleting = true;
-                typingSpeed = 1500; // Pause at end
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                professionIndex = (professionIndex + 1) % professions.length;
-                typingSpeed = 500; // Pause before typing next
-            }
-            
-            setTimeout(type, typingSpeed);
+        function changeRole() {
+            roleElement.classList.remove('animate-role');
+            void roleElement.offsetWidth; // Trigger reflow
+            roleElement.classList.add('animate-role');
+            roleElement.textContent = roles[currentRole];
+            currentRole = (currentRole + 1) % roles.length;
         }
         
-        // Start typing effect after a delay
-        setTimeout(type, 1000);
+        setInterval(changeRole, 3000);
         
-        // Animate skill bars on scroll
-        function animateSkillBars() {
-            const skillBars = document.querySelectorAll('.skill-progress');
-            
-            skillBars.forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0';
+        // Scroll animations
+        const sections = document.querySelectorAll('.section');
+        
+        function checkScroll() {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
                 
-                setTimeout(() => {
-                    bar.style.width = width;
-                }, 100);
+                if (sectionTop < windowHeight * 0.75) {
+                    section.classList.add('visible');
+                }
             });
         }
         
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+        
+        // Form submission
+        const contactForm = document.getElementById('contact-form');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Here you would typically integrate with EmailJS or another service
+            alert('Message sent successfully! I will get back to you soon.');
+            contactForm.reset();
+        });
+        
+        // Initialize progress bars animation
+        document.querySelectorAll('.progress-bar').forEach(bar => {
+            // This is just for demo purposes - in a real app you might want to trigger this on scroll
+            bar.style.width = bar.style.width;
+        });
+
+        // Service modals
+        const serviceModal = document.getElementById('service-modal');
+        const closeModal = document.getElementById('close-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalPrice = document.getElementById('modal-price');
+        const modalDescription = document.getElementById('modal-description');
+        const modalFeatures = document.getElementById('modal-features');
+
+        // Service data with prices
+        const services = {
+            'KRA Services': {
+                price: 'Ksh 200',
+                description: 'Comprehensive tax registration and filing services to keep you compliant with Kenyan regulations.',
+                features: [
+                    'KRA PIN Registration (Ksh 200)',
+                    'Filing Returns (Ksh 150)',
+                    'Tax Compliance Certificates (Ksh 250)',
+                    'iTax Assistance (Ksh 100)'
+                ]
+            },
+            'HELB Assistance': {
+                price: 'Ksh. 200-500',
+                description: 'Expert guidance through the HELB application process for both new and returning applicants.',
+                features: [
+                    'First-time Applications (Ksh 400)',
+                    'Subsequent Applications (Ksh 200)',
+                    'Loan Repayment Plans (Ksh 300)',
+                    'Clearance Certificates (Ksh 500)'
+                ]
+            },
+            'Computer Maintenance': {
+                price: 'Ksh 300-1500',
+                description: 'Keep your systems running smoothly with professional maintenance and optimization services.',
+                features: [
+                    'OS Installation (Ksh 1500)',
+                    'Software Installations (Ksh 300-800)',
+                    'Updates (Ksh 300)',
+                    'Virus Removal (Ksh 700)'
+                ]
+            },
+            'System Development': {
+                price: 'Ksh 3,000+',
+                description: 'Custom software solutions tailored to your specific needs and requirements.',
+                features: [
+                    'Fullstack Development (Ksh 10,000+)',
+                    'School Project Development (Ksh 3,000+)',
+                    'Custom Projects for Students (Ksh 5,000+)',
+                    'Database Integration (Ksh 10,000+)'
+                ]
+            },
+            'Web Development': {
+                price: 'Ksh 1,000+',
+                description: 'Modern, responsive websites that showcase your brand and engage your audience.',
+                features: [
+                    'UI/UX Design (Ksh 1,000+)',
+                    'Personal Website/Portfolio (Ksh 3,000+)',
+                    'Business Websites (Ksh 5,000+)',
+                    'E-commerce Solutions (Ksh 10,000+)'
+                ]
+            },
+            'Graphic Design': {
+                price: 'Ksh 500-2,000',
+                description: 'Creative visual solutions that communicate your message effectively.',
+                features: [
+                    'Logo Design (Ksh 1,500)',
+                    'Birthday/Wedding Cards (Ksh 800)',
+                    'Posters (Ksh 1,200)',
+                    'Social Media Graphics (Ksh 500)'
+                ]
+            }
         };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in');
-                    
-                    if (entry.target.id === 'skills') {
-                        animateSkillBars();
-                    }
-                    
-                    observer.unobserve(entry.target);
-                }
+
+        // Open modal when service details button is clicked
+        document.querySelectorAll('.service-details-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const card = btn.closest('.service-card');
+                const serviceTitle = card.querySelector('h3').textContent;
+                const service = services[serviceTitle];
+                
+                modalTitle.textContent = serviceTitle;
+                modalPrice.textContent = `Price: ${service.price}`;
+                modalDescription.textContent = service.description;
+                
+                // Clear previous features
+                modalFeatures.innerHTML = '';
+                
+                // Add new features
+                service.features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center';
+                    li.innerHTML = `<i class="fas fa-check-circle text-blue-500 dark:text-blue-400 mr-2"></i><span>${feature}</span>`;
+                    modalFeatures.appendChild(li);
+                });
+                
+                serviceModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
             });
-        }, observerOptions);
-        
-        // Observe all sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
         });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            serviceModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        serviceModal.addEventListener('click', (e) => {
+            if (e.target === serviceModal) {
+                serviceModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
         });
     </script>
 </body>

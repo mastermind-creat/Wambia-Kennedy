@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Service | Wambia Kennedy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out'
+                    },
+                    keyframes: {
+                        'fadeIn': {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        'slideUp': {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark body {
+            background-color: #0f172a;
+        }
+
+        .gradient-text {
+            background-image: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+            background-size: 200% auto;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+
+        .floating-label {
+            transition: all 0.3s ease;
+        }
+
+        .floating-input:focus + .floating-label,
+        .floating-input:not(:placeholder-shown) + .floating-label {
+            transform: translateY(-24px);
+            font-size: 0.75rem;
+            color: #3b82f6;
+        }
+
+        .dark .floating-input:focus + .floating-label,
+        .dark .floating-input:not(:placeholder-shown) + .floating-label {
+            color: #8b5cf6;
+        }
+
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger span {
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+    </style>
+</head>
+<body class="text-gray-800 dark:text-gray-200">
+    <!-- Header & Navigation -->
+    <header class="fixed w-full z-50 transition-all duration-300" id="header">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold gradient-text">Wambia</a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html#home" class="nav-link font-medium">Home</a>
+                <a href="index.html#about" class="nav-link font-medium">About</a>
+                <a href="index.html#skills" class="nav-link font-medium">Skills</a>
+                <a href="index.html#services" class="nav-link font-medium">Services</a>
+                <a href="index.html#projects" class="nav-link font-medium">Projects</a>
+                <a href="index.html#contact" class="nav-link font-medium">Contact</a>
+                <a href="booking.html" class="nav-link font-medium text-blue-500 dark:text-blue-400">Book Now</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" type="button" title="Toggle dark mode" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <i class="fas fa-moon" id="icon-moon"></i>
+                    <i class="fas fa-sun hidden" id="icon-sun"></i>
+                </button>
+                
+                <button class="md:hidden hamburger" id="menu-toggle" type="button" title="Open mobile menu">
+                    <span class="block w-6 h-0.5 bg-gray-800 dark:bg-white mb-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-800 dark:bg-white mb-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-800 dark:bg-white"></span>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden fixed inset-0 bg-white dark:bg-gray-900 z-40 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-300" id="mobile-menu">
+            <div class="flex flex-col items-center space-y-8">
+                <a href="index.html#home" class="text-xl font-medium nav-link">Home</a>
+                <a href="index.html#about" class="text-xl font-medium nav-link">About</a>
+                <a href="index.html#skills" class="text-xl font-medium nav-link">Skills</a>
+                <a href="index.html#services" class="text-xl font-medium nav-link">Services</a>
+                <a href="index.html#projects" class="text-xl font-medium nav-link">Projects</a>
+                <a href="index.html#contact" class="text-xl font-medium nav-link">Contact</a>
+                <a href="booking.html" class="text-xl font-medium nav-link text-blue-500 dark:text-blue-400">Book Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Booking Section -->
+    <section id="booking" class="min-h-screen flex items-center justify-center py-20 bg-gray-50 dark:bg-gray-900 section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">Book a Service</h2>
+            <div class="flex justify-center gap-4 mb-8 animate-fade-in delay-200">
+                <a href="index.html#contact"
+                class="px-8 py-3 bg-indigo-600 text-white rounded-full font-medium shadow-md hover:bg-indigo-700 hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
+                    Contact Me
+                </a>
+                <a href="portfolio.html"
+                class="px-8 py-3 border-2 border-indigo-600 text-indigo-600 rounded-full font-medium shadow-md bg-white hover:bg-indigo-600 hover:text-white hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
+                    View Portfolio
+                </a>
+                <a href="index.html"
+                class="px-8 py-3 border-2 border-indigo-600 text-indigo-600 rounded-full font-medium shadow-md bg-white hover:bg-indigo-600 hover:text-white hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
+                    Website
+                </a>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg max-w-2xl mx-auto">
+                <h3 class="text-2xl font-bold mb-6">Service Booking Form</h3>
+                <p class="text-gray-500 dark:text-gray-400 mb-8">Fill out the form below to book a service. I'll get back to you within 24 hours to confirm your booking.</p>
+                
+                <form id="booking-form" class="space-y-6">
+                    <!-- Name -->
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            class="floating-input w-full px-4 py-2 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent focus:border-blue-500 dark:focus:border-blue-400 outline-none" 
+                            placeholder=" " 
+                            required
+                        >
+                        <label for="name" class="floating-label absolute left-4 top-2 text-gray-500 dark:text-gray-400 pointer-events-none">Your Name</label>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="relative">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="floating-input w-full px-4 py-2 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent focus:border-blue-500 dark:focus:border-blue-400 outline-none" 
+                            placeholder=" " 
+                            required
+                        >
+                        <label for="email" class="floating-label absolute left-4 top-2 text-gray-500 dark:text-gray-400 pointer-events-none">Your Email</label>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="relative">
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            class="floating-input w-full px-4 py-2 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent focus:border-blue-500 dark:focus:border-blue-400 outline-none" 
+                            placeholder=" " 
+                            required
+                        >
+                        <label for="phone" class="floating-label absolute left-4 top-2 text-gray-500 dark:text-gray-400 pointer-events-none">Phone Number</label>
+                    </div>
+
+                    <!-- Service Selection -->
+                    <div class="relative">
+                        <select 
+                            id="service" 
+                            name="service" 
+                            class="floating-input w-full px-4 py-2 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent focus:border-blue-500 dark:focus:border-blue-400 outline-none" 
+                            required
+                        >
+                            <option value="" disabled selected></option>
+                            <option value="KRA Services">KRA Services (Ksh 200-250)</option>
+                            <option value="HELB Assistance">HELB Assistance (Ksh 200-500)</option>
+                            <option value="Computer Maintenance">Computer Maintenance (Ksh 300-1500)</option>
+                            <option value="System Development">System Development (Ksh 3,000+)</option>
+                            <option value="Web Development">Web Development (Ksh 1,000+)</option>
+                            <option value="Graphic Design">Graphic Design (Ksh 500-2,000)</option>
+                        </select>
+                        <label for="service" class="floating-label absolute left-4 top-2 text-gray-500 dark:text-gray-400 pointer-events-none">Select Service</label>
+                    </div>
+
+                    <!-- Service Details -->
+                    <div class="relative">
+                        <select 
+                            id="service-details" 
+                            name="service-details" 
+                            class="floating-input w-full px-4 py-2 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent focus:border-blue-500 dark:focus:border-blue-400 outline-none" 
+                            required
+                        >
+                            <option value="" disabled selected>Select a service first</option>
+                        </select>
+                        <label for="service-details" class="floating-label absolute left-4 top-2 text-gray-500 dark:text-gray-400 pointer-events-none">Service Details</label>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="relative">
+                        <textarea 
+                            id="additional-info" 
+                            name="additional-info" 
+                            rows="4" 
+                            class="floating-input w-full px-4 py-2 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent focus:border-blue-500 dark:focus:border-blue-400 outline-none" 
+                            placeholder=" "
+                        ></textarea>
+                        <label for="additional-info" class="floating-label absolute left-4 top-2 text-gray-500 dark:text-gray-400 pointer-events-none">Additional Information</label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit" 
+                        class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-medium hover:opacity-90 transition-opacity shadow-lg"
+                    >
+                        Submit Booking <i class="fas fa-calendar-check ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="index.html" class="text-2xl font-bold gradient-text">Wambia</a>
+                    <p class="text-gray-500 dark:text-gray-400 mt-2">Creating digital solutions that make an impact.</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 dark:text-gray-400 mb-4 md:mb-0">© 2023 Wambia Kennedy. All rights reserved.</p>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const iconMoon = document.getElementById('icon-moon');
+        const iconSun = document.getElementById('icon-sun');
+
+        function updateThemeIcons() {
+            if (html.classList.contains('dark')) {
+                iconMoon.classList.add('hidden');
+                iconSun.classList.remove('hidden');
+            } else {
+                iconMoon.classList.remove('hidden');
+                iconSun.classList.add('hidden');
+            }
+        }
+
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+        updateThemeIcons();
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            updateThemeIcons();
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('opacity-0');
+            mobileMenu.classList.toggle('pointer-events-none');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mobileMenu.classList.add('opacity-0');
+                mobileMenu.classList.add('pointer-events-none');
+            });
+        });
+
+        // Sticky header
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('bg-white', 'dark:bg-gray-800', 'shadow-md');
+            } else {
+                header.classList.remove('bg-white', 'dark:bg-gray-800', 'shadow-md');
+            }
+        });
+
+        // Scroll animations
+        const sections = document.querySelectorAll('.section');
+
+        function checkScroll() {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (sectionTop < windowHeight * 0.75) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // Service details options
+        const serviceDetails = {
+            'KRA Services': [
+                { value: 'KRA PIN Registration', text: 'KRA PIN Registration (Ksh 200)' },
+                { value: 'Filing Returns', text: 'Filing Returns (Ksh 150)' },
+                { value: 'Tax Compliance Certificates', text: 'Tax Compliance Certificates (Ksh 250)' },
+                { value: 'iTax Assistance', text: 'iTax Assistance (Ksh 100)' }
+            ],
+            'HELB Assistance': [
+                { value: 'First-time Applications', text: 'First-time Applications (Ksh 400)' },
+                { value: 'Subsequent Applications', text: 'Subsequent Applications (Ksh 200)' },
+                { value: 'Loan Repayment Plans', text: 'Loan Repayment Plans (Ksh 300)' },
+                { value: 'Clearance Certificates', text: 'Clearance Certificates (Ksh 500)' }
+            ],
+            'Computer Maintenance': [
+                { value: 'OS Installation', text: 'OS Installation (Ksh 1500)' },
+                { value: 'Software Installations', text: 'Software Installations (Ksh 300-800)' },
+                { value: 'Updates', text: 'Updates (Ksh 300)' },
+                { value: 'Virus Removal', text: 'Virus Removal (Ksh 700)' }
+            ],
+            'System Development': [
+                { value: 'Fullstack Development', text: 'Fullstack Development (Ksh 10,000+)' },
+                { value: 'School Project Development', text: 'School Project Development (Ksh 3,000+)' },
+                { value: 'Custom Projects for Students', text: 'Custom Projects for Students (Ksh 5,000+)' },
+                { value: 'Database Integration', text: 'Database Integration (Ksh 10,000+)' }
+            ],
+            'Web Development': [
+                { value: 'UI/UX Design', text: 'UI/UX Design (Ksh 1,000+)' },
+                { value: 'Personal Website/Portfolio', text: 'Personal Website/Portfolio (Ksh 3,000+)' },
+                { value: 'Business Websites', text: 'Business Websites (Ksh 5,000+)' },
+                { value: 'E-commerce Solutions', text: 'E-commerce Solutions (Ksh 10,000+)' }
+            ],
+            'Graphic Design': [
+                { value: 'Logo Design', text: 'Logo Design (Ksh 1,500)' },
+                { value: 'Birthday/Wedding Cards', text: 'Birthday/Wedding Cards (Ksh 800)' },
+                { value: 'Posters', text: 'Posters (Ksh 1,200)' },
+                { value: 'Social Media Graphics', text: 'Social Media Graphics (Ksh 500)' }
+            ]
+        };
+
+        // Update service details dropdown based on selected service
+        const serviceSelect = document.getElementById('service');
+        const serviceDetailsSelect = document.getElementById('service-details');
+
+        serviceSelect.addEventListener('change', (e) => {
+            const selectedService = e.target.value;
+            serviceDetailsSelect.innerHTML = '<option value="" disabled selected>Select a service detail</option>';
+
+            if (selectedService && serviceDetails[selectedService]) {
+                serviceDetails[selectedService].forEach(detail => {
+                    const option = document.createElement('option');
+                    option.value = detail.value;
+                    option.textContent = detail.text;
+                    serviceDetailsSelect.appendChild(option);
+                });
+            }
+        });
+
+        // Form submission
+        const bookingForm = document.getElementById('booking-form');
+
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(bookingForm);
+            const bookingDetails = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                service: formData.get('service'),
+                serviceDetails: formData.get('service-details'),
+                additionalInfo: formData.get('additional-info')
+            };
+
+            // Here you would typically send the data to a backend service
+            console.log('Booking Details:', bookingDetails);
+            alert('Booking submitted successfully! I will contact you within 24 hours to confirm.');
+            bookingForm.reset();
+
+            // Reset floating labels
+            document.querySelectorAll('.floating-input').forEach(input => {
+                input.dispatchEvent(new Event('input'));
+            });
+            serviceDetailsSelect.innerHTML = '<option value="" disabled selected>Select a service first</option>';
+        });
+    </script>
+</body>
+</html>
