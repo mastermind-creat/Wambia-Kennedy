@@ -3,371 +3,1239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Portfolio</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Design Portfolio Gallery</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .gradient-bg {
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
+        }
+        
+        .gallery-item {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: center;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05) rotateY(5deg) rotateX(2deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            z-index: 10;
+        }
+        
+        .gallery-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .quote-form {
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .quote-form.active {
+            transform: translateY(0);
+        }
+        
+        .lazy {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .lazy.loaded {
+            opacity: 1;
+        }
+        
+        /* Dark mode styles */
+        .dark {
+            color-scheme: dark;
+        }
+        
+        .dark body {
+            background-color: #111827;
+            color: #f3f4f6;
+        }
+        
+        .dark .bg-white {
+            background-color: #1f2937;
+        }
+        
+        .dark .bg-gray-100 {
+            background-color: #111827;
+        }
+        
+        .dark .text-gray-700 {
+            color: #d1d5db;
+        }
+        
+        .dark .border-gray-300 {
+            border-color: #374151;
+        }
+        
+        .dark .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scroll-down-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filter-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .filter-btn.active::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .floating-btn {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.25);
+        }
+    </style>
 </head>
-<body>
-    <section class="container gallery-section">
-        <h2>Gallery Section</h2>
-        <div class="flex justify-center gap-4 mb-8 animate-fade-in delay-200">
-            <a href="#contact"
-               class="px-8 py-3 bg-indigo-600 text-white rounded-full font-medium shadow-md hover:bg-indigo-700 hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
-                Contact Me
-            </a>
-            <a href="portfolio.html"
-               class="px-8 py-3 border-2 border-indigo-600 text-indigo-600 rounded-full font-medium shadow-md bg-white hover:bg-indigo-600 hover:text-white hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
-                View Portfolio
-            </a>
-            <a href="index.html"
-               class="px-8 py-3 border-2 border-indigo-600 text-indigo-600 rounded-full font-medium shadow-md bg-white hover:bg-indigo-600 hover:text-white hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
-                Website
-            </a>
+<body class="bg-gray-50 font-sans dark:bg-gray-900 transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm py-4 sticky top-0 z-40">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-paint-brush text-white"></i>
+                </div>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-purple-400">DesignFolio</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#gallery" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">Gallery</a>
+                    <a href="#services" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">Services</a>
+                    <a href="#about" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">About</a>
+                    <a href="#contact" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition">Contact</a>
+                </nav>
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+                <button class="md:hidden p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition" id="mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
-        <div class="filter-bar flex justify-center gap-3 mb-8"></div>
-            <button class="filter-btn active px-5 py-2 rounded-full bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-400" data-filter="all" aria-label="Show all designs">All</button>
-            <button class="filter-btn px-5 py-2 rounded-full bg-white border border-indigo-600 text-indigo-600 font-semibold shadow hover:bg-indigo-600 hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-400" data-filter="logo" aria-label="Show logo designs">Logo</button>
-            <button class="filter-btn px-5 py-2 rounded-full bg-white border border-indigo-600 text-indigo-600 font-semibold shadow hover:bg-indigo-600 hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-400" data-filter="card" aria-label="Show card designs">Card</button>
-            <button class="filter-btn px-5 py-2 rounded-full bg-white border border-indigo-600 text-indigo-600 font-semibold shadow hover:bg-indigo-600 hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-400" data-filter="poster" aria-label="Show poster designs">Poster</button>
-            <button class="filter-btn px-5 py-2 rounded-full bg-white border border-indigo-600 text-indigo-600 font-semibold shadow hover:bg-indigo-600 hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-400" data-filter="cup" aria-label="Show cup designs">Cup</button>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white dark:bg-gray-800 shadow-lg rounded-b-lg" id="mobile-menu">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#gallery" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition py-2 border-b border-gray-200 dark:border-gray-700">Gallery</a>
+                <a href="#services" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition py-2 border-b border-gray-200 dark:border-gray-700">Services</a>
+                <a href="#about" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition py-2 border-b border-gray-200 dark:border-gray-700">About</a>
+                <a href="#contact" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition py-2">Contact</a>
+            </div>
         </div>
-        <div class="gallery-grid">
-            <!-- Gallery Item 1: Logo Design -->
-            <div class="gallery-item" data-category="logo">
-                <div class="relative" onclick="openLightbox(0)">
-                    <img loading="lazy" src="images/graphics/logo.jpg" alt="Logo Design" class="w-full">
-                    <div class="gallery-overlay">
-                        <h3 class="font-bold text-lg">Logo Design</h3>
-                        <p class="text-sm">Category: Logo</p>
-                        <div class="flex gap-2 mb-2">
-                            <button class="btn btn-primary" onclick="event.stopPropagation();scrollToContact()">Hire Me</button>
-                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                            <a href="mailto:kennyleyy0@gmail.com?subject=Design%20Inquiry%20-%20Logo%20Design" class="btn btn-social"><i class="fas fa-envelope"></i> Email</a>
-                        </div>
-                        <div class="social-links">
-                            <a href="images/graphics/logo.jpg" download class="btn btn-social"><i class="fas fa-download"></i></a>
-                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourportfolio.com&title=Logo%20Design" target="_blank" class="btn btn-social"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://wa.me/?text=Check+out+this+Logo+Design+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-whatsapp"></i></a>
-                            <a href="https://twitter.com/intent/tweet?text=Check+out+this+Logo+Design+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-twitter"></i></a>
-                        </div>
-                        <button class="btn btn-tertiary mt-2" onclick="event.stopPropagation();openPricingModal('Logo Design')">Get Custom Design</button>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold">Logo Design</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Modern logo for branding purposes.</p>
-                </div>
-            </div>
+    </header>
 
-            <!-- Gallery Item 2: Birthday Card -->
-            <div class="gallery-item" data-category="card">
-                <div class="relative" onclick="openLightbox(1)">
-                    <img loading="lazy" src="images/graphics/Birthday.jpg" alt="Birthday Card" class="w-full">
-                    <div class="gallery-overlay">
-                        <h3 class="font-bold text-lg">Birthday Card</h3>
-                        <p class="text-sm">Category: Card</p>
-                        <div class="flex gap-2 mb-2">
-                            <button class="btn btn-primary" onclick="event.stopPropagation();scrollToContact()">Hire Me</button>
-                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                            <a href="mailto:kennyleyy0@gmail.com?subject=Design%20Inquiry%20-%20Birthday%20Card" class="btn btn-social"><i class="fas fa-envelope"></i> Email</a>
-                        </div>
-                        <div class="social-links">
-                            <a href="images/graphics/Birthday.jpg" download class="btn btn-social"><i class="fas fa-download"></i></a>
-                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourportfolio.com&title=Birthday%20Card" target="_blank" class="btn btn-social"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://wa.me/?text=Check+out+this+Birthday+Card+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-whatsapp"></i></a>
-                            <a href="https://twitter.com/intent/tweet?text=Check+out+this+Birthday+Card+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-twitter"></i></a>
-                        </div>
-                        <button class="btn btn-tertiary mt-2" onclick="event.stopPropagation();openPricingModal('Birthday Card')">Get Custom Design</button>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold">Birthday Card</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Celebratory card for special occasions.</p>
-                </div>
-            </div>
-
-            <!-- Gallery Item 3: Event Poster -->
-            <div class="gallery-item" data-category="poster">
-                <div class="relative" onclick="openLightbox(2)">
-                    <img loading="lazy" src="images/graphics/new.png" alt="Event Poster" class="w-full">
-                    <div class="gallery-overlay">
-                        <h3 class="font-bold text-lg">Event Poster</h3>
-                        <p class="text-sm">Category: Poster</p>
-                        <div class="flex gap-2 mb-2">
-                            <button class="btn btn-primary" onclick="event.stopPropagation();scrollToContact()">Hire Me</button>
-                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                            <a href="mailto:kennyleyy0@gmail.com?subject=Design%20Inquiry%20-%20Event%20Poster" class="btn btn-social"><i class="fas fa-envelope"></i> Email</a>
-                        </div>
-                        <div class="social-links">
-                            <a href="images/graphics/new.png" download class="btn btn-social"><i class="fas fa-download"></i></a>
-                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourportfolio.com&title=Event%20Poster" target="_blank" class="btn btn-social"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://wa.me/?text=Check+out+this+Event+Poster+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-whatsapp"></i></a>
-                            <a href="https://twitter.com/intent/tweet?text=Check+out+this+Event+Poster+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-twitter"></i></a>
-                        </div>
-                        <button class="btn btn-tertiary mt-2" onclick="event.stopPropagation();openPricingModal('Event Poster')">Get Custom Design</button>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold">Event Poster</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Dynamic poster for event promotion.</p>
-                </div>
-            </div>
-
-            <!-- Gallery Item 4: Success Card Graphic -->
-            <div class="gallery-item" data-category="card">
-                <div class="relative" onclick="openLightbox(3)">
-                    <img loading="lazy" src="images/graphics/success.jpg" alt="Success Card Graphic" class="w-full">
-                    <div class="gallery-overlay">
-                        <h3 class="font-bold text-lg">Success Card Graphic</h3>
-                        <p class="text-sm">Category: Card</p>
-                        <div class="flex gap-2 mb-2">
-                            <button class="btn btn-primary" onclick="event.stopPropagation();scrollToContact()">Hire Me</button>
-                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                            <a href="mailto:kennyleyy0@gmail.com?subject=Design%20Inquiry%20-%20Success%20Card%20Graphic" class="btn btn-social"><i class="fas fa-envelope"></i> Email</a>
-                        </div>
-                        <div class="social-links">
-                            <a href="images/graphics/success.jpg" download class="btn btn-social"><i class="fas fa-download"></i></a>
-                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourportfolio.com&title=Success%20Card%20Graphic" target="_blank" class="btn btn-social"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://wa.me/?text=Check+out+this+Success+Card+Graphic+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-whatsapp"></i></a>
-                            <a href="https://twitter.com/intent/tweet?text=Check+out+this+Success+Card+Graphic+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-twitter"></i></a>
-                        </div>
-                        <button class="btn btn-tertiary mt-2" onclick="event.stopPropagation();openPricingModal('Success Card Graphic')">Get Custom Design</button>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold">Success Card Graphic</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Motivational card for achievements.</p>
-                </div>
-            </div>
-
-            <!-- Gallery Item 5: Cup Design -->
-            <div class="gallery-item" data-category="cup">
-                <div class="relative" onclick="openLightbox(4)">
-                    <img loading="lazy" src="images/graphics/African_cup.png" alt="Cup Design" class="w-full">
-                    <div class="gallery-overlay">
-                        <h3 class="font-bold text-lg">Cup Design</h3>
-                        <p class="text-sm">Category: Cup</p>
-                        <div class="flex gap-2 mb-2">
-                            <button class="btn btn-primary" onclick="event.stopPropagation();scrollToContact()">Hire Me</button>
-                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                            <a href="mailto:kennyleyy0@gmail.com?subject=Design%20Inquiry%20-%20Cup%20Design" class="btn btn-social"><i class="fas fa-envelope"></i> Email</a>
-                        </div>
-                        <div class="social-links">
-                            <a href="images/graphics/African_cup.png" download class="btn btn-social"><i class="fas fa-download"></i></a>
-                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourportfolio.com&title=Cup%20Design" target="_blank" class="btn btn-social"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://wa.me/?text=Check+out+this+Cup+Design+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-whatsapp"></i></a>
-                            <a href="https://twitter.com/intent/tweet?text=Check+out+this+Cup+Design+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-twitter"></i></a>
-                        </div>
-                        <button class="btn btn-tertiary mt-2" onclick="event.stopPropagation();openPricingModal('Cup Design')">Get Custom Design</button>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold">Cup Design</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Elegant cup design for cultural themes.</p>
-                </div>
-            </div>
-
-            <!-- Gallery Item 6: Business Poster -->
-            <div class="gallery-item" data-category="poster">
-                <div class="relative" onclick="openLightbox(5)">
-                    <img loading="lazy" src="images/graphics/Alicia.jpg" alt="Business Poster" class="w-full">
-                    <div class="gallery-overlay">
-                        <h3 class="font-bold text-lg">Business Poster</h3>
-                        <p class="text-sm">Category: Poster</p>
-                        <div class="flex gap-2 mb-2">
-                            <button class="btn btn-primary" onclick="event.stopPropagation();scrollToContact()">Hire Me</button>
-                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                            <a href="mailto:kennyleyy0@gmail.com?subject=Design%20Inquiry%20-%20Business%20Poster" class="btn btn-social"><i class="fas fa-envelope"></i> Email</a>
-                        </div>
-                        <div class="social-links">
-                            <a href="images/graphics/Alicia.jpg" download class="btn btn-social"><i class="fas fa-download"></i></a>
-                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourportfolio.com&title=Business%20Poster" target="_blank" class="btn btn-social"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="https://wa.me/?text=Check+out+this+Business+Poster+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-whatsapp"></i></a>
-                            <a href="https://twitter.com/intent/tweet?text=Check+out+this+Business+Poster+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-twitter"></i></a>
-                        </div>
-                        <button class="btn btn-tertiary mt-2" onclick="event.stopPropagation();openPricingModal('Business Poster')">Get Custom Design</button>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold">Business Poster</h3>
-                    <p class="text-gray-500 dark:text-gray-400">Vibrant poster for business events.</p>
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900 opacity-90"></div>
+        <div class="container mx-auto px-4 py-24 md:py-32 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 animate-fade-in">
+                    <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-purple-400">Creative Designs</span> That Inspire
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 animate-fade-in" style="animation-delay: 0.2s;">
+                    Transforming ideas into visually stunning realities with passion and precision
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 animate-fade-in" style="animation-delay: 0.4s;">
+                    <a href="index.html" target="_blank" class="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-bold hover:from-indigo-700 hover:to-purple-700 transition shadow-lg hover:shadow-xl">
+                        View Website
+                    </a>
+                    <button id="contact-hero-btn" class="px-8 py-3 bg-white dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 rounded-full font-bold hover:bg-gray-100 dark:hover:bg-gray-700 transition shadow-lg hover:shadow-xl">
+                        Get a Quote
+                    </button>
                 </div>
             </div>
         </div>
-        <a href="https://yourportfolio.com/more-graphics" class="view-more">View More Graphics</a>
-
-        <!-- CTA Banner -->
-        <div class="cta-banner">
-            <h3>Like what you see? Let’s create something amazing!</h3>
-            <button onclick="scrollToContact()" class="btn btn-primary">Contact Me</button>
+        <div class="scroll-down-indicator">
+            <i class="fas fa-chevron-down text-gray-400 text-2xl"></i>
         </div>
+    </section>
 
-        <!-- Floating Quote Button -->
-        <button id="quote-btn" class="quote-btn">
-            <i class="fas fa-comment-dots"></i> Request Design Quote
-        </button>
+    <!-- Gallery Filters -->
+    <section class="py-12 bg-white dark:bg-gray-800" id="gallery">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">Design Portfolio</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto"></div>
+                <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+                    Explore my collection of creative designs across various categories
+                </p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <button class="filter-btn px-4 py-2 rounded-full bg-indigo-600 text-white active" data-filter="all">All Projects</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300" data-filter="logo">Logo Designs</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300" data-filter="poster">Poster Designs</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300" data-filter="card">Card Designs</button>
+                <button class="filter-btn px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300" data-filter="branding">Branding</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="py-8 relative overflow-hidden bg-gray-50 dark:bg-gray-900">
+        <div class="absolute inset-0 -z-10 opacity-10 gradient-bg bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400"></div>
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="gallery-grid">
+                <!-- Gallery items will be added here by JavaScript -->
+            </div>
+            
+            <div class="text-center mt-12">
+                <button id="load-more" class="px-6 py-3 border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 rounded-full font-bold hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-900 transition">
+                    Load More Designs
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-16 bg-white dark:bg-gray-800" id="services">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">My Services</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto"></div>
+                <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+                    Comprehensive design solutions tailored to your brand's needs
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-brush"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Logo Design</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Unique and memorable logos that capture your brand's essence and make a lasting impression.
+                    </p>
+                    <a href="index.html#services">
+                        <button class="text-indigo-600 dark:text-indigo-400 font-medium hover:text-indigo-800 dark:hover:text-indigo-300 transition">
+                            Learn more <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </a>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Brand Identity</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Comprehensive branding packages including color schemes, typography, and visual guidelines.
+                    </p>
+                    <a href="index.html#services">
+                        <button class="text-indigo-600 dark:text-indigo-400 font-medium hover:text-indigo-800 dark:hover:text-indigo-300 transition">
+                            Learn more <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </a>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-teal-400 rounded-full flex items-center justify-center text-white text-2xl mb-4">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Print Design</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Stunning business cards, brochures, flyers, and other print materials that stand out.
+                    </p>
+                    <a href="index.html#services">
+                        <button class="text-indigo-600 dark:text-indigo-400 font-medium hover:text-indigo-800 dark:hover:text-indigo-300 transition">
+                            Learn more <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-900" id="about">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 relative">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl">
+                        <img src="images/profile.png" 
+                             alt="Designer at work" 
+                             class="w-full h-auto rounded-2xl">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-2xl"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <h3 class="text-xl font-bold">Wambia Kennedy</h3>
+                            <p class="text-sm opacity-80">Creative Designer & Developer</p>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-4xl shadow-xl animate-float">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">About Me</h2>
+                    <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mb-6"></div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        With over 5 years of experience in the design industry, I've had the privilege of working with startups, established businesses, and creative agencies to bring their visions to life.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        My approach combines strategic thinking with artistic expression, ensuring that every design not only looks beautiful but also serves its intended purpose effectively.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center text-indigo-600 dark:text-indigo-300 mr-3">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <span class="font-medium">50+ Happy Clients</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center text-indigo-600 dark:text-indigo-300 mr-3">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <span class="font-medium">200+ Projects</span>
+                        </div>
+                    </div>
+                    <button class="mt-8 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-bold hover:from-indigo-700 hover:to-purple-700 transition shadow-lg hover:shadow-xl">
+                        Download Resume
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">Client Testimonials</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto"></div>
+                <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+                    What my clients say about working with me
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-white">Emily Rodriguez</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">CEO, TechStart</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">
+                        "Kennedy transformed our brand identity completely. The new logo and visual system perfectly captured our company's innovative spirit. The engagement from our customers has increased significantly since the rebrand."
+                    </p>
+                    <div class="flex mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-white">Michael Chen</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Marketing Director, Bloom</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">
+                        "Working with Kennedy was an absolute pleasure. She took our vague ideas and turned them into a stunning visual campaign that exceeded all our expectations. Her attention to detail is remarkable."
+                    </p>
+                    <div class="flex mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-white">Jessica Williams</h4>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Founder, The Green Cafe</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 italic">
+                        "Kennedy's designs for our cafe's branding and menu completely changed our business. Customers constantly compliment the aesthetic, and our social media following grew by 300% after the redesign."
+                    </p>
+                    <div class="flex mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="py-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to Elevate Your Brand?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Let's collaborate to create something extraordinary that captures your vision and resonates with your audience.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button id="contact-btn" class="px-8 py-3 bg-white text-indigo-700 rounded-full font-bold hover:bg-indigo-100 transition shadow-lg hover:shadow-xl">
+                    Start Your Project
+                </button>
+                <button id="pricing-btn" class="px-8 py-3 border-2 border-white text-white rounded-full font-bold hover:bg-white/10 transition shadow-lg hover:shadow-xl">
+                    View Pricing
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-100 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Get In Touch</h2>
+            <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-8 md:p-12">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        <p class="mb-8 opacity-90">
+                            Have a project in mind or want to discuss potential collaboration? Feel free to reach out through any of these channels.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white mr-4 mt-1">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Personal Address</h4>
+                                    <p class="opacity-90">Nyanza <br>Kisumu, Kenya</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white mr-4 mt-1">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Email Me</h4>
+                                    <p class="opacity-90">kennyleyy0@gmail.com<br>kennedywambia6@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white mr-4 mt-1">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Call Me</h4>
+                                    <p class="opacity-90">+254 743 394 373<br>Mon-Sun, 9am-5pm EAT</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 pt-6 border-t border-white/20">
+                            <h4 class="font-bold mb-4">Follow Me</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition">
+                                    <i class="fab fa-behance"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition">
+                                    <i class="fab fa-dribbble"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Message</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label for="contact-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
+                                <input type="text" id="contact-name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+                            </div>
+                            
+                            <div>
+                                <label for="contact-email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                                <input type="email" id="contact-email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+                            </div>
+                            
+                            <div>
+                                <label for="contact-subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Subject</label>
+                                <input type="text" id="contact-subject" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+                            </div>
+                            
+                            <div>
+                                <label for="contact-message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+                                <textarea id="contact-message" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 rounded-lg font-bold hover:from-indigo-700 hover:to-purple-700 transition shadow-md">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Lightbox Modal -->
-    <div id="lightbox-modal" class="modal">
-        <div class="modal-content">
-            <button onclick="closeLightbox()" class="modal-close" aria-label="Close lightbox"><i class="fas fa-times"></i></button>
-            <img id="lightbox-img" src="" alt="" class="w-full h-80 object-contain rounded-lg mb-4">
-            <div class="flex justify-between w-full mb-2">
-                <button onclick="prevLightbox()" class="btn btn-primary" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
-                <button onclick="nextLightbox()" class="btn btn-primary" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+    <div id="lightbox" class="lightbox hidden">
+        <div class="absolute top-4 right-4">
+            <button id="close-lightbox" class="text-white text-3xl hover:text-gray-300 transition">&times;</button>
+        </div>
+        <div class="lightbox-content relative">
+            <img id="lightbox-img" src="" alt="" class="max-w-full max-h-screen mx-auto rounded-lg">
+            <div class="absolute top-1/2 left-4 transform -translate-y-1/2">
+                <button id="prev-btn" class="bg-white bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center hover:bg-opacity-75 transition">
+                    <i class="fas fa-chevron-left text-gray-800 text-xl"></i>
+                </button>
             </div>
-            <h3 id="lightbox-title" class="font-bold text-lg"></h3>
-            <p id="lightbox-category" class="text-sm text-gray-500 dark:text-gray-400 mb-2"></p>
-            <div id="lightbox-actions" class="flex gap-2 flex-wrap justify-center"></div>
+            <div class="absolute top-1/2 right-4 transform -translate-y-1/2">
+                <button id="next-btn" class="bg-white bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center hover:bg-opacity-75 transition">
+                    <i class="fas fa-chevron-right text-gray-800 text-xl"></i>
+                </button>
+            </div>
+            <div class="absolute bottom-4 left-0 right-0 text-center text-white">
+                <h3 id="lightbox-title" class="text-xl font-bold drop-shadow-lg"></h3>
+                <p id="lightbox-category" class="text-sm opacity-80 drop-shadow-lg"></p>
+            </div>
         </div>
     </div>
 
     <!-- Pricing Modal -->
-    <div id="pricing-modal" class="modal">
-        <div class="modal-content">
-            <button onclick="closePricingModal()" class="modal-close" aria-label="Close pricing modal"><i class="fas fa-times"></i></button>
-            <h3 id="pricing-title" class="text-2xl font-bold mb-2"></h3>
-            <p id="pricing-price" class="text-blue-500 dark:text-blue-400 font-medium mb-4"></p>
-            <p id="pricing-description" class="text-gray-700 dark:text-gray-300 mb-4"></p>
-            <button onclick="scrollToContact();closePricingModal()" class="btn btn-primary w-full">Contact Me</button>
+    <div id="pricing-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden w-full max-w-4xl animate-fade-in">
+            <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Design Service Packages</h3>
+                <button id="close-pricing" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-2xl">&times;</button>
+            </div>
+            
+            <div class="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-gray-700">
+                <div class="p-6">
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Basic</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Perfect for startups and small businesses</p>
+                    <div class="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-6">Ksh 500<span class="text-lg font-normal">/project</span></div>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">1 Logo Concept</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">2 Revisions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Final Files (PNG, JPG)</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-times text-red-400 mr-2"></i>
+                            <span class="text-gray-400">Brand Guidelines</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-times text-red-400 mr-2"></i>
+                            <span class="text-gray-400">Social Media Kit</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full px-4 py-2 border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 font-bold rounded-lg hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-900 transition">
+                        Choose Basic
+                    </button>
+                </div>
+                
+                <div class="p-6 relative">
+                    <div class="absolute top-0 right-4 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-b-lg">POPULAR</div>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Standard</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Ideal for growing businesses</p>
+                    <div class="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-6">Ksh 1,500<span class="text-lg font-normal">/project</span></div>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">3 Logo Concepts</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Unlimited Revisions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Final Files (AI, EPS, PNG, JPG)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Basic Brand Guidelines</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-times text-red-400 mr-2"></i>
+                            <span class="text-gray-400">Social Media Kit</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg hover:from-indigo-700 hover:to-purple-700 transition">
+                        Choose Standard
+                    </button>
+                </div>
+                
+                <div class="p-6">
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Premium</h4>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Complete branding solution</p>
+                    <div class="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-6">Ksh 3,000<span class="text-lg font-normal">/project</span></div>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">5 Logo Concepts</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Unlimited Revisions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Final Files (All Formats)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Comprehensive Brand Guidelines</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Social Media Kit</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full px-4 py-2 border-2 border-indigo-600 text-indigo-600 dark:text-indigo-400 font-bold rounded-lg hover:bg-indigo-600 hover:text-white dark:hover:bg-indigo-900 transition">
+                        Choose Premium
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6 bg-gray-50 dark:bg-gray-700 border-t border-gray-200 dark:border-gray-700">
+                <h4 class="font-bold text-gray-900 dark:text-white mb-2">Need something custom?</h4>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Contact me for a personalized quote tailored to your specific needs.</p>
+                <button id="get-quote-btn" class="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-bold hover:from-indigo-700 hover:to-purple-700 transition">
+                    Get Custom Quote
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- Quote Modal -->
-    <div id="quote-modal" class="modal">
-        <div class="modal-content">
-            <button onclick="closeQuoteModal()" class="modal-close" aria-label="Close quote modal"><i class="fas fa-times"></i></button>
-            <h3 class="text-2xl font-bold mb-4">Request Design Quote</h3>
-            <form id="quote-form" class="space-y-4">
-                <input type="text" name="name" placeholder="Your Name" required class="form-input" aria-label="Your Name">
-                <input type="email" name="email" placeholder="Your Email" required class="form-input" aria-label="Your Email">
-                <input type="text" name="type" placeholder="Design Type (Logo, Poster, Card...)" required class="form-input" aria-label="Design Type">
-                <textarea name="details" rows="3" placeholder="Project Details" required class="form-input" aria-label="Project Details"></textarea>
-                <button type="submit" class="btn btn-primary w-full">Send Quote Request</button>
-            </form>
+    <!-- Quote Form -->
+    <div id="quote-form" class="quote-form fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-2xl rounded-t-xl z-50 p-6 max-w-2xl mx-auto border border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Request Custom Quote</h3>
+            <button id="close-quote" class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-2xl">&times;</button>
         </div>
+        
+        <form class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your Name</label>
+                    <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+                </div>
+                
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+                </div>
+            </div>
+            
+            <div>
+                <label for="company" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Company (Optional)</label>
+                <input type="text" id="company" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+            </div>
+            
+            <div>
+                <label for="project-type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Project Type</label>
+                <select id="project-type" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+                    <option>Logo Design</option>
+                    <option>Brand Identity</option>
+                    <option>Print Design</option>
+                    <option>Packaging Design</option>
+                    <option>Website Design</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="budget" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Estimated Budget</label>
+                <select id="budget" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white">
+                    <option>Less than Ksh. 500</option>
+                    <option>Ksh. 500 - Ksh. 1,000</option>
+                    <option>Ksh. 1,000 - Ksh. 2,500</option>
+                    <option>Ksh. 2,500 - Ksh. 5,000</option>
+                    <option>More than Ksh. 5,000</option>
+                    <option>Not sure</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="details" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Project Details</label>
+                <textarea id="details" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white" placeholder="Tell me about your project, goals, timeline, and any specific requirements..."></textarea>
+            </div>
+            
+            <div class="flex items-center">
+                <input type="checkbox" id="agree-terms" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700">
+                <label for="agree-terms" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                    I agree to the <a href="#" class="text-indigo-600 dark:text-indigo-400 hover:underline">terms and conditions</a>
+                </label>
+            </div>
+            
+            <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-bold hover:from-indigo-700 hover:to-purple-700 transition shadow-md">
+                Submit Quote Request
+            </button>
+        </form>
     </div>
+
+    <!-- Floating Buttons -->
+    <div class="fixed right-6 bottom-24 space-y-4 z-40">
+        <a href="#gallery" class="block w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full flex items-center justify-center shadow-xl floating-btn hover:from-pink-600 hover:to-rose-600 transition-all">
+            <i class="fas fa-images text-xl"></i>
+        </a>
+        <button id="quote-btn" class="w-16 h-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full flex items-center justify-center shadow-xl floating-btn">
+            <i class="fas fa-pen-nib text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white mr-3">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Wambia Kennedy</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Creating beautiful, functional designs that tell your brand's story and connect with your audience.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-white hover:bg-indigo-600 transition">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-white hover:bg-indigo-600 transition">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-white hover:bg-indigo-600 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-white hover:bg-indigo-600 transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#gallery" class="text-gray-400 hover:text-white transition">Portfolio</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Logo Design</a></li>
+                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Brand Identity</a></li>
+                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Print Design</a></li>
+                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Packaging</a></li>
+                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Web Design</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>Nyanza <br>Kisumu, kenya</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3"></i>
+                            <span>kennyleyy0@gmail.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3"></i>
+                            <span>+254 743 394 373</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 DesignFolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
+        // Gallery data
         const galleryItems = [
-            { src: "images/graphics/logo.jpg", title: "Logo Design", category: "logo", download: "images/graphics/logo.jpg" },
-            { src: "images/graphics/Birthday.jpg", title: "Birthday Card", category: "card", download: "images/graphics/Birthday.jpg" },
-            { src: "images/graphics/new.png", title: "Event Poster", category: "poster", download: "images/graphics/new.png" },
-            { src: "images/graphics/success.jpg", title: "Success Card Graphic", category: "card", download: "images/graphics/success.jpg" },
-            { src: "images/graphics/African_cup.png", title: "Cup Design", category: "cup", download: "images/graphics/African_cup.png" },
-            { src: "images/graphics/Alicia.jpg", title: "Business Poster", category: "poster", download: "images/graphics/Alicia.jpg" }
+            { id: 1, title: "Tech Startup Logo", category: "logo", image: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" },
+            { id: 2, title: "Music Festival Poster", category: "poster", image: "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" },
+            { id: 3, title: "Digital Skills Training", category: "logo", image: "images/graphics/digitalskills.png" },
+            { id: 4, title: "Coffee Shop Logo", category: "logo", image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" },
+            { id: 5, title: "Art Exhibition Poster", category: "poster", image: "https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80" },
+            { id: 6, title: "Business Card Design", category: "card", image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" },
+            { id: 7, title: "Fitness Brand Logo", category: "logo", image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" },
+            { id: 8, title: "Movie Poster Design", category: "poster", image: "https://images.unsplash.com/photo-1542204165-65bf26472b9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" },
+            { id: 9, title: "Birthday Card Design", category: "card", image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" },
+            { id: 10, title: "Restaurant Branding", category: "branding", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" },
+            { id: 11, title: "Concert Poster", category: "poster", image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" },
+            { id: 12, title: "Holiday Greeting Card", category: "card", image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" },
+            { id: 13, title: "Tech Startup Logo", category: "logo", image: "images/graphics/logo.jpg" },
+            { id: 14, title: "Music Festival Poster", category: "poster", image: "images/graphics/new.png" },
+            { id: 15, title: "Wedding Invitation Card", category: "card", image: "images/graphics/success.jpg" },
+            { id: 16, title: "Coffee Shop Logo", category: "logo", image: "images/graphics/African_cup.png" },
+            { id: 17, title: "Art Exhibition Poster", category: "poster", image: "images/graphics/Alicia.jpg" },
+            { id: 18, title: "Business Card Design", category: "card", image: "images/graphics/Birthday.jpg" },
+            { id: 19, title: "Fitness Brand Logo", category: "logo", image: "images/graphics/ajira.jpg" },
+            { id: 20, title: "Movie Poster Design", category: "poster", image: "images/graphics/graphic1.png" },
+            { id: 21, title: "Birthday Card Design", category: "card", image: "images/graphics/stvcAjira.jpg" },
+            { id: 22, title: "Wedding Invitation Card", category: "card", image: "images/graphics/african.png" },
+            { id: 3, title: "Coffee Shop Logo", category: "card", image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" },
+            { id: 24, title: "Art Exhibition Poster", category: "poster", image: "images/graphics/flower.jpg" },
+            { id: 25, title: "Business Card Design", category: "card", image: "images/graphics/Fullstack Foundry.png" },
+            { id: 26, title: "Fitness Brand Logo", category: "logo", image: "images/graphics/linkedin.png" },
+            { id: 27, title: "Movie Poster Design", category: "poster", image: "images/graphics/logo.png" },
+            { id: 28, title: "Birthday Card Design", category: "card", image: "images/graphics/projectTracko.jpg" },
+            { id: 29, title: "Restaurant Logo", category: "logo", image: "images/graphics/systemdev.png" },
+            { id: 30, title: "Concert Poster", category: "poster", image: "images/graphics/training.png" },
+            { id: 31, title: "Holiday Greeting Card", category: "card", image: "images/graphics/worship.jpg" }
         ];
 
-        let currentLightbox = 0;
+        // Initialize gallery
+        const galleryGrid = document.getElementById('gallery-grid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxCategory = document.getElementById('lightbox-category');
+        const closeLightbox = document.getElementById('close-lightbox');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const pricingModal = document.getElementById('pricing-modal');
+        const closePricing = document.getElementById('close-pricing');
+        const getQuoteBtn = document.getElementById('get-quote-btn');
+        const quoteForm = document.getElementById('quote-form');
+        const quoteBtn = document.getElementById('quote-btn');
+        const closeQuote = document.getElementById('close-quote');
+        const contactBtn = document.getElementById('contact-btn');
+        const pricingBtn = document.getElementById('pricing-btn');
+        const contactHeroBtn = document.getElementById('contact-hero-btn');
+        const loadMoreBtn = document.getElementById('load-more');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-        function openLightbox(idx) {
-            currentLightbox = idx;
-            const item = galleryItems[idx];
-            document.getElementById('lightbox-img').src = item.src;
-            document.getElementById('lightbox-title').textContent = item.title;
-            document.getElementById('lightbox-category').textContent = `Category: ${item.category}`;
-            document.getElementById('lightbox-actions').innerHTML = `
-                <a href="${item.download}" download class="btn btn-social"><i class="fas fa-download"></i></a>
-                <button class="btn btn-primary" onclick="scrollToContact();closeLightbox()">Hire Me</button>
-                <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-                <a href="mailto:kennyleyy0@gmail.com?subject=Design%20Inquiry%20-%20${encodeURIComponent(item.title)}" class="btn btn-social"><i class="fas fa-envelope"></i></a>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourportfolio.com&title=${encodeURIComponent(item.title)}" target="_blank" class="btn btn-social"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://wa.me/?text=Check+out+this+${encodeURIComponent(item.title)}+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://twitter.com/intent/tweet?text=Check+out+this+${encodeURIComponent(item.title)}+https://yourportfolio.com" target="_blank" class="btn btn-social"><i class="fab fa-twitter"></i></a>
-                <button class="btn btn-tertiary" onclick="openPricingModal('${item.title}');closeLightbox()">Get Custom Design</button>
-            `;
-            document.getElementById('lightbox-modal').classList.add('active');
+        let currentImageIndex = 0;
+        let filteredItems = [...galleryItems];
+        let displayedItems = 8; // Initial number of items to display
+        let currentFilter = 'all';
+
+        // Render gallery items
+        function renderGallery(items, limit = displayedItems) {
+            galleryGrid.innerHTML = '';
+            const itemsToShow = items.slice(0, limit);
+            
+            itemsToShow.forEach((item, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = `gallery-item relative overflow-hidden rounded-xl shadow-md transition-all duration-300 ${item.category}`;
+                galleryItem.setAttribute('data-category', item.category);
+                galleryItem.setAttribute('data-index', index);
+                
+                // Determine icon based on category
+                let categoryIcon = 'fa-palette'; // default
+                if (item.category === 'logo') categoryIcon = 'fa-brush';
+                if (item.category === 'poster') categoryIcon = 'fa-image';
+                if (item.category === 'card') categoryIcon = 'fa-envelope';
+                if (item.category === 'branding') categoryIcon = 'fa-tags';
+
+                galleryItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="w-full h-64 object-cover lazy" loading="lazy">
+                    <div class="gallery-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <div class="flex items-center mb-2">
+                            <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white mr-3">
+                                <i class="fas ${categoryIcon} text-sm"></i>
+                            </div>
+                            <span class="text-indigo-300 text-sm font-medium">${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</span>
+                        </div>
+                        <h3 class="text-white font-bold text-xl mb-4">${item.title}</h3>
+                        <div class="flex space-x-3">
+                            <button class="view-btn px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm hover:bg-white/20 transition border border-white/20">
+                                <i class="fas fa-expand mr-1"></i> View
+                            </button>
+                            <button class="download-btn px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg text-sm hover:bg-white/20 transition border border-white/20" data-id="${item.id}">
+                                <i class="fas fa-download mr-1"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                galleryGrid.appendChild(galleryItem);
+                
+                // Add click event to open lightbox
+                const viewBtn = galleryItem.querySelector('.view-btn');
+                viewBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    currentImageIndex = index;
+                    openLightbox();
+                });
+                
+                galleryItem.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('download-btn') && !e.target.classList.contains('view-btn')) {
+                        currentImageIndex = index;
+                        openLightbox();
+                    }
+                });
+            });
+            
+            // Update load more button visibility
+            if (limit >= items.length) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'inline-block';
+            }
+            
+            // Lazy load images
+            lazyLoadImages();
+        }
+
+        // Lazy load images
+        function lazyLoadImages() {
+            const lazyImages = document.querySelectorAll('.lazy');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.getAttribute('src');
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+            
+            lazyImages.forEach(img => {
+                observer.observe(img);
+            });
+        }
+
+        // Filter gallery items
+        function filterGallery(category) {
+            currentFilter = category;
+            if (category === 'all') {
+                filteredItems = [...galleryItems];
+            } else {
+                filteredItems = galleryItems.filter(item => item.category === category);
+            }
+            displayedItems = 8; // Reset to initial count when filtering
+            renderGallery(filteredItems);
+            
+            // Update active filter button
+            filterButtons.forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.classList.remove('bg-gray-200', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+                    btn.classList.add('bg-indigo-600', 'text-white');
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('bg-indigo-600', 'text-white', 'active');
+                    btn.classList.add('bg-gray-200', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+                }
+            });
+        }
+
+        // Open lightbox
+        function openLightbox() {
+            const item = filteredItems[currentImageIndex];
+            lightboxImg.src = item.image;
+            lightboxImg.alt = item.title;
+            lightboxTitle.textContent = item.title;
+            lightboxCategory.textContent = item.category.charAt(0).toUpperCase() + item.category.slice(1);
+            lightbox.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeLightbox() {
-            document.getElementById('lightbox-modal').classList.remove('active');
-            document.body.style.overflow = 'auto';
+        // Close lightbox
+        function closeLightboxFunc() {
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = '';
         }
 
-        function prevLightbox() {
-            currentLightbox = (currentLightbox - 1 + galleryItems.length) % galleryItems.length;
-            openLightbox(currentLightbox);
+        // Navigate lightbox images
+        function navigateLightbox(direction) {
+            if (direction === 'prev') {
+                currentImageIndex = (currentImageIndex - 1 + filteredItems.length) % filteredItems.length;
+            } else {
+                currentImageIndex = (currentImageIndex + 1) % filteredItems.length;
+            }
+            const item = filteredItems[currentImageIndex];
+            lightboxImg.src = item.image;
+            lightboxImg.alt = item.title;
+            lightboxTitle.textContent = item.title;
+            lightboxCategory.textContent = item.category.charAt(0).toUpperCase() + item.category.slice(1);
         }
 
-        function nextLightbox() {
-            currentLightbox = (currentLightbox + 1) % galleryItems.length;
-            openLightbox(currentLightbox);
-        }
-
-        function openPricingModal(title) {
-            document.getElementById('pricing-title').textContent = `${title} - Custom Design`;
-            document.getElementById('pricing-price').textContent = "Starting at Ksh 500";
-            document.getElementById('pricing-description').textContent = `Get a custom ${title} tailored to your needs. Contact for a quote!`;
-            document.getElementById('pricing-modal').classList.add('active');
+        // Open pricing modal
+        function openPricingModal() {
+            pricingModal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
 
+        // Close pricing modal
         function closePricingModal() {
-            document.getElementById('pricing-modal').classList.remove('active');
-            document.body.style.overflow = 'auto';
+            pricingModal.classList.add('hidden');
+            document.body.style.overflow = '';
         }
 
-        function openQuoteModal() {
-            document.getElementById('quote-modal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+        // Toggle quote form
+        function toggleQuoteForm() {
+            quoteForm.classList.toggle('active');
+            if (quoteForm.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         }
 
-        function closeQuoteModal() {
-            document.getElementById('quote-modal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
+        // Scroll to contact section
         function scrollToContact() {
             document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
         }
 
-        document.getElementById('quote-btn').addEventListener('click', openQuoteModal);
-
-        document.getElementById('quote-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Quote request sent! I will get back to you soon.');
-            closeQuoteModal();
-            e.target.reset();
-        });
-
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.getAttribute('data-filter');
-                document.querySelectorAll('.gallery-item').forEach(item => {
-                    const isVisible = filter === 'all' || item.getAttribute('data-category') === filter;
-                    item.classList.toggle('hidden', !isVisible);
-                    if (isVisible) {
-                        item.classList.add('animate-fade-in');
-                    }
-                });
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-            });
-        });
-
-        function fadeUpOnScroll() {
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                if (item.getBoundingClientRect().top < window.innerHeight * 0.85 && !item.classList.contains('hidden')) {
-                    item.classList.add('animate-fade-in');
-                }
-            });
+        // Download image
+        function downloadImage(id) {
+            const item = galleryItems.find(item => item.id === id);
+            if (item) {
+                // In a real implementation, this would download the actual high-res file
+                alert(`Downloading: ${item.title}\n\nIn a real implementation, this would trigger a file download.`);
+            }
         }
 
-        window.addEventListener('scroll', fadeUpOnScroll);
-        window.addEventListener('load', fadeUpOnScroll);
+        // Share image
+        function shareImage(id) {
+            const item = galleryItems.find(item => item.id === id);
+            if (item) {
+                // In a real implementation, this would use the Web Share API or open share dialogs
+                alert(`Sharing: ${item.title}\n\nShare options would appear here in a real implementation.`);
+            }
+        }
 
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
+        // Load more items
+        function loadMoreItems() {
+            displayedItems += 4; // Load 4 more items
+            if (currentFilter === 'all') {
+                renderGallery(galleryItems, displayedItems);
+            } else {
+                renderGallery(galleryItems.filter(item => item.category === currentFilter), displayedItems);
+            }
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Close mobile menu when clicking on a link
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // Event listeners
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => filterGallery(btn.dataset.filter));
+        });
+
+        closeLightbox.addEventListener('click', closeLightboxFunc);
+        prevBtn.addEventListener('click', () => navigateLightbox('prev'));
+        nextBtn.addEventListener('click', () => navigateLightbox('next'));
+        closePricing.addEventListener('click', closePricingModal);
+        getQuoteBtn.addEventListener('click', () => {
+            closePricingModal();
+            toggleQuoteForm();
+        });
+        quoteBtn.addEventListener('click', toggleQuoteForm);
+        closeQuote.addEventListener('click', toggleQuoteForm);
+        contactBtn.addEventListener('click', scrollToContact);
+        contactHeroBtn.addEventListener('click', scrollToContact);
+        pricingBtn.addEventListener('click', openPricingModal);
+        loadMoreBtn.addEventListener('click', loadMoreItems);
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightboxFunc();
+            }
+            if (e.target === pricingModal) {
+                closePricingModal();
+            }
+        });
+
+        // Event delegation for download buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('download-btn') || e.target.closest('.download-btn')) {
+                e.preventDefault();
+                e.stopPropagation();
+                const btn = e.target.classList.contains('download-btn') ? e.target : e.target.closest('.download-btn');
+                downloadImage(parseInt(btn.dataset.id));
+            }
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // Check for saved theme preference or use system preference
+        const currentTheme = localStorage.getItem('theme') || 
+                             (prefersDarkScheme.matches ? 'dark' : 'light');
+
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+
+            const theme = html.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
+
+        // Initialize
+        renderGallery(galleryItems);
     </script>
 </body>
 </html>
