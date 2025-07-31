@@ -65,10 +65,46 @@
             transform: translateY(-8px) rotate(-45deg);
         }
         
-        .progress-bar {
-            transition: width 1.5s ease-in-out;
-        }
         
+                /* Circular Progress Bar */
+        .circle-bg {
+            stroke: #e5e7eb; /* Light gray for background */
+        }
+
+        .dark .circle-bg {
+            stroke: #374151; /* Darker gray for dark mode */
+        }
+
+        .circle {
+            transition: stroke-dasharray 0.5s ease;
+        }
+
+        .percentage {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        /* No additional CSS needed for linear progress bars; existing Tailwind styles suffice */
+
+/* Hover Animation for Tech Stack Cards */
+.tech-stack-card {
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.tech-stack-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+        /* Hover Animation for Tech Stack Cards */
+        .tech-stack-card {
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .tech-stack-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+                
         .floating-label {
             transition: all 0.3s ease;
         }
