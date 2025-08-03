@@ -919,42 +919,29 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Chatbot Toggle
+                // Chatbot Toggle
         const chatbotToggle = document.getElementById('chatbotToggle');
         const chatbotModal = document.getElementById('chatbotModal');
         const closeChatbot = document.getElementById('closeChatbot');
-        
+
         chatbotToggle.addEventListener('click', () => {
             chatbotModal.classList.toggle('hidden');
         });
-        
+
         closeChatbot.addEventListener('click', () => {
             chatbotModal.classList.add('hidden');
         });
 
-        // Simple Chatbot Functionality
+        // Chatbot Functionality
         const chatbotMessages = document.getElementById('chatbotMessages');
         const chatbotInput = document.getElementById('chatbotInput');
         const sendChatbotMessage = document.getElementById('sendChatbotMessage');
-        
-        const chatbotResponses = {
-            "hello": "Hello! How can I help you today?",
-            "hi": "Hi there! What would you like to know about Ajira Digital Club?",
-            "what is ajira": "Ajira Digital is a Kenyan government initiative to equip youth with digital skills for online work opportunities.",
-            "how to join": "You can join by filling out the registration form on our website or contacting us via WhatsApp.",
-            "training": "We offer training in web development, digital marketing, graphic design, and more. Check our Services section for details.",
-            "events": "Our upcoming events are listed in the Events section. You can register for any that interest you.",
-            "contact": "You can reach us via email at ajira@semetvc.ac.ke or call +254 700 123 456. Our contact details are in the Contact section.",
-            "thanks": "You're welcome! Let me know if you have any other questions.",
-            "thank you": "You're welcome! Let me know if you have any other questions."
-        };
-        
-        sendChatbotMessage.addEventListener('click', () => {
-            const message = chatbotInput.value.toLowerCase();
+
+        sendChatbotMessage.addEventListener('click', async () => {
+            const message = chatbotInput.value.trim();
             chatbotInput.value = '';
-            
-            if (message.trim() === '') return;
-            
+            if (!message) return;
+
             // Add user message
             const userMessageDiv = document.createElement('div');
             userMessageDiv.className = 'mb-4 text-right';
@@ -964,32 +951,45 @@
                 </div>
             `;
             chatbotMessages.appendChild(userMessageDiv);
-            
-            // Add bot response
-            setTimeout(() => {
-                let response = "I'm sorry, I didn't understand that. Could you try asking something else? Here are some things I can help with: what is ajira, how to join, training, events, contact.";
-                
-                for (const [key, value] of Object.entries(chatbotResponses)) {
-                    if (message.includes(key)) {
-                        response = value;
-                        break;
-                    }
-                }
-                
-                const botMessageDiv = document.createElement('div');
-                botMessageDiv.className = 'mb-4';
+
+            // Add "typing..." indicator
+            const botMessageDiv = document.createElement('div');
+            botMessageDiv.className = 'mb-4';
+            botMessageDiv.innerHTML = `
+                <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 inline-block">
+                    <p>Typing...</p>
+                </div>
+            `;
+            chatbotMessages.appendChild(botMessageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+            // Fetch response from Vercel API
+            try {
+                const response = await fetch('https://your-project.vercel.app/api/deepseek', {  // Replace with your Vercel function URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message })
+                });
+
+                const data = await response.json();
                 botMessageDiv.innerHTML = `
                     <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 inline-block">
-                        <p>${response}</p>
+                        <p>${data.reply}</p>
                     </div>
                 `;
-                chatbotMessages.appendChild(botMessageDiv);
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            }, 500);
-            
+            } catch (error) {
+                botMessageDiv.innerHTML = `
+                    <div class="bg-red-100 text-red-700 rounded-lg p-3 inline-block">
+                        <p>Oops! Something went wrong. Try again later.</p>
+                    </div>
+                `;
+            }
+
             chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         });
-        
+
         chatbotInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 sendChatbotMessage.click();
