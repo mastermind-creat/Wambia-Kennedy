@@ -1,85 +1,39 @@
-// Chatbot Toggle
-const chatbotToggle = document.getElementById('chatbotToggle');
-const chatbotModal = document.getElementById('chatbotModal');
-const closeChatbot = document.getElementById('closeChatbot');
+export default async function handler(req, res) {
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method not allowed' });
+    }
 
-chatbotToggle.addEventListener('click', () => {
-    chatbotModal.classList.toggle('hidden');
-});
+    const { message } = req.body;
 
-closeChatbot.addEventListener('click', () => {
-    chatbotModal.classList.add('hidden');
-});
+    if (!message) {
+        return res.status(400).json({ error: 'Message is required' });
+    }
 
-// Chatbot Functionality
-const chatbotMessages = document.getElementById('chatbotMessages');
-const chatbotInput = document.getElementById('chatbotInput');
-const sendChatbotMessage = document.getElementById('sendChatbotMessage');
-
-sendChatbotMessage.addEventListener('click', async () => {
-    const message = chatbotInput.value.trim();
-    chatbotInput.value = '';
-    if (!message) return;
-
-    // Add user message
-    const userMessageDiv = document.createElement('div');
-    userMessageDiv.className = 'mb-4 text-right';
-    userMessageDiv.innerHTML = `
-        <div class="bg-red-100 dark:bg-green-900 text-gray-900 dark:text-white rounded-lg p-3 inline-block max-w-[80%]">
-            <p>${message}</p>
-        </div>
-    `;
-    chatbotMessages.appendChild(userMessageDiv);
-
-    // Add typing indicator
-    const botMessageDiv = document.createElement('div');
-    botMessageDiv.className = 'mb-4';
-    botMessageDiv.innerHTML = `
-        <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 inline-block">
-            <div class="typing-indicator">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    `;
-    chatbotMessages.appendChild(botMessageDiv);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-
-    // Fetch response from Vercel API
     try {
-        const response = await fetch('https://seme-tvc-ajira.vercel.app/api/deepseek', {
+        const response = await fetch('https://api.deepseek.com/chat/completions', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}` // ✅ Store API key in Vercel env
             },
-            body: JSON.stringify({ message })
+            body: JSON.stringify({
+                model: 'deepseek-chat',
+                messages: [
+                    { role: 'system', content: 'You are Ajira Digital Assistant. Help users with Ajira info.' },
+                    { role: 'user', content: message }
+                ]
+            })
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
-            throw new Error(`Server returned ${response.status}`);
+            throw new Error(data.error || 'Failed to fetch response from DeepSeek API');
         }
 
-        const data = await response.json();
-        const reply = data.reply || "Oops! I couldn't get a response right now.";
-
-        botMessageDiv.innerHTML = `
-            <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 inline-block max-w-[80%]">
-                <p>${reply}</p>
-            </div>
-        `;
+        res.status(200).json({ reply: data.choices[0].message.content });
     } catch (error) {
-        console.error('Chatbot error:', error);
-        botMessageDiv.innerHTML = `
-            <div class="bg-red-100 text-red-700 rounded-lg p-3 inline-block max-w-[80%]">
-                <p>Oops! Something went wrong. Please try again later.</p>
-            </div>
-        `;
+        console.error(error);
+        res.status(500).json({ error: 'Failed to connect to DeepSeek API' });
     }
-
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-});
-
-chatbotInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        sendChatbotMessage.click();
-    }
-});
+}
