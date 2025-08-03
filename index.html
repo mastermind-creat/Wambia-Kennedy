@@ -965,13 +965,14 @@
 
             // Fetch response from Vercel API
             try {
-                const response = await fetch('https://your-project.vercel.app/api/deepseek', {  // Replace with your Vercel function URL
+                const response = await fetch('https://seme-tvc-ajira.vercel.app/api/deepseek', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({ message })
                 });
+
 
                 const data = await response.json();
                 botMessageDiv.innerHTML = `
