@@ -1,45 +1,85 @@
-export default async function handler(req, res) {
-  // Allow CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+// Chatbot Toggle
+const chatbotToggle = document.getElementById('chatbotToggle');
+const chatbotModal = document.getElementById('chatbotModal');
+const closeChatbot = document.getElementById('closeChatbot');
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
+chatbotToggle.addEventListener('click', () => {
+    chatbotModal.classList.toggle('hidden');
+});
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+closeChatbot.addEventListener('click', () => {
+    chatbotModal.classList.add('hidden');
+});
 
-  const { message } = req.body;
+// Chatbot Functionality
+const chatbotMessages = document.getElementById('chatbotMessages');
+const chatbotInput = document.getElementById('chatbotInput');
+const sendChatbotMessage = document.getElementById('sendChatbotMessage');
 
-  if (!message) {
-    return res.status(400).json({ error: 'Message is required' });
-  }
+sendChatbotMessage.addEventListener('click', async () => {
+    const message = chatbotInput.value.trim();
+    chatbotInput.value = '';
+    if (!message) return;
 
-  try {
-    const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: 'deepseek-chat',
-        messages: [{ role: 'user', content: message }]
-      })
-    });
+    // Add user message
+    const userMessageDiv = document.createElement('div');
+    userMessageDiv.className = 'mb-4 text-right';
+    userMessageDiv.innerHTML = `
+        <div class="bg-red-100 dark:bg-green-900 text-gray-900 dark:text-white rounded-lg p-3 inline-block max-w-[80%]">
+            <p>${message}</p>
+        </div>
+    `;
+    chatbotMessages.appendChild(userMessageDiv);
 
-    const data = await response.json();
+    // Add typing indicator
+    const botMessageDiv = document.createElement('div');
+    botMessageDiv.className = 'mb-4';
+    botMessageDiv.innerHTML = `
+        <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 inline-block">
+            <div class="typing-indicator">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    `;
+    chatbotMessages.appendChild(botMessageDiv);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
-    if (!data.choices || !data.choices[0]) {
-      return res.status(500).json({ error: 'Invalid response from DeepSeek API', details: data });
+    // Fetch response from Vercel API
+    try {
+        const response = await fetch('https://seme-tvc-ajira.vercel.app/api/deepseek', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Server returned ${response.status}`);
+        }
+
+        const data = await response.json();
+        const reply = data.reply || "Oops! I couldn't get a response right now.";
+
+        botMessageDiv.innerHTML = `
+            <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 inline-block max-w-[80%]">
+                <p>${reply}</p>
+            </div>
+        `;
+    } catch (error) {
+        console.error('Chatbot error:', error);
+        botMessageDiv.innerHTML = `
+            <div class="bg-red-100 text-red-700 rounded-lg p-3 inline-block max-w-[80%]">
+                <p>Oops! Something went wrong. Please try again later.</p>
+            </div>
+        `;
     }
 
-    return res.status(200).json({ reply: data.choices[0].message.content });
-  } catch (error) {
-    console.error('DeepSeek API Error:', error);
-    return res.status(500).json({ error: 'Something went wrong on the server' });
-  }
-}
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+});
+
+chatbotInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendChatbotMessage.click();
+    }
+});

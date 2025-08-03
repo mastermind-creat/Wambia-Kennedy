@@ -37,6 +37,19 @@ const chatbotMessages = document.getElementById('chatbotMessages');
 const chatbotInput = document.getElementById('chatbotInput');
 const sendChatbotMessage = document.getElementById('sendChatbotMessage');
 
+// Fallback responses
+const fallbackResponses = {
+    "hello": "Hello! How can I assist you with Ajira Digital Club?",
+    "hi": "Hi there! How can I help you today?",
+    "what is ajira": "Ajira Digital is a Kenyan government initiative to equip youth with digital skills for online work opportunities.",
+    "how to join": "You can join by filling out the registration form on our website or contacting us via WhatsApp.",
+    "training": "We offer training in web development, digital marketing, graphic design, and more. Check our Services section for details.",
+    "events": "Our upcoming events are listed in the Events section. You can register for any that interest you.",
+    "contact": "You can reach us via email at ajira@semetvc.ac.ke or call +254 700 123 456. Our contact details are in the Contact section.",
+    "thanks": "You're welcome! Let me know if you have any other questions.",
+    "thank you": "You're welcome! Let me know if you have any other questions."
+};
+
 sendChatbotMessage.addEventListener('click', async () => {
     const message = chatbotInput.value.trim();
     chatbotInput.value = '';
@@ -46,13 +59,13 @@ sendChatbotMessage.addEventListener('click', async () => {
     const userMessageDiv = document.createElement('div');
     userMessageDiv.className = 'mb-4 text-right';
     userMessageDiv.innerHTML = `
-        <div class="bg-red-100 dark:bg-green-900 text-gray-900 dark:text-white rounded-lg p-3 inline-block">
+        <div class="bg-red-100 dark:bg-green-900 text-gray-900 dark:text-white rounded-lg p-3 inline-block max-w-[80%]">
             <p>${message}</p>
         </div>
     `;
     chatbotMessages.appendChild(userMessageDiv);
 
-    // Add "typing..." indicator
+    // Add typing indicator
     const botMessageDiv = document.createElement('div');
     botMessageDiv.className = 'mb-4';
     botMessageDiv.innerHTML = `
@@ -65,7 +78,7 @@ sendChatbotMessage.addEventListener('click', async () => {
     chatbotMessages.appendChild(botMessageDiv);
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
-    // Fetch response from Vercel API
+    // Try API first
     try {
         const response = await fetch('https://seme-tvc-ajira.vercel.app/api/deepseek', {
             method: 'POST',
@@ -75,23 +88,30 @@ sendChatbotMessage.addEventListener('click', async () => {
             body: JSON.stringify({ message })
         });
 
-        if (!response.ok) {
-            throw new Error(`Server returned ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`Server returned ${response.status}`);
 
         const data = await response.json();
-        const reply = data.reply || "Oops! I couldn't get a response right now.";
-
+        const reply = data.reply || "Hmm, I couldn't get a clear response right now.";
         botMessageDiv.innerHTML = `
-            <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 inline-block">
+            <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 inline-block max-w-[80%]">
                 <p>${reply}</p>
             </div>
         `;
     } catch (error) {
-        console.error('Chatbot error:', error);
+        console.warn("API failed, using fallback:", error);
+
+        // Fallback logic
+        let fallbackReply = "I'm sorry, I can't connect to the AI right now. Here are some things I can help with: what is ajira, how to join, training, events, contact.";
+        for (const [key, value] of Object.entries(fallbackResponses)) {
+            if (message.toLowerCase().includes(key)) {
+                fallbackReply = value;
+                break;
+            }
+        }
+
         botMessageDiv.innerHTML = `
-            <div class="bg-red-100 text-red-700 rounded-lg p-3 inline-block">
-                <p>Oops! Something went wrong. Please try again later.</p>
+            <div class="bg-yellow-100 text-yellow-800 rounded-lg p-3 inline-block max-w-[80%]">
+                <p>${fallbackReply}</p>
             </div>
         `;
     }
