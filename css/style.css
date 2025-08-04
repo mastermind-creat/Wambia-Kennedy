@@ -63,3 +63,27 @@ body {
             from { transform: translateY(0); }
             to { transform: translateY(-4px); }
         }
+                
+        .profile-frame {
+            width: 130px;
+            height: 130px;
+            clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0 50%);
+            background: linear-gradient(135deg, #dc2626, #f87171);
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            }
+        .profile-frame.small {
+            width: 90px;
+            height: 90px;
+            }
+        .profile-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            clip-path: inherit;
+            border: 3px solid #fff;
+            }
+
+        
