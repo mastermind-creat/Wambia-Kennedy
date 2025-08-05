@@ -1106,23 +1106,39 @@
     </section>
 
     <!-- Leaders Section -->
-    <section id="leaders" class="py-20 bg-gray-50 dark:bg-gray-900">
-      <div class="container mx-auto px-4 text-center">
+    <section
+      id="leaders"
+      class="py-20 bg-gray-50 dark:bg-gray-900 relative overflow-hidden"
+    >
+      <!-- Decorative Elements -->
+      <div
+        class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none"
+      >
+        <div
+          class="absolute top-20 left-10 w-32 h-32 rounded-full bg-red-500 filter blur-3xl"
+        ></div>
+        <div
+          class="absolute bottom-10 right-10 w-40 h-40 rounded-full bg-green-500 filter blur-3xl"
+        ></div>
+      </div>
+
+      <div class="container mx-auto px-4 text-center relative z-10">
         <!-- Section Heading -->
-        <h2
-          class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
-          data-aos="fade-up"
-        >
-          Meet Our Leaders
-        </h2>
-        <div class="w-20 h-1 bg-red-600 dark:bg-green-500 mx-auto mb-6"></div>
-        <p
-          class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-          Driving innovation and empowering digital careers.
-        </p>
+        <div class="section-header">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+            data-aos="fade-up"
+          >
+            Meet Our Leaders
+          </h2>
+          <p
+            class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            Driving innovation and empowering digital careers.
+          </p>
+        </div>
 
         <!-- Patron -->
         <div class="mb-16">
@@ -1138,17 +1154,22 @@
             data-aos-delay="200"
           >
             <div
-              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition transform hover:scale-105 p-6 w-72"
+              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 p-6 w-72 relative overflow-hidden"
             >
-              <div class="profile-frame mx-auto mb-4">
+              <div class="shine-overlay"></div>
+              <div class="profile-frame mx-auto mb-4 floating">
                 <img
                   src="images/leaders/patron.jpg"
                   alt="Patron"
                   class="profile-img"
+                  loading="lazy"
                 />
               </div>
-              <h4 class="text-xl font-bold text-gray-900 dark:text-white">
+              <h4
+                class="text-xl font-bold text-gray-900 dark:text-white relative inline-block"
+              >
                 Gideon Onduru
+                <span class="underline-animation"></span>
               </h4>
               <p class="text-red-600 dark:text-green-400 font-medium mb-2">
                 Patron
@@ -1157,6 +1178,20 @@
                 Dedicated to guiding Ajira Club for sustainable growth and
                 impact.
               </p>
+              <div class="flex justify-center gap-4 mt-4">
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -1170,104 +1205,273 @@
             Current Leaders
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Leader Card -->
-            <div class="leader-card" data-aos="fade-up" data-aos-delay="100">
+            <!-- Leader 1 -->
+            <div
+              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 relative overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="shine-overlay"></div>
               <div class="profile-frame mx-auto mb-4">
                 <img
                   src="images/leaders/ken.jpg"
                   alt="Chairman"
                   class="profile-img"
+                  loading="lazy"
                 />
               </div>
-              <h4 class="leader-name dark:text-white">Wambia Kennedy</h4>
-              <p class="leader-role dark:text-green-400">Chairperson</p>
-              <p class="leader-desc dark:text-gray-300 text-sm">
+              <h4
+                class="text-lg font-bold text-gray-900 dark:text-white relative inline-block"
+              >
+                Wambia Kennedy
+                <span class="underline-animation mb-2"></span>
+              </h4>
+              <p class="text-red-600 dark:text-green-400 font-medium mb-3">
+                Chairperson
+              </p>
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
                 Leading with vision and commitment to empower youth digitally.
               </p>
+              <div class="flex justify-center gap-4">
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-github"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fas fa-globe"></i>
+                </a>
+              </div>
             </div>
 
-            <div class="leader-card" data-aos="fade-up" data-aos-delay="200">
+            <!-- Leader 2 -->
+            <div
+              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 relative overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="shine-overlay"></div>
               <div class="profile-frame mx-auto mb-4">
                 <img
-                  src="images/leaders/ass-chair.jpg"
+                  src="images/leaders/wambia1.png"
                   alt="Assistant Chairperson"
                   class="profile-img"
+                  loading="lazy"
                 />
               </div>
-              <h4 class="leader-name dark:text-white">George Onyango</h4>
-              <p class="leader-role dark:text-green-400">
+              <h4
+                class="text-lg font-bold text-gray-900 dark:text-white relative inline-block"
+              >
+                George Onyango
+                <span class="underline-animation"></span>
+              </h4>
+              <p class="text-red-600 dark:text-green-400 font-medium mb-3">
                 Assistant Chairperson
               </p>
-              <p class="leader-desc dark:text-gray-300 text-sm">
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
                 Supporting leadership and ensuring smooth coordination of
                 programs.
               </p>
+              <div class="flex justify-center gap-4">
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </div>
             </div>
 
-            <div class="leader-card" data-aos="fade-up" data-aos-delay="300">
+            <!-- Leader 3 -->
+            <div
+              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 relative overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="shine-overlay"></div>
               <div class="profile-frame mx-auto mb-4">
                 <img
                   src="images/leaders/organizing.jpg"
                   alt="Organizing Secretary"
                   class="profile-img"
+                  loading="lazy"
                 />
               </div>
-              <h4 class="leader-name dark:text-white">Harry Ouko</h4>
-              <p class="leader-role dark:text-green-400">
+              <h4
+                class="text-lg font-bold text-gray-900 dark:text-white relative inline-block"
+              >
+                Harry Ouko
+                <span class="underline-animation"></span>
+              </h4>
+              <p class="text-red-600 dark:text-green-400 font-medium mb-3">
                 Organizing Secretary
               </p>
-              <p class="leader-desc dark:text-gray-300 text-sm">
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
                 Responsible for event planning and seamless execution of
                 activities.
               </p>
+              <div class="flex justify-center gap-4">
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </div>
             </div>
 
-            <div class="leader-card" data-aos="fade-up" data-aos-delay="400">
+            <!-- Leader 4 -->
+            <div
+              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 relative overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <div class="shine-overlay"></div>
               <div class="profile-frame mx-auto mb-4">
                 <img
                   src="images/leaders/secretary.jpg"
                   alt="Secretary"
                   class="profile-img"
+                  loading="lazy"
                 />
               </div>
-              <h4 class="leader-name dark:text-white">Billy James</h4>
-              <p class="leader-role dark:text-green-400">Secretary</p>
-              <p class="leader-desc dark:text-gray-300 text-sm">
+              <h4
+                class="text-lg font-bold text-gray-900 dark:text-white relative inline-block"
+              >
+                Billy James
+                <span class="underline-animation"></span>
+              </h4>
+              <p class="text-red-600 dark:text-green-400 font-medium mb-3">
+                Secretary
+              </p>
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
                 Ensuring effective communication and documentation across the
                 club.
               </p>
+              <div class="flex justify-center gap-4">
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </div>
             </div>
 
-            <div class="leader-card" data-aos="fade-up" data-aos-delay="500">
+            <!-- Leader 5 -->
+            <div
+              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 relative overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              <div class="shine-overlay"></div>
               <div class="profile-frame mx-auto mb-4">
                 <img
                   src="images/leaders/ass-secretary.jpg"
                   alt="Assistant Secretary"
                   class="profile-img"
+                  loading="lazy"
                 />
               </div>
-              <h4 class="leader-name dark:text-white">Sarah Owino</h4>
-              <p class="leader-role dark:text-green-400">Assistant Secretary</p>
-              <p class="leader-desc dark:text-gray-300 text-sm">
+              <h4
+                class="text-lg font-bold text-gray-900 dark:text-white relative inline-block"
+              >
+                Sarah Owino
+                <span class="underline-animation"></span>
+              </h4>
+              <p class="text-red-600 dark:text-green-400 font-medium mb-3">
+                Assistant Secretary
+              </p>
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
                 Assisting in record-keeping and supporting administrative
                 functions.
               </p>
+              <div class="flex justify-center gap-4">
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </div>
             </div>
 
-            <div class="leader-card" data-aos="fade-up" data-aos-delay="600">
+            <!-- Leader 6 -->
+            <div
+              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 relative overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
+              <div class="shine-overlay"></div>
               <div class="profile-frame mx-auto mb-4">
                 <img
                   src="images/leaders/treasurer.jpg"
                   alt="Treasurer"
                   class="profile-img"
+                  loading="lazy"
                 />
               </div>
-              <h4 class="leader-name dark:text-white">Martha Atieno</h4>
-              <p class="leader-role dark:text-green-400">Treasurer</p>
-              <p class="leader-desc dark:text-gray-300 text-sm">
+              <h4
+                class="text-lg font-bold text-gray-900 dark:text-white relative inline-block"
+              >
+                Martha Atieno
+                <span class="underline-animation"></span>
+              </h4>
+              <p class="text-red-600 dark:text-green-400 font-medium mb-3">
+                Treasurer
+              </p>
+              <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
                 Managing financial resources for transparency and
                 accountability.
               </p>
+              <div class="flex justify-center gap-4">
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="#"
+                  class="social-icon bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white hover:bg-red-600 dark:hover:bg-green-600"
+                >
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -1281,44 +1485,68 @@
             Former Leaders
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="former-card" data-aos="fade-up" data-aos-delay="100">
+            <!-- Former 1 -->
+            <div
+              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <div class="profile-frame small mx-auto mb-4">
                 <img
                   src="images/leaders/former1.jpg"
                   alt="Former Leader"
                   class="profile-img"
+                  loading="lazy"
                 />
               </div>
-              <h4 class="former-name dark:text-white">Danneta Collet</h4>
-              <p class="former-role dark:text-green-400">
+              <h4 class="text-lg font-bold text-gray-900 dark:text-white">
+                Danneta Collet
+              </h4>
+              <p class="text-red-600 dark:text-green-400 text-sm">
                 Former Chairlady (2024)
               </p>
             </div>
 
-            <div class="former-card" data-aos="fade-up" data-aos-delay="200">
+            <!-- Former 2 -->
+            <div
+              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <div class="profile-frame small mx-auto mb-4">
                 <img
                   src="images/leaders/former2.jpg"
                   alt="Former Leader"
                   class="profile-img"
+                  loading="lazy"
                 />
               </div>
-              <h4 class="former-name dark:text-white">James Abwao</h4>
-              <p class="former-role dark:text-green-400">
+              <h4 class="text-lg font-bold text-gray-900 dark:text-white">
+                James Abwao
+              </h4>
+              <p class="text-red-600 dark:text-green-400 text-sm">
                 Former Chairperson (2024)
               </p>
             </div>
 
-            <div class="former-card" data-aos="fade-up" data-aos-delay="300">
+            <!-- Former 3 -->
+            <div
+              class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <div class="profile-frame small mx-auto mb-4">
                 <img
                   src="images/leaders/former3.jpg"
                   alt="Former Leader"
                   class="profile-img"
+                  loading="lazy"
                 />
               </div>
-              <h4 class="former-name dark:text-white">Grace Atieno</h4>
-              <p class="former-role dark:text-green-400">
+              <h4 class="text-lg font-bold text-gray-900 dark:text-white">
+                Grace Atieno
+              </h4>
+              <p class="text-red-600 dark:text-green-400 text-sm">
                 Former Organizing Sec (2018 - 2020)
               </p>
             </div>
