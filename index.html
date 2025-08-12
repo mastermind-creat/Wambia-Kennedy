@@ -27,6 +27,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine Intersect Plugin (add this before the core Alpine script) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Alpine Core -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css">
     <link rel="stylesheet" href="css/style.css">
@@ -476,275 +481,371 @@
         </div>
     </section>
 
-    <!-- Skills & Technologies Section -->
+ <!-- Skills & Technologies Section -->
 <section id="skills" class="py-20 bg-gray-50 dark:bg-gray-900">
     <div class="container mx-auto px-6 md:px-12 lg:px-24">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">Skills & Technologies</h2>
 
-        <!-- Frontend -->
-        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-8">Frontend</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <!-- HTML5 -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-html5 text-blue-500 dark:text-blue-400 text-2xl"></i>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <!-- Database Card (Updated with MySQL and GraphQL) -->
+            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-cyan-500 transform hover:-translate-y-2">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="w-8 h-8 bg-cyan-100 dark:bg-cyan-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-800">
+                        <i class="fas fa-database text-cyan-500 dark:text-cyan-400 transition-transform duration-300 group-hover:rotate-6"></i>
+                    </span>
+                    Database
+                </h3>
+                <div class="space-y-5">
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">MongoDB</span>
+                            <span class="text-sm font-semibold text-green-500 dark:text-green-400">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[85%]' : 'w-0'"></div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold">HTML5</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Semantic markup, accessibility, SEO optimization.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 95%"></div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">PostgreSQL</span>
+                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">80%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[80%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">MySQL</span>
+                            <span class="text-sm font-semibold text-orange-500 dark:text-orange-400">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-orange-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[90%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">GraphQL</span>
+                            <span class="text-sm font-semibold text-pink-500 dark:text-pink-400">75%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-pink-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[75%]' : 'w-0'"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- CSS3 -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-css3-alt text-purple-500 dark:text-purple-400 text-2xl"></i>
+
+            <!-- Other cards remain unchanged but with updated percentages -->
+            <!-- Frontend Development Card -->
+            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-blue-500 transform hover:-translate-y-2">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800">
+                        <i class="fas fa-laptop-code text-blue-500 dark:text-blue-400 transition-transform duration-300 group-hover:rotate-6"></i>
+                    </span>
+                    Frontend Development
+                </h3>
+                <div class="space-y-5">
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">React.js</span>
+                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">92%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[92%]' : 'w-0'"></div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold">CSS3</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Responsive design, animations, Flexbox, Grid.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-purple-500 h-2.5 rounded-full" style="width: 90%"></div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Next.js</span>
+                            <span class="text-sm font-semibold text-gray-500 dark:text-gray-400">88%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-gray-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[88%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Tailwind CSS</span>
+                            <span class="text-sm font-semibold text-cyan-500 dark:text-cyan-400">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-cyan-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[90%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Bootstrap</span>
+                            <span class="text-sm font-semibold text-purple-500 dark:text-purple-400">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-purple-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[85%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">AJAX</span>
+                            <span class="text-sm font-semibold text-green-500 dark:text-green-400">87%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[87%]' : 'w-0'"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- JavaScript -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-js text-yellow-500 dark:text-yellow-400 text-2xl"></i>
+
+            <!-- Backend Development Card -->
+            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-green-500 transform hover:-translate-y-2">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-green-200 dark:group-hover:bg-green-800">
+                        <i class="fas fa-server text-green-500 dark:text-green-400 transition-transform duration-300 group-hover:rotate-6"></i>
+                    </span>
+                    Backend Development
+                </h3>
+                <div class="space-y-5">
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">PHP</span>
+                            <span class="text-sm font-semibold text-purple-500 dark:text-purple-400">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-purple-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[85%]' : 'w-0'"></div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold">JavaScript</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">ES6+, DOM manipulation, async programming, APIs.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 85%"></div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Node.js</span>
+                            <span class="text-sm font-semibold text-green-500 dark:text-green-400">80%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[80%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Express.js</span>
+                            <span class="text-sm font-semibold text-gray-500 dark:text-gray-400">78%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-gray-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[78%]' : 'w-0'"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- React -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-react text-blue-500 dark:text-blue-400 text-2xl"></i>
+
+            <!-- Mobile Fullstack Card -->
+            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-yellow-500 transform hover:-translate-y-2">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="w-8 h-8 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800">
+                        <i class="fas fa-mobile-alt text-yellow-500 dark:text-yellow-400 transition-transform duration-300 group-hover:rotate-6"></i>
+                    </span>
+                    Mobile Fullstack
+                </h3>
+                <div class="space-y-5">
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">MERN Stack</span>
+                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">82%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[82%]' : 'w-0'"></div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold">React</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Hooks, Context API, Redux, Next.js.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Responsive Design</span>
+                            <span class="text-sm font-semibold text-green-500 dark:text-green-400">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[90%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Progressive Web Apps</span>
+                            <span class="text-sm font-semibold text-purple-500 dark:text-purple-400">75%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-purple-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[75%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">RESTful APIs</span>
+                            <span class="text-sm font-semibold text-red-500 dark:text-red-400">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-red-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[85%]' : 'w-0'"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Tailwind/Bootstrap -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-css3-alt text-blue-500 dark:text-blue-400 text-2xl"></i>
+
+            <!-- DevOps & Tools Card -->
+            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-orange-500 transform hover:-translate-y-2">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="w-8 h-8 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-orange-200 dark:group-hover:bg-orange-800">
+                        <i class="fas fa-tools text-orange-500 dark:text-orange-400 transition-transform duration-300 group-hover:rotate-6"></i>
+                    </span>
+                    DevOps & Tools
+                </h3>
+                <div class="space-y-5">
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Git & GitHub</span>
+                            <span class="text-sm font-semibold text-gray-500 dark:text-gray-400">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-gray-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[90%]' : 'w-0'"></div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold">Tailwind/Bootstrap</h3>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">AWS Basics</span>
+                            <span class="text-sm font-semibold text-orange-500 dark:text-orange-400">70%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-orange-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[70%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">CI/CD</span>
+                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">75%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[75%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Linux/Ubuntu</span>
+                            <span class="text-sm font-semibold text-yellow-500 dark:text-yellow-400">80%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-yellow-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[80%]' : 'w-0'"></div>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Utility-first CSS, component libraries.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 90%"></div>
+            </div>
+
+            <!-- Computer Training Card -->
+            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-pink-500 transform hover:-translate-y-2">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <span class="w-8 h-8 bg-pink-100 dark:bg-pink-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-pink-200 dark:group-hover:bg-pink-800">
+                        <i class="fas fa-chalkboard-teacher text-pink-500 dark:text-pink-400 transition-transform duration-300 group-hover:rotate-6"></i>
+                    </span>
+                    Computer Training
+                </h3>
+                <div class="space-y-5">
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Programming Basics</span>
+                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[95%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Technical Documentation</span>
+                            <span class="text-sm font-semibold text-green-500 dark:text-green-400">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[90%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Student Mentoring</span>
+                            <span class="text-sm font-semibold text-purple-500 dark:text-purple-400">92%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-purple-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[92%]' : 'w-0'"></div>
+                        </div>
+                    </div>
+                    
+                    <div x-data="{ shown: false }" x-intersect="shown = true">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-medium">Curriculum Development</span>
+                            <span class="text-sm font-semibold text-red-500 dark:text-red-400">88%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-red-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[88%]' : 'w-0'"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Backend -->
-        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-8">Backend</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <!-- Node.js -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-node-js text-green-500 dark:text-green-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">Node.js</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Express, REST APIs, authentication.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 70%"></div>
-                </div>
-            </div>
-            <!-- Python/Django -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-python text-blue-500 dark:text-blue-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">Python/Django</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Django framework, ORM, REST APIs.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 80%"></div>
-                </div>
-            </div>
-            <!-- PHP/Laravel -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-php text-purple-500 dark:text-purple-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">PHP/Laravel</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Laravel framework, Eloquent ORM, Blade.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-purple-500 h-2.5 rounded-full" style="width: 75%"></div>
-                </div>
-            </div>
-            <!-- REST APIs -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mr-4">
-                        <i class="fas fa-code-branch text-green-500 dark:text-green-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">REST APIs</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Design, development, integration.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 80%"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Database & Storage -->
-        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-8">Database & Storage</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <!-- MySQL -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
-                        <i class="fas fa-database text-blue-500 dark:text-blue-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">MySQL</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Schema design, queries, optimization.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 70%"></div>
-                </div>
-            </div>
-            <!-- MongoDB -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mr-4">
-                        <i class="fas fa-database text-green-500 dark:text-green-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">MongoDB</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">NoSQL, document-based storage, scalability.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 65%"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Development -->
-        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-8">Mobile Development</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <!-- React Native -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-react text-blue-500 dark:text-blue-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">React Native</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Cross-platform apps, native performance.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 60%"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- DevOps & Cloud -->
-        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-8">DevOps & Cloud</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <!-- AWS -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-orange-100 dark:bg-orange-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-aws text-orange-500 dark:text-orange-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">AWS</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">EC2, S3, Lambda, CloudFormation.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-orange-500 h-2.5 rounded-full" style="width: 65%"></div>
-                </div>
-            </div>
-            <!-- Docker -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-docker text-blue-500 dark:text-blue-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">Docker</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Containerization, orchestration, microservices.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 60%"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tools & Others -->
-        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-8">Tools & Others</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            <!-- Figma -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-pink-100 dark:bg-pink-900 flex items-center justify-center mr-4">
-                        <i class="fab fa-figma text-pink-500 dark:text-pink-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">Figma</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">UI/UX design, prototyping, wireframing.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-pink-500 h-2.5 rounded-full" style="width: 75%"></div>
-                </div>
-            </div>
-            <!-- Git/GitHub -->
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center mr-4">
-                        <i class="fab fa-github text-gray-500 dark:text-gray-400 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold">Git/GitHub</h3>
-                </div>
-                <p class="text-gray-500 dark:text-gray-400 mb-4">Version control, CI/CD pipelines.</p>
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <div class="bg-gray-500 h-2.5 rounded-full" style="width: 85%"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tech Stack I Love Working With -->
-        <h3 class="text-2xl font-semibold text-gray-800 dark:text-white mb-8">Tech Stack I Love Working With</h3>
+        <!-- Tools I Love Using -->
+        <h3 class="text-2xl font-bold text-center mb-12 relative">
+            <span class="relative z-10 px-4 bg-gray-50 dark:bg-gray-900">Tools I ❤️ Using</span>
+            <span class="absolute top-1/2 left-0 right-0 h-px bg-gray-300 dark:bg-gray-700 -z-0"></span>
+        </h3>
+        
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-            <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-xl transition-shadow flex flex-col items-center">
-                <i class="fab fa-react text-blue-500 dark:text-blue-400 text-3xl mb-2"></i>
-                <span class="text-gray-800 dark:text-white font-medium">React</span>
+            <!-- Git & GitHub (Featured) -->
+            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-gray-300 dark:border-gray-600">
+                <div class="absolute inset-0 bg-gradient-to-br from-gray-500 to-gray-800 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                <div class="relative z-10 flex flex-col items-center">
+                    <i class="fab fa-github text-4xl mb-3 transition-transform duration-300 group-hover:scale-110" style="color: #333; dark:color: #f5f5f5"></i>
+                    <span class="text-gray-800 dark:text-white font-medium block text-center">Git & GitHub</span>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">Daily Driver</span>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 h-1 bg-gray-500 dark:bg-gray-400 group-hover:h-2 transition-all duration-300"></div>
             </div>
-            <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-xl transition-shadow flex flex-col items-center">
-                <i class="fab fa-php text-green-500 dark:text-green-400 text-3xl mb-2"></i>
-                <span class="text-gray-800 dark:text-white font-medium">PHP/Laravel</span>
+            
+            <!-- VS Code -->
+            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
+                <div class="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                <i class="fas fa-code text-blue-500 dark:text-blue-400 text-4xl mb-3 transition-transform duration-300 group-hover:scale-110"></i>
+                <span class="text-gray-800 dark:text-white font-medium block text-center">VS Code</span>
             </div>
-            <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-xl transition-shadow flex flex-col items-center">
-                <i class="fas fa-database text-blue-500 dark:text-blue-400 text-3xl mb-2"></i>
-                <span class="text-gray-800 dark:text-white font-medium">MySQL</span>
+            
+            <!-- Docker -->
+            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
+                <div class="absolute inset-0 bg-blue-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                <i class="fab fa-docker text-blue-400 dark:text-blue-300 text-4xl mb-3 transition-transform duration-300 group-hover:scale-110"></i>
+                <span class="text-gray-800 dark:text-white font-medium block text-center">Docker</span>
             </div>
-            <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-xl transition-shadow flex flex-col items-center">
-                <i class="fab fa-figma text-pink-500 dark:text-pink-400 text-3xl mb-2"></i>
-                <span class="text-gray-800 dark:text-white font-medium">Figma</span>
+            
+            <!-- Postman -->
+            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
+                <div class="absolute inset-0 bg-orange-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                <i class="fas fa-cloud text-orange-500 dark:text-orange-400 text-4xl mb-3 transition-transform duration-300 group-hover:scale-110"></i>
+                <span class="text-gray-800 dark:text-white font-medium block text-center">Postman</span>
             </div>
-            <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-xl transition-shadow flex flex-col items-center">
-                <i class="fab fa-aws text-orange-500 dark:text-orange-400 text-3xl mb-2"></i>
-                <span class="text-gray-800 dark:text-white font-medium">AWS</span>
+            
+            <!-- Figma -->
+            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
+                <div class="absolute inset-0 bg-pink-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                <i class="fab fa-figma text-pink-500 dark:text-pink-400 text-4xl mb-3 transition-transform duration-300 group-hover:scale-110"></i>
+                <span class="text-gray-800 dark:text-white font-medium block text-center">Figma</span>
             </div>
-            <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md hover:shadow-xl transition-shadow flex flex-col items-center">
-                <i class="fab fa-docker text-blue-500 dark:text-blue-400 text-3xl mb-2"></i>
-                <span class="text-gray-800 dark:text-white font-medium">Docker</span>
+            
+            <!-- Terminal -->
+            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
+                <div class="absolute inset-0 bg-gray-700 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                <i class="fas fa-terminal text-gray-700 dark:text-gray-300 text-4xl mb-3 transition-transform duration-300 group-hover:scale-110"></i>
+                <span class="text-gray-800 dark:text-white font-medium block text-center">Terminal</span>
             </div>
         </div>
     </div>
