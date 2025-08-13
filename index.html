@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -69,6 +70,7 @@
     </script>
 </head>
 <body class="text-gray-800 dark:text-gray-200">
+    <div id="particles-js" class="absolute inset-0"></div>
     <!-- Floating background shapes -->
     <div class="floating-shape shape-1"></div>
     <div class="floating-shape shape-2"></div>
@@ -486,7 +488,7 @@
     <div class="container mx-auto px-6 md:px-12 lg:px-24">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">Skills & Technologies</h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             <!-- Database Card (Updated with MySQL and GraphQL) -->
             <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-cyan-500 transform hover:-translate-y-2">
                 <h3 class="text-2xl font-bold mb-6 flex items-center">
@@ -806,7 +808,7 @@
             <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-gray-300 dark:border-gray-600">
                 <div class="absolute inset-0 bg-gradient-to-br from-gray-500 to-gray-800 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
                 <div class="relative z-10 flex flex-col items-center">
-                    <i class="fab fa-github text-4xl mb-3 transition-transform duration-300 group-hover:scale-110" style="color: #333; dark:color: #f5f5f5"></i>
+                    <i class="fab fa-github text-4xl mb-3 transition-transform duration-300 group-hover:scale-110" style="color: #333; dark:color; #f5f5f5"></i>
                     <span class="text-gray-800 dark:text-white font-medium block text-center">Git & GitHub</span>
                     <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">Daily Driver</span>
                 </div>
@@ -1394,7 +1396,7 @@
 
         <!-- CTA Banner -->
         <div class="cta-banner">
-            <h3>Like what you see? Let’s create something amazing!</h3>
+            <h3>Like what you see? Let's create something amazing!</h3>
             <button onclick="scrollToContact()" class="btn btn-primary">Contact Me</button>
         </div>
 
@@ -1402,6 +1404,27 @@
         <button id="quote-btn" class="quote-btn">
             <i class="fas fa-comment-dots"></i> Request Design Quote
         </button>
+
+        
+
+        <!-- Scroll to Top Button -->
+        <button id="scroll-to-top" class="scroll-to-top" title="Scroll to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <!-- Loading Screen -->
+        <!-- <div id="loading-screen" class="loading-screen">
+            <div class="loading-content">
+                <div class="loading-logo">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h2>Wambia Kennedy</h2>
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+                <p>Loading amazing content...</p>
+            </div>
+        </div> -->
     </section>
 
     <!-- Lightbox Modal -->
@@ -1481,6 +1504,10 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blog-posts">
                 <!-- Blog posts will be loaded here -->
+                <div class="text-center py-8">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+                    <p class="mt-4">Loading blog posts...</p>
+                </div>
             </div>
 
             <div class="text-center mt-12">
@@ -1537,6 +1564,7 @@
                         <!-- Tweets will be loaded here -->
                         <div class="text-center py-8">
                             <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+                            <p class="mt-4">Loading tweets...</p>
                         </div>
                     </div>
                 </div>
@@ -1728,6 +1756,67 @@
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+        <a href="https://wa.me/254743394373?text=Hi%20Wambia!%20I%20saw%20your%20portfolio%20and%20I'd%20like%20to%20discuss%20a%20project." 
+        target="_blank" 
+        class="whatsapp-float"
+        title="Chat on WhatsApp"
+        style="position: fixed !important; bottom: 2rem !important; left: 2rem !important; display: flex !important; visibility: visible !important; opacity: 1 !important; z-index: 99999 !important; pointer-events: auto !important;">
+            <div class="whatsapp-icon">
+                <i class="fab fa-whatsapp"></i>
+                <!-- Fallback text in case icon doesn't load -->
+                <span style="display: none;">WhatsApp</span>
+            </div>
+            <div class="whatsapp-pulse"></div>
+            <div class="whatsapp-tooltip">Chat with me!</div>
+        </a>
+    <!-- Chatbot -->
+    <div id="chatbot" class="chatbot-container" style="display: block !important; visibility: visible !important; z-index: 99999 !important;">
+        <div class="chatbot-toggle" id="chatbot-toggle">
+            <i class="fas fa-comments"></i>
+            <!-- Fallback text in case icon doesn't load -->
+            <span style="display: none;">Chat</span>
+            <span class="notification-dot"></span>
+        </div>
+        
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <div class="chatbot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="chatbot-info">
+                    <h3>Wambia Assistant</h3>
+                    <p class="status">Online</p>
+                </div>
+                <button class="chatbot-close" id="chatbot-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        <p>👋 Hi there! I'm Wambia's AI assistant. How can I help you today?</p>
+                        <div class="quick-replies">
+                            <button class="quick-reply" data-message="Tell me about your services">Services</button>
+                            <button class="quick-reply" data-message="What are your prices?">Pricing</button>
+                            <button class="quick-reply" data-message="How can I contact you?">Contact</button>
+                            <button class="quick-reply" data-message="Show me your portfolio">Portfolio</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <input type="text" id="chatbot-input-field" placeholder="Type your message..." maxlength="200">
+                <button id="chatbot-send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Service Modals -->
     <div id="service-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto">
@@ -1751,5 +1840,790 @@
 
     <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
     <script src="js/index.js"></script>
+    <script>
+        // Debug: Check if elements exist
+        console.log('Debug: Checking elements...');
+        console.log('WhatsApp float:', document.querySelector('.whatsapp-float'));
+        console.log('Chatbot toggle:', document.getElementById('chatbot-toggle'));
+        console.log('Chatbot window:', document.getElementById('chatbot-window'));
+        
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.classList.add('hidden');
+                }
+            }, 1000); // Reduced from 2000ms to 1000ms
+        });
+
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+        
+        if (scrollToTopBtn) {
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            scrollToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Chatbot Functionality
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const chatbotClose = document.getElementById('chatbot-close');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInput = document.getElementById('chatbot-input-field');
+        const chatbotSend = document.getElementById('chatbot-send');
+
+        // Chatbot responses
+        const chatbotResponses = {
+            'services': {
+                message: "I offer a wide range of services including:\n\n• Web Development (Personal websites, E-commerce)\n• Graphic Design (Logos, Posters, Cards)\n• System Development (Custom software solutions)\n• Computer Maintenance & Training\n• KRA Services & HELB Assistance\n\nWould you like to know more about any specific service?",
+                quickReplies: ['Pricing', 'Portfolio', 'Contact']
+            },
+            'pricing': {
+                message: "My pricing varies based on project complexity:\n\n• Basic Website: $100+\n• Standard Website: $150+\n• Premium Website: $250+\n• Logo Design: $50+\n• Graphic Design: $30+\n\nAll prices are negotiable. Would you like to discuss your specific project?",
+                quickReplies: ['Services', 'Contact', 'Portfolio']
+            },
+            'contact': {
+                message: "You can reach me through:\n\n📧 Email: kennyleyy0@gmail.com\n📱 WhatsApp: +254 743 394 373\n📞 Phone: +254 743 394 373\n📍 Location: Kisumu, Kenya\n\nI typically respond within 2-4 hours during business hours.",
+                quickReplies: ['Services', 'Pricing', 'Portfolio']
+            },
+            'portfolio': {
+                message: "Check out my latest work:\n\n• Personal Plumbing Website\n• Portfolio Website\n• Seme TVC Ajira Website\n• Various Graphic Designs\n\nYou can view my full portfolio at the bottom of this page or ask about specific projects!",
+                quickReplies: ['Services', 'Pricing', 'Contact']
+            },
+            'default': {
+                message: "I'm here to help! You can ask me about:\n\n• My services and expertise\n• Project pricing and timelines\n• How to get in touch\n• Viewing my portfolio\n\nWhat would you like to know?",
+                quickReplies: ['Services', 'Pricing', 'Contact', 'Portfolio']
+            }
+        };
+
+        function addMessage(content, isUser = false, quickReplies = null) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = 'message-content';
+            
+            if (typeof content === 'string') {
+                messageContent.innerHTML = content.replace(/\n/g, '<br>');
+            } else {
+                messageContent.innerHTML = content.message.replace(/\n/g, '<br>');
+                
+                if (content.quickReplies && content.quickReplies.length > 0) {
+                    const quickRepliesDiv = document.createElement('div');
+                    quickRepliesDiv.className = 'quick-replies';
+                    
+                    content.quickReplies.forEach(reply => {
+                        const button = document.createElement('button');
+                        button.className = 'quick-reply';
+                        button.textContent = reply;
+                        button.addEventListener('click', () => handleQuickReply(reply));
+                        quickRepliesDiv.appendChild(button);
+                    });
+                    
+                    messageContent.appendChild(quickRepliesDiv);
+                }
+            }
+            
+            messageDiv.appendChild(messageContent);
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function handleQuickReply(reply) {
+            addMessage(reply, true);
+            
+            setTimeout(() => {
+                const response = chatbotResponses[reply.toLowerCase()] || chatbotResponses['default'];
+                addMessage(response);
+            }, 500);
+        }
+
+        function handleUserMessage(message) {
+            const lowerMessage = message.toLowerCase();
+            let response = chatbotResponses['default'];
+            
+            if (lowerMessage.includes('service') || lowerMessage.includes('what do you do')) {
+                response = chatbotResponses['services'];
+            } else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('how much')) {
+                response = chatbotResponses['pricing'];
+            } else if (lowerMessage.includes('contact') || lowerMessage.includes('reach') || lowerMessage.includes('email') || lowerMessage.includes('phone')) {
+                response = chatbotResponses['contact'];
+            } else if (lowerMessage.includes('portfolio') || lowerMessage.includes('work') || lowerMessage.includes('project')) {
+                response = chatbotResponses['portfolio'];
+            }
+            
+            addMessage(response);
+        }
+
+        // Chatbot event listeners
+        if (chatbotToggle) {
+            console.log('Chatbot toggle found, adding event listener');
+            chatbotToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Chatbot toggle clicked');
+                if (chatbotWindow) {
+                    chatbotWindow.classList.add('active');
+                    const notificationDot = document.querySelector('.notification-dot');
+                    if (notificationDot) {
+                        notificationDot.style.display = 'none';
+                    }
+                }
+            });
+        } else {
+            console.error('Chatbot toggle not found!');
+        }
+
+        if (chatbotClose) {
+            chatbotClose.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Chatbot close clicked');
+                if (chatbotWindow) {
+                    chatbotWindow.classList.remove('active');
+                }
+            });
+        } else {
+            console.error('Chatbot close not found!');
+        }
+
+        if (chatbotSend && chatbotInput) {
+            chatbotSend.addEventListener('click', function(e) {
+                e.preventDefault();
+                const message = chatbotInput.value.trim();
+                if (message) {
+                    addMessage(message, true);
+                    chatbotInput.value = '';
+                    
+                    setTimeout(() => {
+                        handleUserMessage(message);
+                    }, 500);
+                }
+            });
+
+            chatbotInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    chatbotSend.click();
+                }
+            });
+        }
+
+        // Quick reply event listeners
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('quick-reply')) {
+                e.preventDefault();
+                e.stopPropagation();
+                const message = e.target.getAttribute('data-message');
+                if (message) {
+                    handleQuickReply(message);
+                }
+            }
+        });
+
+        // Auto-open chatbot after 5 seconds
+        setTimeout(() => {
+            if (chatbotWindow && !chatbotWindow.classList.contains('active')) {
+                const notificationDot = document.querySelector('.notification-dot');
+                if (notificationDot) {
+                    notificationDot.style.display = 'block';
+                }
+            }
+        }, 5000); // Reduced from 10000ms to 5000ms
+
+        // Ensure WhatsApp button is visible
+        document.addEventListener('DOMContentLoaded', function() {
+            const whatsappButton = document.querySelector('.whatsapp-float');
+            if (whatsappButton) {
+                // Force the button to be visible and properly positioned
+                whatsappButton.style.position = 'fixed';
+                whatsappButton.style.bottom = '2rem';
+                whatsappButton.style.left = '2rem';
+                whatsappButton.style.display = 'flex';
+                whatsappButton.style.visibility = 'visible';
+                whatsappButton.style.opacity = '1';
+                whatsappButton.style.zIndex = '99999';
+                whatsappButton.style.pointerEvents = 'auto';
+                console.log('WhatsApp button should be visible now');
+            } else {
+                console.error('WhatsApp button not found!');
+            }
+        });
+
+        // Also ensure it's visible after page load
+        window.addEventListener('load', function() {
+            const whatsappButton = document.querySelector('.whatsapp-float');
+            if (whatsappButton) {
+                whatsappButton.style.position = 'fixed';
+                whatsappButton.style.bottom = '2rem';
+                whatsappButton.style.left = '2rem';
+                whatsappButton.style.display = 'flex';
+                whatsappButton.style.visibility = 'visible';
+                whatsappButton.style.opacity = '1';
+                whatsappButton.style.zIndex = '99999';
+                whatsappButton.style.pointerEvents = 'auto';
+                console.log('WhatsApp button confirmed visible after page load');
+            }
+        });
+
+        // Utility functions
+        function scrollToContact() {
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function openLightbox(index) {
+            // Lightbox functionality
+            console.log('Opening lightbox for index:', index);
+        }
+
+        function closeLightbox() {
+            // Close lightbox functionality
+            console.log('Closing lightbox');
+        }
+
+        function prevLightbox() {
+            // Previous lightbox functionality
+            console.log('Previous lightbox');
+        }
+
+        function nextLightbox() {
+            // Next lightbox functionality
+            console.log('Next lightbox');
+        }
+
+        function openPricingModal(service) {
+            // Pricing modal functionality
+            console.log('Opening pricing modal for:', service);
+        }
+
+        function closePricingModal() {
+            // Close pricing modal functionality
+            console.log('Closing pricing modal');
+        }
+
+        function closeQuoteModal() {
+            // Close quote modal functionality
+            console.log('Closing quote modal');
+        }
+
+        // Make functions globally available
+        window.scrollToContact = scrollToContact;
+        window.openLightbox = openLightbox;
+        window.closeLightbox = closeLightbox;
+        window.prevLightbox = prevLightbox;
+        window.nextLightbox = nextLightbox;
+        window.openPricingModal = openPricingModal;
+        window.closePricingModal = closePricingModal;
+        window.closeQuoteModal = closeQuoteModal;
+
+        // Gallery functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gallery filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-blue-600', 'text-white');
+                        btn.classList.add('bg-gray-200', 'dark:bg-gray-700', 'hover:bg-gray-300', 'dark:hover:bg-gray-600');
+                    });
+                    this.classList.remove('bg-gray-200', 'dark:bg-gray-700', 'hover:bg-gray-300', 'dark:hover:bg-gray-600');
+                    this.classList.add('bg-blue-600', 'text-white');
+                    
+                    // Filter gallery items
+                    galleryItems.forEach(item => {
+                        const category = item.getAttribute('data-category');
+                        if (filter === 'all' || category === filter) {
+                            item.style.display = 'block';
+                            item.classList.add('animate-fade-in');
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Ensure all gallery items are visible initially
+            galleryItems.forEach(item => {
+                item.style.display = 'block';
+                item.classList.add('animate-fade-in');
+            });
+
+            // Gallery lightbox functionality
+            const lightboxModal = document.getElementById('lightbox-modal');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxCategory = document.getElementById('lightbox-category');
+            const lightboxActions = document.getElementById('lightbox-actions');
+
+            // Gallery items data
+            const galleryData = [
+                {
+                    title: 'Logo Design',
+                    category: 'Logo',
+                    image: 'https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80',
+                    description: 'Modern logo for branding purposes.'
+                },
+                {
+                    title: 'Birthday Card',
+                    category: 'Card',
+                    image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+                    description: 'Celebratory card for special occasions.'
+                },
+                {
+                    title: 'Event Poster',
+                    category: 'Poster',
+                    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+                    description: 'Dynamic poster for event promotion.'
+                },
+                {
+                    title: 'Success Card Graphic',
+                    category: 'Card',
+                    image: 'images/graphics/success.jpg',
+                    description: 'Motivational card for achievements.'
+                },
+                {
+                    title: 'Cup Design',
+                    category: 'Cup',
+                    image: 'images/graphics/African_cup.png',
+                    description: 'Elegant cup design for cultural themes.'
+                },
+                {
+                    title: 'Business Poster',
+                    category: 'Poster',
+                    image: 'images/graphics/Alicia.jpg',
+                    description: 'Vibrant poster for business events.'
+                }
+            ];
+
+            // Update openLightbox function
+            window.openLightbox = function(index) {
+                if (lightboxModal && galleryData[index]) {
+                    const item = galleryData[index];
+                    lightboxImg.src = item.image;
+                    lightboxImg.alt = item.title;
+                    lightboxTitle.textContent = item.title;
+                    lightboxCategory.textContent = `Category: ${item.category}`;
+                    
+                    // Add action buttons
+                    lightboxActions.innerHTML = `
+                        <button onclick="scrollToContact()" class="btn btn-primary">Hire Me</button>
+                        <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="mailto:kennyleyy0@gmail.com?subject=Design%20Inquiry%20-%20${encodeURIComponent(item.title)}" class="btn btn-social"><i class="fas fa-envelope"></i> Email</a>
+                    `;
+                    
+                    lightboxModal.classList.remove('hidden');
+                    lightboxModal.classList.add('flex');
+                }
+            };
+
+            // Update closeLightbox function
+            window.closeLightbox = function() {
+                if (lightboxModal) {
+                    lightboxModal.classList.add('hidden');
+                    lightboxModal.classList.remove('flex');
+                }
+            };
+
+            // Close lightbox when clicking outside
+            if (lightboxModal) {
+                lightboxModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeLightbox();
+                    }
+                });
+            }
+
+            // Add click handlers to gallery items
+            galleryItems.forEach((item, index) => {
+                const clickableArea = item.querySelector('.relative');
+                if (clickableArea) {
+                    clickableArea.addEventListener('click', function() {
+                        openLightbox(index);
+                    });
+                }
+            });
+        });
+
+        // Performance optimizations for faster loading
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preload critical images
+            const criticalImages = [
+                'images/profile2.png',
+                'images/graphics/success.jpg',
+                'images/graphics/African_cup.png',
+                'images/graphics/Alicia.jpg'
+            ];
+            
+            criticalImages.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+
+            // Section animations with Intersection Observer
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Initialize gallery immediately
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => {
+                item.style.display = 'block';
+                item.classList.add('animate-fade-in');
+            });
+
+            // Initialize filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('bg-blue-600', 'text-white');
+                        btn.classList.add('bg-gray-200', 'dark:bg-gray-700', 'hover:bg-gray-300', 'dark:hover:bg-gray-600');
+                    });
+                    this.classList.remove('bg-gray-200', 'dark:bg-gray-700', 'hover:bg-gray-300', 'dark:hover:bg-gray-600');
+                    this.classList.add('bg-blue-600', 'text-white');
+                    
+                    // Filter gallery items
+                    galleryItems.forEach(item => {
+                        const category = item.getAttribute('data-category');
+                        if (filter === 'all' || category === filter) {
+                            item.style.display = 'block';
+                            item.classList.add('animate-fade-in');
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Mobile menu functionality
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    mobileMenu.classList.toggle('opacity-0');
+                    mobileMenu.classList.toggle('pointer-events-none');
+                });
+            }
+
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            const iconMoon = document.getElementById('icon-moon');
+            const iconSun = document.getElementById('icon-sun');
+            
+            if (themeToggle && iconMoon && iconSun) {
+                themeToggle.addEventListener('click', function() {
+                    document.documentElement.classList.toggle('dark');
+                    iconMoon.classList.toggle('hidden');
+                    iconSun.classList.toggle('hidden');
+                });
+            }
+
+            // Contact form handling
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    const name = formData.get('name') || document.getElementById('name').value;
+                    const email = formData.get('email') || document.getElementById('email').value;
+                    const subject = formData.get('subject') || document.getElementById('subject').value;
+                    const message = formData.get('message') || document.getElementById('message').value;
+                    
+                    // Simple validation
+                    if (!name || !email || !subject || !message) {
+                        alert('Please fill in all fields');
+                        return;
+                    }
+                    
+                    // Simulate form submission
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        alert('Thank you for your message! I will get back to you soon.');
+                        this.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 1500); // Reduced from 2000ms to 1500ms
+                });
+            }
+
+            // Quote form handling
+            const quoteForm = document.getElementById('quote-form');
+            if (quoteForm) {
+                quoteForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(this);
+                    const name = formData.get('name');
+                    const email = formData.get('email');
+                    const type = formData.get('type');
+                    const details = formData.get('details');
+                    
+                    if (!name || !email || !type || !details) {
+                        alert('Please fill in all fields');
+                        return;
+                    }
+                    
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        alert('Thank you for your quote request! I will review your project and get back to you with a detailed quote.');
+                        this.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        closeQuoteModal();
+                    }, 1500); // Reduced from 2000ms to 1500ms
+                });
+            }
+
+            // Service modal functionality
+            const serviceButtons = document.querySelectorAll('.service-details-btn');
+            const serviceModal = document.getElementById('service-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalPrice = document.getElementById('modal-price');
+            const modalDescription = document.getElementById('modal-description');
+            const modalFeatures = document.getElementById('modal-features');
+            const closeModal = document.getElementById('close-modal');
+            
+            if (serviceButtons.length > 0 && serviceModal) {
+                serviceButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const serviceCard = this.closest('.service-card');
+                        const title = serviceCard.querySelector('h3').textContent;
+                        
+                        // Set modal content based on service
+                        modalTitle.textContent = title;
+                        
+                        // You can customize this based on your services
+                        if (title.includes('KRA')) {
+                            modalPrice.textContent = 'Price: Ksh 2,000 - 5,000';
+                            modalDescription.textContent = 'Comprehensive tax registration and filing services to keep you compliant with Kenyan regulations.';
+                            modalFeatures.innerHTML = `
+                                <li>KRA PIN Registration</li>
+                                <li>Filing Returns</li>
+                                <li>Tax Compliance</li>
+                                <li>Documentation Support</li>
+                            `;
+                        } else if (title.includes('HELB')) {
+                            modalPrice.textContent = 'Price: Ksh 1,500 - 3,000';
+                            modalDescription.textContent = 'Expert guidance through the HELB application process for both new and returning applicants.';
+                            modalFeatures.innerHTML = `
+                                <li>First-time Applications</li>
+                                <li>Subsequent Applications</li>
+                                <li>Documentation Support</li>
+                                <li>Application Tracking</li>
+                            `;
+                        } else {
+                            modalPrice.textContent = 'Price: Contact for Quote';
+                            modalDescription.textContent = 'Professional service tailored to your specific needs.';
+                            modalFeatures.innerHTML = `
+                                <li>Custom Solutions</li>
+                                <li>Professional Service</li>
+                                <li>Quality Assurance</li>
+                                <li>Ongoing Support</li>
+                            `;
+                        }
+                        
+                        serviceModal.classList.remove('hidden');
+                        serviceModal.classList.add('flex');
+                    });
+                });
+                
+                if (closeModal) {
+                    closeModal.addEventListener('click', function() {
+                        serviceModal.classList.add('hidden');
+                        serviceModal.classList.remove('flex');
+                    });
+                }
+                
+                // Close modal when clicking outside
+                serviceModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.classList.add('hidden');
+                        this.classList.remove('flex');
+                    }
+                });
+            }
+        });
+    </script>
+    <script>
+        // Particles.js configuration
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof particlesJS !== 'undefined') {
+      particlesJS("particles-js", {
+        particles: {
+          number: {
+            value: 100,
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+          },
+          color: {
+            value: ["#C084FC", "#DB2777", "#F472B6"],
+          },
+          shape: {
+            type: "star",
+            stroke: {
+              width: 0,
+              color: "#000000",
+            },
+            polygon: {
+              nb_sides: 5,
+            },
+          },
+          opacity: {
+            value: 0.6,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false,
+            },
+          },
+          size: {
+            value: 5,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 40,
+              size_min: 0.1,
+              sync: false,
+            },
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#FBCFE8",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 3,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+            attract: {
+              enable: false,
+              rotateX: 600,
+              rotateY: 1200,
+            },
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: {
+              enable: true,
+              mode: "repulse",
+            },
+            onclick: {
+              enable: true,
+              mode: "push",
+            },
+            resize: true,
+          },
+          modes: {
+            grab: {
+              distance: 400,
+              line_linked: {
+                opacity: 1,
+              },
+            },
+            bubble: {
+              distance: 400,
+              size: 40,
+              duration: 2,
+              opacity: 8,
+              speed: 3,
+            },
+            repulse: {
+              distance: 200,
+              duration: 0.4,
+            },
+            push: {
+              particles_nb: 4,
+            },
+            remove: {
+              particles_nb: 2,
+            },
+          },
+        },
+        retina_detect: true,
+                });
+            } else {
+                console.error('Particles.js library not loaded');
+            }
+      });
+    </script>
 </body>
 </html>
