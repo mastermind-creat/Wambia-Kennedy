@@ -3,56 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Projects | Portfolio</title>
+    <title>My Projects | Wambia Kennedy</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
         }
         
         .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
         
-        .project-card:hover .project-overlay {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .modal {
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
         }
         
-        .modal-content {
-            transform: scale(0.9);
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .project-card:hover::before {
+            left: 100%;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             transition: all 0.3s ease;
         }
         
-        .modal.active {
-            visibility: visible;
+        .project-card:hover .project-overlay {
             opacity: 1;
         }
         
-        .modal.active .modal-content {
-            transform: scale(1);
-            opacity: 1;
+        .tech-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .tech-badge:hover {
+            transform: scale(1.05);
         }
         
-        .animate-fade-in {
-            animation: fadeIn 0.6s ease forwards;
+        .filter-btn {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal {
+            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
         }
         
         .delay-100 { animation-delay: 0.1s; }
@@ -60,283 +126,372 @@
         .delay-300 { animation-delay: 0.3s; }
         .delay-400 { animation-delay: 0.4s; }
         .delay-500 { animation-delay: 0.5s; }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .floating-shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <!-- Floating Background Shapes -->
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-code text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold gradient-text">Wambia Kennedy</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-slate-600 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="index.html#about" class="text-slate-600 hover:text-blue-600 transition-colors">About</a>
+                    <a href="index.html#services" class="text-slate-600 hover:text-blue-600 transition-colors">Services</a>
+                    <a href="index.html#contact" class="text-slate-600 hover:text-blue-600 transition-colors">Contact</a>
+                    <a href="index.html#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all duration-300">
+                        Get Quote
+                    </a>
+                </div>
+                
+                <button class="md:hidden text-slate-600 hover:text-blue-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
     <!-- Header -->
-    <header class="py-16 px-4 sm:px-6 lg:px-8 text-center">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 gradient-text animate-fade-in">
-            My Projects
-        </h1>
-        <p class="text-lg mb-5 md:text-xl text-slate-600 max-w-2xl mx-auto animate-fade-in delay-100">
-            A collection of my best work across web development, design, and more.
-        </p>
-        <div class="flex justify-center gap-4 mb-8 animate-fade-in delay-200">
-            <a href="index.html#contact"
-               class="px-8 py-3 bg-indigo-600 text-white rounded-full font-medium shadow-md hover:bg-indigo-700 hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
-                Contact Me
-            </a>
-            <a href="portfolio.html"
-               class="px-8 py-3 border-2 border-indigo-600 text-indigo-600 rounded-full font-medium shadow-md bg-white hover:bg-indigo-600 hover:text-white hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
-                View Portfolio
-            </a>
-            <a href="index.html"
-               class="px-8 py-3 border-2 border-indigo-600 text-indigo-600 rounded-full font-medium shadow-md bg-white hover:bg-indigo-600 hover:text-white hover:scale-105 transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2">
-                Website
-            </a>
+    <header class="py-20 px-4 sm:px-6 lg:px-8 text-center relative">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-text animate-fade-in-up">
+                My Projects
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-600 mb-8 animate-fade-in-up delay-100">
+                Showcasing innovative solutions and creative designs that bring ideas to life
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 animate-fade-in-up delay-200">
+                <a href="index.html#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
+                    <i class="fas fa-paper-plane mr-2"></i>Start a Project
+                </a>
+                <a href="index.html" class="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300">
+                    <i class="fas fa-home mr-2"></i>Back to Home
+                </a>
+            </div>
         </div>
     </header>
 
     <!-- Filter Section -->
-    <section class="px-4 sm:px-6 lg:px-8 mb-12 max-w-7xl mx-auto">
-        <div class="flex flex-wrap justify-center gap-3 mb-8 animate-fade-in delay-200">
-            <button class="filter-btn px-4 py-2 rounded-full bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-300" data-filter="all">All</button>
-            <button class="filter-btn px-4 py-2 rounded-full bg-slate-200 hover:bg-slate-300 transition-all duration-300" data-filter="web">Web Development</button>
-            <button class="filter-btn px-4 py-2 rounded-full bg-slate-200 hover:bg-slate-300 transition-all duration-300" data-filter="app">Mobile Apps</button>
-            <button class="filter-btn px-4 py-2 rounded-full bg-slate-200 hover:bg-slate-300 transition-all duration-300" data-filter="design">UI/UX Design</button>
+    <section class="px-4 sm:px-6 lg:px-8 mb-16 max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4">Explore My Work</h2>
+            <p class="text-slate-600">Filter through different categories to find exactly what you're looking for</p>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-4 mb-8 animate-fade-in-up delay-200">
+            <button class="filter-btn active px-6 py-3 rounded-full font-medium" data-filter="all">
+                <i class="fas fa-th-large mr-2"></i>All Projects
+            </button>
+            <button class="filter-btn px-6 py-3 rounded-full font-medium" data-filter="web">
+                <i class="fas fa-globe mr-2"></i>Web Development
+            </button>
+            <button class="filter-btn px-6 py-3 rounded-full font-medium" data-filter="app">
+                <i class="fas fa-mobile-alt mr-2"></i>Mobile Apps
+            </button>
+            <button class="filter-btn px-6 py-3 rounded-full font-medium" data-filter="design">
+                <i class="fas fa-palette mr-2"></i>UI/UX Design
+            </button>
         </div>
         
         <!-- Search Bar -->
-        <div class="max-w-md mx-auto mb-12 animate-fade-in delay-300">
+        <div class="max-w-md mx-auto animate-fade-in-up delay-300">
             <div class="relative">
-                <input type="text" id="search" placeholder="Search projects..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                <buttonbutton class="absolute right-3 top-3 text-slate-400 hover:text-indigo-600" aria-label="Search">
-                    <i class="fas fa-search"></i>
+                <input type="text" id="search" placeholder="Search projects..." 
+                       class="w-full px-6 py-4 rounded-full border-2 border-slate-200 focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all duration-300 bg-white/80 backdrop-blur-sm">
+                <button class="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-blue-600 transition-colors">
+                    <i class="fas fa-search text-lg"></i>
                 </button>
             </div>
         </div>
     </section>
 
     <!-- Projects Grid -->
-    <section class="px-4 sm:px-6 lg:px-8 mb-16 max-w-7xl mx-auto">
+    <section class="px-4 sm:px-6 lg:px-8 mb-20 max-w-7xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Project 1 -->
-            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-100" data-category="web">
+            <!-- Project 1: Portfolio Website -->
+            <div class="project-card animate-fade-in-up delay-100" data-category="web">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 1" class="w-full h-48 object-cover">
-                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
-                        <div>
-                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="1">
-                                View Details
+                    <img src="images/projects/portfolio.png" alt="Portfolio Website" class="w-full h-64 object-cover">
+                    <div class="project-overlay">
+                        <div class="text-center text-white">
+                            <button class="view-details-btn mb-4 px-6 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-blue-50 transition-colors" data-project="1">
+                                <i class="fas fa-eye mr-2"></i>View Details
                             </button>
-                            <div class="flex gap-2">
-                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
-                                    Live Demo
+                            <div class="flex gap-3 justify-center">
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fas fa-external-link-alt mr-2"></i>Live Demo
                                 </a>
-                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
-                                    <i class="fab fa-github mr-2"></i> Code
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fab fa-github mr-2"></i>Code
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2">E-commerce Website</h3>
-                    <p class="text-slate-600 mb-4">A full-featured online store with cart functionality and payment processing.</p>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Portfolio Website</h3>
+                    <p class="text-slate-600 mb-4">A modern, responsive portfolio website that showcases professional work and skills with elegant animations and clean design. Built with the latest web technologies for optimal performance and user experience.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">React</span>
-                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">Node.js</span>
-                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">MongoDB</span>
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">Tailwind CSS</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 2 -->
-            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-200" data-category="app">
+            <!-- Project 2: AJIRA System -->
+            <div class="project-card animate-fade-in-up delay-200" data-category="web">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 2" class="w-full h-48 object-cover">
-                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
-                        <div>
-                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="2">
-                                View Details
+                    <img src="images/projects/ajira.png" alt="AJIRA System" class="w-full h-64 object-cover">
+                    <div class="project-overlay">
+                        <div class="text-center text-white">
+                            <button class="view-details-btn mb-4 px-6 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-blue-50 transition-colors" data-project="2">
+                                <i class="fas fa-eye mr-2"></i>View Details
                             </button>
-                            <div class="flex gap-2">
-                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
-                                    Live Demo
+                            <div class="flex gap-3 justify-center">
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fas fa-external-link-alt mr-2"></i>Live Demo
                                 </a>
-                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
-                                    <i class="fab fa-github mr-2"></i> Code
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fab fa-github mr-2"></i>Code
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2">Fitness Tracker App</h3>
-                    <p class="text-slate-600 mb-4">Mobile application for tracking workouts, nutrition, and progress.</p>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">AJIRA Job Portal</h3>
+                    <p class="text-slate-600 mb-4">A comprehensive job portal system designed to connect job seekers with employers efficiently. Features advanced search algorithms, user management, and real-time notifications.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">Flutter</span>
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">Firebase</span>
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">Dart</span>
+                        <span class="tech-badge">PHP</span>
+                        <span class="tech-badge">MySQL</span>
+                        <span class="tech-badge">Bootstrap</span>
+                        <span class="tech-badge">jQuery</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 3 -->
-            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-300" data-category="design">
+            <!-- Project 3: Online Library -->
+            <div class="project-card animate-fade-in-up delay-300" data-category="web">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Project 3" class="w-full h-48 object-cover">
-                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
-                        <div>
-                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="3">
-                                View Details
+                    <img src="images/projects/online_library.png" alt="Online Library" class="w-full h-64 object-cover">
+                    <div class="project-overlay">
+                        <div class="text-center text-white">
+                            <button class="view-details-btn mb-4 px-6 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-blue-50 transition-colors" data-project="3">
+                                <i class="fas fa-eye mr-2"></i>View Details
                             </button>
-                            <div class="flex gap-2">
-                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
-                                    Live Demo
+                            <div class="flex gap-3 justify-center">
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fas fa-external-link-alt mr-2"></i>Live Demo
                                 </a>
-                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
-                                    <i class="fab fa-github mr-2"></i> Code
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fab fa-github mr-2"></i>Code
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2">Portfolio UI Design</h3>
-                    <p class="text-slate-600 mb-4">Modern and clean UI design for a creative professional portfolio.</p>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Online Library System</h3>
+                    <p class="text-slate-600 mb-4">A digital library management system that streamlines book cataloging, user management, and borrowing processes. Perfect for educational institutions and libraries.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Figma</span>
-                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Adobe XD</span>
-                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Illustrator</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Django</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">HTML/CSS</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 4 -->
-            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-400" data-category="web">
+            <!-- Project 4: SACCO Management -->
+            <div class="project-card animate-fade-in-up delay-400" data-category="web">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1555421689-3f034debb7a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 4" class="w-full h-48 object-cover">
-                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
-                        <div>
-                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="4">
-                                View Details
+                    <img src="images/projects/sacco.png" alt="SACCO Management" class="w-full h-64 object-cover">
+                    <div class="project-overlay">
+                        <div class="text-center text-white">
+                            <button class="view-details-btn mb-4 px-6 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-blue-50 transition-colors" data-project="4">
+                                <i class="fas fa-eye mr-2"></i>View Details
                             </button>
-                            <div class="flex gap-2">
-                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
-                                    Live Demo
+                            <div class="flex gap-3 justify-center">
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fas fa-external-link-alt mr-2"></i>Live Demo
                                 </a>
-                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
-                                    <i class="fab fa-github mr-2"></i> Code
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fab fa-github mr-2"></i>Code
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2">Task Management System</h3>
-                    <p class="text-slate-600 mb-4">Collaborative platform for teams to manage projects and tasks.</p>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">SACCO Management System</h3>
+                    <p class="text-slate-600 mb-4">A comprehensive financial management system designed specifically for Savings and Credit Cooperative Organizations. Handles member management, loans, and financial reporting.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">Vue.js</span>
-                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">Laravel</span>
-                        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">MySQL</span>
+                        <span class="tech-badge">Java</span>
+                        <span class="tech-badge">Spring Boot</span>
+                        <span class="tech-badge">MySQL</span>
+                        <span class="tech-badge">Thymeleaf</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 5 -->
-            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-500" data-category="app">
+            <!-- Project 5: WRS System -->
+            <div class="project-card animate-fade-in-up delay-500" data-category="web">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1555774698-0f77e70ac5f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 5" class="w-full h-48 object-cover">
-                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
-                        <div>
-                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="5">
-                                View Details
+                    <img src="images/projects/wrs.png" alt="WRS System" class="w-full h-64 object-cover">
+                    <div class="project-overlay">
+                        <div class="text-center text-white">
+                            <button class="view-details-btn mb-4 px-6 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-blue-50 transition-colors" data-project="5">
+                                <i class="fas fa-eye mr-2"></i>View Details
                             </button>
-                            <div class="flex gap-2">
-                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
-                                    Live Demo
+                            <div class="flex gap-3 justify-center">
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fas fa-external-link-alt mr-2"></i>Live Demo
                                 </a>
-                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
-                                    <i class="fab fa-github mr-2"></i> Code
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fab fa-github mr-2"></i>Code
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2">Recipe Sharing App</h3>
-                    <p class="text-slate-600 mb-4">Discover and share your favorite recipes with the community.</p>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">WRS Management System</h3>
+                    <p class="text-slate-600 mb-4">A warehouse management system that optimizes inventory tracking, order processing, and logistics management. Provides real-time insights for better decision making.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">React Native</span>
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">GraphQL</span>
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-sm rounded-full">MongoDB</span>
+                        <span class="tech-badge">C#</span>
+                        <span class="tech-badge">ASP.NET</span>
+                        <span class="tech-badge">SQL Server</span>
+                        <span class="tech-badge">Bootstrap</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 6 -->
-            <div class="project-card rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] animate-fade-in delay-500" data-category="design">
+            <!-- Project 6: Springs System -->
+            <div class="project-card animate-fade-in-up delay-500" data-category="web">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 6" class="w-full h-48 object-cover">
-                    <div class="project-overlay absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 flex items-end p-6 transition-all duration-300 transform translate-y-4">
-                        <div>
-                            <button class="view-details-btn mb-2 px-4 py-2 bg-white text-indigo-600 rounded-md hover:bg-indigo-50 transition-colors" data-project="6">
-                                View Details
+                    <img src="images/projects/springs.png" alt="Springs System" class="w-full h-64 object-cover">
+                    <div class="project-overlay">
+                        <div class="text-center text-white">
+                            <button class="view-details-btn mb-4 px-6 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-blue-50 transition-colors" data-project="6">
+                                <i class="fas fa-eye mr-2"></i>View Details
                             </button>
-                            <div class="flex gap-2">
-                                <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
-                                    Live Demo
+                            <div class="flex gap-3 justify-center">
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fas fa-external-link-alt mr-2"></i>Live Demo
                                 </a>
-                                <a href="#" class="px-4 py-2 bg-slate-800 text-white rounded-md hover:bg-slate-700 transition-colors">
-                                    <i class="fab fa-github mr-2"></i> Code
+                                <a href="#" class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors">
+                                    <i class="fab fa-github mr-2"></i>Code
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-semibold mb-2">E-learning Platform UI</h3>
-                    <p class="text-slate-600 mb-4">User interface design for an online education platform.</p>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Springs Management System</h3>
+                    <p class="text-slate-600 mb-4">A specialized management system for springs and water resource management with environmental monitoring features. Helps track water quality and resource utilization.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Sketch</span>
-                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Figma</span>
-                        <span class="px-3 py-1 bg-amber-100 text-amber-800 text-sm rounded-full">Photoshop</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Flask</span>
+                        <span class="tech-badge">SQLite</span>
+                        <span class="tech-badge">Chart.js</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Load More Button -->
-        <div class="text-center mt-12 animate-fade-in delay-500">
-            <button id="load-more" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg">
-                Load More Projects
+        <div class="text-center mt-16 animate-fade-in-up delay-500">
+            <button id="load-more" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300">
+                <i class="fas fa-plus mr-2"></i>Load More Projects
             </button>
         </div>
     </section>
 
     <!-- Project Modal -->
-    <div id="project-modal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black/50 invisible opacity-0 transition-all duration-300">
-        <div class="modal-content bg-white rounded-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+    <div id="project-modal" class="modal fixed inset-0 z-50 flex items-center justify-center invisible opacity-0 transition-all duration-300">
+        <div class="modal-content max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto rounded-2xl">
             <div class="relative">
-                <button id="close-modal" type="button" aria-label="Close modal" class="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md hover:bg-slate-100 z-10">
-                    <i class="fas fa-times text-slate-700"></i>
+                <button id="close-modal" type="button" aria-label="Close modal" 
+                        class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white z-10 transition-all duration-300">
+                    <i class="fas fa-times text-slate-700 text-lg"></i>
                 </button>
-                <img id="modal-image" src="" alt="Project" class="w-full h-64 md:h-80 object-cover rounded-t-xl">
+                <img id="modal-image" src="" alt="Project" class="w-full h-64 md:h-80 object-cover rounded-t-2xl">
             </div>
-            <div class="p-6 md:p-8">
-                <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
-                <p id="modal-description" class="text-slate-600 mb-6"></p>
+            <div class="p-8">
+                <h3 id="modal-title" class="text-3xl font-bold mb-4 text-slate-800"></h3>
+                <p id="modal-description" class="text-slate-600 mb-8 text-lg leading-relaxed"></p>
                 
-                <div class="mb-6">
-                    <h4 class="text-lg font-semibold mb-3">Key Features</h4>
-                    <ul id="modal-features" class="list-disc pl-5 space-y-2 text-slate-700">
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold mb-4 text-slate-800">Key Features</h4>
+                    <ul id="modal-features" class="space-y-3 text-slate-700">
                         <!-- Features will be added by JavaScript -->
                     </ul>
                 </div>
                 
-                <div class="mb-6">
-                    <h4 class="text-lg font-semibold mb-3">Technologies Used</h4>
-                    <div id="modal-tech" class="flex flex-wrap gap-2">
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold mb-4 text-slate-800">Technologies Used</h4>
+                    <div id="modal-tech" class="flex flex-wrap gap-3">
                         <!-- Tech badges will be added by JavaScript -->
                     </div>
                 </div>
                 
                 <div class="flex flex-wrap gap-4">
-                    <a id="modal-live-link" href="#" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors flex items-center">
+                    <a id="modal-live-link" href="#" 
+                       class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center">
                         <i class="fas fa-external-link-alt mr-2"></i> Live Demo
                     </a>
-                    <a id="modal-code-link" href="#" class="px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors flex items-center">
+                    <a id="modal-code-link" href="#" 
+                       class="bg-slate-800 text-white px-8 py-4 rounded-full font-semibold hover:bg-slate-700 hover:scale-105 transition-all duration-300 flex items-center">
                         <i class="fab fa-github mr-2"></i> View Code
                     </a>
                 </div>
@@ -345,78 +500,78 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4">
+    <footer class="bg-gradient-to-r from-slate-800 to-slate-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white mr-3">
-                            <i class="fas fa-paint-brush"></i>
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white mr-4">
+                            <i class="fas fa-code text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold">Wambia Kennedy</h3>
+                        <h3 class="text-2xl font-bold">Wambia Kennedy</h3>
                     </div>
-                    <p class="text-gray-400 mb-4">
-                        Creating beautiful, functional designs that tell your brand's story and connect with your audience.
+                    <p class="text-slate-300 mb-6 leading-relaxed">
+                        Creating innovative digital solutions that transform ideas into reality. Let's build something amazing together.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-white hover:bg-indigo-600 transition">
-                            <i class="fab fa-behance"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-white hover:bg-indigo-600 transition">
-                            <i class="fab fa-dribbble"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-white hover:bg-indigo-600 transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-white hover:bg-indigo-600 transition">
+                        <a href="#" class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-all duration-300">
                             <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-all duration-300">
+                            <i class="fab fa-instagram"></i>
                         </a>
                     </div>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#gallery" class="text-gray-400 hover:text-white transition">Portfolio</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition">Services</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-slate-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="index.html#about" class="text-slate-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="index.html#services" class="text-slate-300 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="index.html#contact" class="text-slate-300 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="gallery.html" class="text-slate-300 hover:text-white transition-colors">Gallery</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-bold mb-4">Services</h4>
-                    <ul class="space-y-2">
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Logo Design</a></li>
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Brand Identity</a></li>
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Print Design</a></li>
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Packaging</a></li>
-                        <li><a href="index.html#services" class="text-gray-400 hover:text-white transition">Web Design</a></li>
+                    <h4 class="text-lg font-bold mb-6">Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#services" class="text-slate-300 hover:text-white transition-colors">Web Development</a></li>
+                        <li><a href="index.html#services" class="text-slate-300 hover:text-white transition-colors">Mobile Apps</a></li>
+                        <li><a href="index.html#services" class="text-slate-300 hover:text-white transition-colors">UI/UX Design</a></li>
+                        <li><a href="index.html#services" class="text-slate-300 hover:text-white transition-colors">System Development</a></li>
+                        <li><a href="index.html#services" class="text-slate-300 hover:text-white transition-colors">Consulting</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="text-lg font-bold mb-4">Contact Info</h4>
-                    <ul class="space-y-2 text-gray-400">
+                    <h4 class="text-lg font-bold mb-6">Contact Info</h4>
+                    <ul class="space-y-4 text-slate-300">
                         <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
-                            <span>Nyanza <br>Kisumu, kenya</span>
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-400"></i>
+                            <span>Nyanza, Kisumu<br>Kenya</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-envelope mr-3"></i>
+                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
                             <span>kennyleyy0@gmail.com</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-phone-alt mr-3"></i>
+                            <i class="fas fa-phone-alt mr-3 text-blue-400"></i>
                             <span>+254 743 394 373</span>
                         </li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 DesignFolio. All rights reserved.</p>
+            <div class="border-t border-slate-700 mt-12 pt-8 text-center text-slate-400">
+                <p>&copy; 2025 Wambia Kennedy. All rights reserved. | Crafted with ❤️ for amazing experiences</p>
             </div>
         </div>
     </footer>
@@ -426,92 +581,98 @@
             // Project data for modals
             const projects = {
                 1: {
-                    title: "E-commerce Website",
-                    description: "A full-featured online store built with modern web technologies. This project includes product listings, shopping cart functionality, user authentication, and secure payment processing.",
+                    title: "Portfolio Website",
+                    description: "A modern, responsive portfolio website that showcases professional work and skills with elegant animations and clean design. Built with the latest web technologies for optimal performance and user experience.",
                     features: [
-                        "Product catalog with categories and filters",
-                        "Shopping cart with persistent storage",
-                        "User authentication and profiles",
-                        "Secure checkout with Stripe integration",
-                        "Admin dashboard for inventory management"
+                        "Responsive design that works on all devices",
+                        "Smooth animations and transitions",
+                        "Interactive project showcases",
+                        "Contact form with validation",
+                        "SEO optimized for better visibility",
+                        "Fast loading times and performance"
                     ],
-                    tech: ["React", "Node.js", "Express", "MongoDB", "Redux", "Stripe"],
-                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    tech: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS", "Font Awesome"],
+                    image: "images/projects/portfolio.png",
                     liveLink: "#",
                     codeLink: "#"
                 },
                 2: {
-                    title: "Fitness Tracker App",
-                    description: "A comprehensive mobile application for fitness enthusiasts to track their workouts, nutrition, and progress over time. The app includes personalized recommendations and social features.",
+                    title: "AJIRA Job Portal",
+                    description: "A comprehensive job portal system designed to connect job seekers with employers efficiently. Features advanced search algorithms, user management, and real-time notifications.",
                     features: [
-                        "Workout logging with exercise database",
-                        "Nutrition tracking with barcode scanning",
-                        "Progress charts and statistics",
-                        "Personalized workout plans",
-                        "Social features to connect with friends"
+                        "Advanced job search and filtering",
+                        "User registration and profile management",
+                        "Employer dashboard for job posting",
+                        "Real-time notifications system",
+                        "Resume upload and management",
+                        "Admin panel for system management"
                     ],
-                    tech: ["Flutter", "Firebase", "Dart", "Google Fit API", "Firestore"],
-                    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    tech: ["PHP", "MySQL", "Bootstrap", "jQuery", "AJAX", "JavaScript"],
+                    image: "images/projects/ajira.png",
                     liveLink: "#",
                     codeLink: "#"
                 },
                 3: {
-                    title: "Portfolio UI Design",
-                    description: "A modern and clean UI design for a creative professional's portfolio. The design focuses on showcasing work in an elegant, minimalist way while maintaining strong visual impact.",
+                    title: "Online Library System",
+                    description: "A digital library management system that streamlines book cataloging, user management, and borrowing processes. Perfect for educational institutions and libraries.",
                     features: [
-                        "Responsive layout for all devices",
-                        "Interactive project showcases",
-                        "Minimalist navigation",
-                        "Dark mode support",
-                        "Micro-interactions for engagement"
+                        "Book cataloging and categorization",
+                        "User registration and authentication",
+                        "Borrowing and return management",
+                        "Fine calculation system",
+                        "Search and filter functionality",
+                        "Reports and analytics dashboard"
                     ],
-                    tech: ["Figma", "Adobe XD", "Illustrator", "Photoshop", "After Effects"],
-                    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80",
+                    tech: ["Python", "Django", "PostgreSQL", "HTML/CSS", "Bootstrap"],
+                    image: "images/projects/online_library.png",
                     liveLink: "#",
                     codeLink: "#"
                 },
                 4: {
-                    title: "Task Management System",
-                    description: "A collaborative platform for teams to manage projects, tasks, and deadlines. The system includes real-time updates, file sharing, and progress tracking.",
+                    title: "SACCO Management System",
+                    description: "A comprehensive financial management system designed specifically for Savings and Credit Cooperative Organizations. Handles member management, loans, and financial reporting.",
                     features: [
-                        "Project boards with drag-and-drop tasks",
-                        "Team collaboration with real-time updates",
-                        "File attachments and comments",
-                        "Time tracking and reporting",
-                        "Customizable workflows"
+                        "Member registration and management",
+                        "Loan application and processing",
+                        "Savings account management",
+                        "Financial reporting and analytics",
+                        "Payment tracking system",
+                        "Multi-branch support"
                     ],
-                    tech: ["Vue.js", "Laravel", "MySQL", "WebSockets", "TailwindCSS"],
-                    image: "https://images.unsplash.com/photo-1555421689-3f034debb7a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    tech: ["Java", "Spring Boot", "MySQL", "Thymeleaf", "Bootstrap"],
+                    image: "images/projects/sacco.png",
                     liveLink: "#",
                     codeLink: "#"
                 },
                 5: {
-                    title: "Recipe Sharing App",
-                    description: "A community-driven platform for discovering and sharing recipes. Users can save favorites, create meal plans, and get personalized recommendations.",
+                    title: "WRS Management System",
+                    description: "A warehouse management system that optimizes inventory tracking, order processing, and logistics management. Provides real-time insights for better decision making.",
                     features: [
-                        "Recipe database with search and filters",
-                        "User profiles with saved recipes",
-                        "Meal planning tools",
-                        "Grocery list generation",
-                        "Rating and review system"
+                        "Inventory tracking and management",
+                        "Order processing and fulfillment",
+                        "Real-time stock monitoring",
+                        "Barcode scanning integration",
+                        "Reporting and analytics",
+                        "Multi-location support"
                     ],
-                    tech: ["React Native", "GraphQL", "MongoDB", "Node.js", "Apollo"],
-                    image: "https://images.unsplash.com/photo-1555774698-0f77e70ac5f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    tech: ["C#", "ASP.NET", "SQL Server", "Bootstrap", "JavaScript"],
+                    image: "images/projects/wrs.png",
                     liveLink: "#",
                     codeLink: "#"
                 },
                 6: {
-                    title: "E-learning Platform UI",
-                    description: "User interface design for an online education platform. The design focuses on creating an engaging learning experience with intuitive navigation.",
+                    title: "Springs Management System",
+                    description: "A specialized management system for springs and water resource management with environmental monitoring features. Helps track water quality and resource utilization.",
                     features: [
-                        "Course browsing and filtering",
-                        "Interactive video player",
-                        "Progress tracking",
-                        "Discussion forums",
-                        "Mobile-first responsive design"
+                        "Water quality monitoring",
+                        "Resource utilization tracking",
+                        "Environmental data collection",
+                        "Reporting and analytics",
+                        "Alert system for anomalies",
+                        "Historical data analysis"
                     ],
-                    tech: ["Sketch", "Figma", "Photoshop", "Principle", "After Effects"],
-                    image: "https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    tech: ["Python", "Flask", "SQLite", "Chart.js", "Bootstrap"],
+                    image: "images/projects/springs.png",
                     liveLink: "#",
                     codeLink: "#"
                 }
@@ -525,22 +686,23 @@
                 button.addEventListener('click', () => {
                     // Update active button
                     filterButtons.forEach(btn => {
-                        btn.classList.remove('bg-indigo-600', 'text-white');
-                        btn.classList.add('bg-slate-200', 'hover:bg-slate-300');
+                        btn.classList.remove('active');
                     });
                     
-                    button.classList.remove('bg-slate-200', 'hover:bg-slate-300');
-                    button.classList.add('bg-indigo-600', 'text-white');
+                    button.classList.add('active');
                     
                     const filter = button.dataset.filter;
                     
-                    // Filter projects
-                    projectCards.forEach(card => {
-                        if (filter === 'all' || card.dataset.category === filter) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
+                    // Filter projects with animation
+                    projectCards.forEach((card, index) => {
+                        setTimeout(() => {
+                            if (filter === 'all' || card.dataset.category === filter) {
+                                card.style.display = 'block';
+                                card.classList.add('animate-fade-in-up');
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }, index * 100);
                     });
                 });
             });
@@ -582,7 +744,8 @@
                     featuresList.innerHTML = '';
                     project.features.forEach(feature => {
                         const li = document.createElement('li');
-                        li.textContent = feature;
+                        li.className = 'flex items-start';
+                        li.innerHTML = `<i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i><span>${feature}</span>`;
                         featuresList.appendChild(li);
                     });
                     
@@ -590,7 +753,7 @@
                     techContainer.innerHTML = '';
                     project.tech.forEach(tech => {
                         const span = document.createElement('span');
-                        span.className = 'px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full';
+                        span.className = 'tech-badge';
                         span.textContent = tech;
                         techContainer.appendChild(span);
                     });
@@ -599,67 +762,53 @@
                     document.getElementById('modal-code-link').href = project.codeLink;
                     
                     // Show modal
-                    modal.classList.add('active');
+                    modal.classList.remove('invisible', 'opacity-0');
                     document.body.style.overflow = 'hidden';
                 });
             });
             
             closeModal.addEventListener('click', () => {
-                modal.classList.remove('active');
+                modal.classList.add('invisible', 'opacity-0');
                 document.body.style.overflow = 'auto';
             });
             
             // Close modal when clicking outside
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
-                    modal.classList.remove('active');
+                    modal.classList.add('invisible', 'opacity-0');
                     document.body.style.overflow = 'auto';
                 }
             });
 
             // Load more projects (simulated)
             const loadMoreButton = document.getElementById('load-more');
-            let loadedProjects = 6;
             
             loadMoreButton.addEventListener('click', () => {
-                // In a real implementation, you would fetch more projects from an API
-                // Here we'll just simulate loading more projects
-                loadMoreButton.textContent = 'Loading...';
+                loadMoreButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Loading...';
                 loadMoreButton.disabled = true;
                 
                 setTimeout(() => {
-                    // Simulate loading delay
-                    loadMoreButton.textContent = 'No More Projects';
+                    loadMoreButton.innerHTML = '<i class="fas fa-check mr-2"></i>All Projects Loaded';
                     loadMoreButton.disabled = true;
-                    loadMoreButton.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
-                    loadMoreButton.classList.add('bg-slate-400', 'cursor-not-allowed');
-                }, 1000);
+                    loadMoreButton.classList.remove('from-blue-600', 'to-purple-600', 'hover:scale-105');
+                    loadMoreButton.classList.add('from-slate-400', 'to-slate-500', 'cursor-not-allowed');
+                }, 1500);
             });
 
-            // Dark mode toggle (optional)
-            const darkModeToggle = document.createElement('button');
-            darkModeToggle.className = 'fixed bottom-4 right-4 bg-slate-800 text-white p-3 rounded-full shadow-lg hover:bg-slate-700 z-50';
-            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-            document.body.appendChild(darkModeToggle);
-            
-            let darkMode = false;
-            
-            darkModeToggle.addEventListener('click', () => {
-                darkMode = !darkMode;
-                
-                if (darkMode) {
-                    document.body.classList.add('bg-slate-900');
-                    document.body.classList.remove('bg-slate-50');
-                    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-                    darkModeToggle.classList.remove('bg-slate-800');
-                    darkModeToggle.classList.add('bg-amber-400', 'text-slate-900');
-                } else {
-                    document.body.classList.remove('bg-slate-900');
-                    document.body.classList.add('bg-slate-50');
-                    darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-                    darkModeToggle.classList.add('bg-slate-800');
-                    darkModeToggle.classList.remove('bg-amber-400', 'text-slate-900');
-                }
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
             });
         });
     </script>
