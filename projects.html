@@ -140,31 +140,31 @@
         </p>
       </div>
       <div
-        class="flex flex-wrap justify-center gap-4 mb-8 animate-fade-in-up delay-200"
+        class="flex flex-wrap justify-center dark:text-slate-100 gap-4 mb-8 animate-fade-in-up delay-200"
       >
         <button
-          class="filter-btn active px-6 py-3 rounded-full font-medium bg-white dark:bg-accent-dark text-slate-700 dark:text-white border border-slate-200 dark:border-accent-dark shadow"
+          class="filter-btn active px-6 py-3 rounded-full font-medium bg-white dark:bg-accent-dark text-slate-700 dark:text-white border border-slate-200 dark:border-accent-dark shadow dark:shadow-lg"
           data-filter="all"
         >
           <i class="fas fa-th-large mr-2"></i>All Projects
         </button>
         <button
-          class="filter-btn px-6 py-3 rounded-full font-medium bg-white dark:bg-secondary-dark text-slate-700 dark:text-white border border-slate-200 dark:border-slate-700 shadow"
+          class="filter-btn px-6 py-3 rounded-full font-medium bg-white dark:bg-secondary-dark text-slate-700 dark:text-white dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow dark:shadow-lg"
           data-filter="web"
         >
           <i class="fas fa-globe mr-2"></i>Web Development
         </button>
         <button
-          class="filter-btn px-6 py-3 rounded-full font-medium bg-white dark:bg-secondary-dark text-slate-700 dark:text-white border border-slate-200 dark:border-slate-700 shadow"
+          class="filter-btn px-6 py-3 rounded-full font-medium bg-white dark:bg-secondary-dark text-slate-700 dark:text-white border border-slate-200 dark:border-slate-700 shadow dark:shadow-lg"
           data-filter="app"
         >
           <i class="fas fa-mobile-alt mr-2"></i>Mobile Apps
         </button>
         <button
-          class="filter-btn px-6 py-3 rounded-full font-medium bg-white dark:bg-secondary-dark text-slate-700 dark:text-white border border-slate-200 dark:border-slate-700 shadow"
-          data-filter="design"
+          class="filter-btn px-6 py-3 rounded-full font-medium bg-white dark:bg-secondary-dark text-slate-700 dark:text-white border border-slate-200 dark:border-slate-700 shadow dark:shadow-lg"
+          data-filter="software"
         >
-          <i class="fas fa-palette mr-2"></i>UI/UX Design
+          <i class="fas fa-palette mr-2"></i>Softwares/ Systems
         </button>
       </div>
       <!-- Search Bar -->
@@ -174,7 +174,7 @@
             type="text"
             id="search"
             placeholder="Search projects..."
-            class="w-full px-6 py-4 rounded-full border-2 border-slate-200 dark:border-slate-700 focus:border-blue-500 dark:focus:border-accent-dark focus:outline-none focus:ring-4 focus:ring-blue-100 dark:focus:ring-accent-dark/30 transition-all duration-300 bg-white/80 dark:bg-secondary-dark/80 backdrop-blur-sm text-slate-900 dark:text-slate-100"
+            class="w-full px-6 py-4 rounded-full border-2 border-slate-200 dark:border-slate-700 focus:border-blue-500 dark:focus:border-accent-dark focus:outline-none focus:ring-4 focus:ring-blue-100 dark:focus:ring-accent-dark/30 transition-all duration-300 bg-white/80 dark:bg-secondary-dark/80 backdrop-blur-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-400"
           />
           <button
             class="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-slate-300 hover:text-blue-600 dark:hover:text-accent-dark transition-colors"
@@ -459,7 +459,7 @@
               <div class="relative">
                 <img
                   src="images/projects/wrs.png"
-                  alt="WRS System"
+                  alt="Workstation Reservation System"
                   class="w-full h-64 object-cover"
                 />
                 <div class="project-overlay">
@@ -491,17 +491,19 @@
                 <h3
                   class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3"
                 >
-                  WRS Management System
+                  Workstation Reservation System
                 </h3>
                 <p class="text-slate-600 mb-4">
-                  A warehouse management system that optimizes inventory
-                  tracking, order processing, and logistics management. Provides
-                  real-time insights for better decision making.
+                  A comprehensive system for managing workstation bookings,
+                  scheduling, and resource allocation. Enables employees to
+                  reserve workspaces, track availability, and optimize office
+                  space utilization.
                 </p>
                 <div class="flex flex-wrap gap-2">
                   <span class="tech-badge">C#</span>
                   <span class="tech-badge">ASP.NET</span>
                   <span class="tech-badge">SQL Server</span>
+                  <span class="tech-badge">JavaScript</span>
                   <span class="tech-badge">Bootstrap</span>
                 </div>
               </div>
@@ -523,7 +525,7 @@
               <div class="relative">
                 <img
                   src="images/projects/springs.png"
-                  alt="Springs System"
+                  alt="Springs website"
                   class="w-full h-64 object-cover"
                 />
                 <div class="project-overlay">
@@ -600,13 +602,13 @@
                     </button>
                     <div class="flex gap-3 justify-center">
                       <a
-                        href="#"
+                        href="https://welding-flax.vercel.app/"
                         class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors"
                       >
                         <i class="fas fa-external-link-alt mr-2"></i>Live Demo
                       </a>
                       <a
-                        href="#"
+                        href="https://github.com/mastermind-creat/Welding"
                         class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-colors"
                       >
                         <i class="fab fa-github mr-2"></i>Code
@@ -630,7 +632,7 @@
                   <span class="tech-badge">HTML5</span>
                   <span class="tech-badge">Tailwind CSS</span>
                   <span class="tech-badge">JavaScript</span>
-                  <span class="tech-badge">Netlify</span>
+                  <span class="tech-badge">Vercel</span>
                 </div>
               </div>
             </div>
@@ -1048,10 +1050,10 @@
               "Responsive design for all devices",
               "SEO optimized for local search",
             ],
-            tech: ["HTML5", "Tailwind CSS", "JavaScript", "Netlify"],
+            tech: ["HTML5", "Tailwind CSS", "JavaScript", "Node.js", "Vercel"],
             image: "images/projects/welding.png",
-            liveLink: "#",
-            codeLink: "#",
+            liveLink: "https://welding-flax.vercel.app/",
+            codeLink: "https://github.com/mastermind-creat/Welding",
           },
         };
 
