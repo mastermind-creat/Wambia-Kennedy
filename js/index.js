@@ -153,27 +153,28 @@
                     'Updates (Ksh 300)',
                     'Virus Removal (Ksh 700)'
                 ]
-            },
-            'System Development': {
-                price: 'Ksh 3,000+',
-                description: 'Custom software solutions tailored to your specific needs and requirements.',
+                        },
+                        'Software Development': {
+                price: 'Ksh 70,000+',
+                description: 'Custom software solutions designed to solve real business challenges with scalability in mind.',
                 features: [
-                    'Fullstack Development (Ksh 10,000+)',
-                    'School Project Development (Ksh 3,000+)',
-                    'Custom Projects for Students (Ksh 5,000+)',
-                    'Database Integration (Ksh 10,000+)'
+                    'Fullstack Development (Ksh 90,000+)',
+                    'School Project Development (Ksh 10,000+)',
+                    'Custom Projects for Students (Ksh 12,000+)',
+                    'Database Integration (Ksh 40,000+)'
                 ]
             },
             'Web Development': {
-                price: 'Ksh 1,000+',
-                description: 'Modern, responsive websites that showcase your brand and engage your audience.',
+                price: 'Ksh 10,000+',
+                description: 'Responsive, modern websites that elevate your brand presence and drive engagement.',
                 features: [
-                    'UI/UX Design (Ksh 1,000+)',
-                    'Personal Website/Portfolio (Ksh 3,000+)',
-                    'Business Websites (Ksh 5,000+)',
-                    'E-commerce Solutions (Ksh 10,000+)'
+                    'UI/UX Design (Ksh 5,000+)',
+                    'Personal Website/Portfolio (Ksh 12,000+)',
+                    'Business Websites (Ksh 20,000+)',
+                    'E-commerce Solutions (Ksh 50,000+)'
                 ]
             },
+
             'Graphic Design': {
                 price: 'Ksh 500+',
                 description: 'Creative visual solutions that communicate your message effectively.',
@@ -182,6 +183,29 @@
                     'Birthday/Wedding Cards (Ksh 800)',
                     'Posters (Ksh 1,200)',
                     'Social Media Graphics (Ksh 500)'
+                ]
+            },
+            'Virtual Assistance': {
+                price: 'Ksh 3,000+ per task / Ksh 15,000+ monthly',
+                description: 'Reliable virtual assistance services to help you stay productive, whether remotely or onsite.',
+                features: [
+                    'Remote Administrative Support (Ksh 3,000+ per task)',
+                    'Social Media Management (Ksh 8,000+ monthly)',
+                    'Email & Calendar Management (Ksh 5,000+ monthly)',
+                    'Onsite Assistance – Events Coverage (Photography & Videography) (Ksh 10,000+ per event)',
+                    'Data Entry & Research (Ksh 4,000+ per task)'
+                ]
+            },
+
+            'Deployment, Hosting & Troubleshooting': {
+                price: 'Ksh 4,000+ per task',
+                description: 'Professional support for deployment, hosting, and troubleshooting to keep your projects running smoothly.',
+                features: [
+                    'Deployments on Vercel, Netlify & GitHub Pages (Ksh 4,000+ per project)',
+                    'WordPress Setup & Hosting (Ksh 6,000+ per site)',
+                    'Firebase & Supabase Integration (Ksh 5,000+ per setup)',
+                    'Server / Hosting Troubleshooting & Fixes (Ksh 3,000+ per issue)',
+                    'Custom Domain & SSL Configuration (Ksh 2,500+ per setup)'
                 ]
             }
         };
