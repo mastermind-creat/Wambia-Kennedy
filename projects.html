@@ -892,162 +892,243 @@
 
     <!-- Footer -->
     <footer
-      class="bg-gradient-to-r from-slate-800 to-slate-900 dark:from-primary-dark dark:to-secondary-dark text-white py-16"
+      class="bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 py-14 relative"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <div class="flex items-center mb-6">
+      <div class="container mx-auto px-6 lg:px-12">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-10">
+          <!-- Brand -->
+          <div class="md:col-span-2">
+            <div class="flex items-center mb-5">
               <div
-                class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white mr-4"
+                class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white mr-3"
               >
-                <i class="fas fa-code text-xl"></i>
+                <i class="fas fa-code"></i>
               </div>
-              <h3 class="text-2xl font-bold">Wambia Kennedy</h3>
+              <a href="#home" class="flex items-center gap-2">
+                <img
+                  src="images/logo/logo.png"
+                  alt="Wambia Kennedy Logo"
+                  class="w-10 h-10 rounded-full shadow-lg"
+                />
+                <span class="text-2xl font-bold gradient-text hidden md:inline"
+                  >Wambia</span
+                >
+              </a>
             </div>
-            <p class="text-slate-300 mb-6 leading-relaxed">
-              Creating innovative digital solutions that transform ideas into
-              reality. Let's build something amazing together.
+            <p class="text-gray-600 dark:text-gray-400 mb-5 leading-relaxed">
+              Creating beautiful, functional designs that tell your brand's
+              story and connect with your audience worldwide.
             </p>
             <div class="flex space-x-4">
               <a
-                href="#"
-                class="w-10 h-10 bg-slate-700 dark:bg-secondary-dark rounded-full flex items-center justify-center text-white hover:bg-blue-600 dark:hover:bg-accent-dark transition-all duration-300"
-              >
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-              <a
-                href="#"
-                class="w-10 h-10 bg-slate-700 dark:bg-secondary-dark rounded-full flex items-center justify-center text-white hover:bg-blue-600 dark:hover:bg-accent-dark transition-all duration-300"
+                href="https://github.com/"
+                target="_blank"
+                class="w-10 h-10 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center hover:text-black dark:hover:text-white transition"
               >
                 <i class="fab fa-github"></i>
               </a>
               <a
-                href="#"
-                class="w-10 h-10 bg-slate-700 dark:bg-secondary-dark rounded-full flex items-center justify-center text-white hover:bg-blue-600 dark:hover:bg-accent-dark transition-all duration-300"
+                href="https://x.com/"
+                target="_blank"
+                class="w-10 h-10 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center hover:text-black dark:hover:text-white transition"
               >
-                <i class="fab fa-twitter"></i>
+                <i class="fab fa-x-twitter"></i>
               </a>
               <a
-                href="#"
-                class="w-10 h-10 bg-slate-700 dark:bg-secondary-dark rounded-full flex items-center justify-center text-white hover:bg-blue-600 dark:hover:bg-accent-dark transition-all duration-300"
+                href="https://facebook.com/"
+                target="_blank"
+                class="w-10 h-10 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center hover:text-blue-600 transition"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="https://instagram.com/"
+                target="_blank"
+                class="w-10 h-10 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center hover:text-pink-500 transition"
               >
                 <i class="fab fa-instagram"></i>
               </a>
+              <a
+                href="https://linkedin.com/"
+                target="_blank"
+                class="w-10 h-10 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center hover:text-blue-700 transition"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a
+                href="https://wa.me/254743394373"
+                target="_blank"
+                class="w-10 h-10 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center hover:text-green-500 transition"
+              >
+                <i class="fab fa-whatsapp"></i>
+              </a>
             </div>
           </div>
+
+          <!-- Quick Links -->
           <div>
-            <h4 class="text-lg font-bold mb-6">Quick Links</h4>
-            <ul class="space-y-3">
+            <h4 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">
+              Quick Links
+            </h4>
+            <ul class="space-y-2">
               <li>
                 <a
-                  href="index.html"
-                  class="text-slate-300 hover:text-white transition-colors"
-                  >Home</a
+                  href="#gallery"
+                  class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 transition"
+                  >Portfolio</a
                 >
               </li>
               <li>
                 <a
-                  href="index.html#about"
-                  class="text-slate-300 hover:text-white transition-colors"
-                  >About</a
-                >
-              </li>
-              <li>
-                <a
-                  href="index.html#services"
-                  class="text-slate-300 hover:text-white transition-colors"
+                  href="#services"
+                  class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 transition"
                   >Services</a
                 >
               </li>
               <li>
                 <a
-                  href="index.html#contact"
-                  class="text-slate-300 hover:text-white transition-colors"
+                  href="#about"
+                  class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 transition"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 transition"
                   >Contact</a
                 >
               </li>
               <li>
                 <a
-                  href="gallery.html"
-                  class="text-slate-300 hover:text-white transition-colors"
-                  >Gallery</a
+                  href="#"
+                  class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 transition"
+                  >Blog</a
                 >
               </li>
             </ul>
           </div>
 
+          <!-- Services -->
           <div>
-            <h4 class="text-lg font-bold mb-6">Services</h4>
-            <ul class="space-y-3">
+            <h4 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">
+              Services
+            </h4>
+            <ul class="space-y-2">
               <li>
                 <a
                   href="index.html#services"
-                  class="text-slate-300 hover:text-white transition-colors"
-                  >Web Development</a
+                  class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 transition"
+                  >Logo Design</a
                 >
               </li>
               <li>
                 <a
                   href="index.html#services"
-                  class="text-slate-300 hover:text-white transition-colors"
-                  >Mobile Apps</a
+                  class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 transition"
+                  >Brand Identity</a
                 >
               </li>
               <li>
                 <a
                   href="index.html#services"
-                  class="text-slate-300 hover:text-white transition-colors"
-                  >UI/UX Design</a
+                  class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 transition"
+                  >Print Design</a
                 >
               </li>
               <li>
                 <a
                   href="index.html#services"
-                  class="text-slate-300 hover:text-white transition-colors"
-                  >System Development</a
+                  class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 transition"
+                  >Packaging</a
                 >
               </li>
               <li>
                 <a
                   href="index.html#services"
-                  class="text-slate-300 hover:text-white transition-colors"
-                  >Consulting</a
+                  class="text-gray-600 dark:text-gray-400 hover:text-indigo-500 transition"
+                  >Web Design</a
                 >
               </li>
             </ul>
           </div>
 
+          <!-- Contact Info -->
           <div>
-            <h4 class="text-lg font-bold mb-6">Contact Info</h4>
-            <ul class="space-y-4 text-slate-300">
+            <h4 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">
+              Contact Info
+            </h4>
+            <ul class="space-y-3 text-gray-600 dark:text-gray-400">
               <li class="flex items-start">
-                <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-400"></i>
-                <span>Nyanza, Kisumu<br />Kenya</span>
+                <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                <span>Nyanza, Kisumu, Kenya</span>
               </li>
               <li class="flex items-center">
-                <i class="fas fa-envelope mr-3 text-blue-400"></i>
-                <span>kennyleyy0@gmail.com</span>
+                <i class="fas fa-envelope mr-3"></i>
+                <a
+                  href="mailto:kennyleyy0@gmail.com"
+                  class="hover:text-indigo-500"
+                  >kennyleyy0@gmail.com</a
+                >
               </li>
               <li class="flex items-center">
-                <i class="fas fa-phone-alt mr-3 text-blue-400"></i>
-                <span>+254 743 394 373</span>
+                <i class="fas fa-phone-alt mr-3"></i>
+                <a href="tel:+254743394373" class="hover:text-indigo-500"
+                  >+254 743 394 373</a
+                >
               </li>
             </ul>
           </div>
         </div>
 
+        <!-- Newsletter -->
         <div
-          class="border-t border-slate-700 dark:border-slate-600 mt-12 pt-8 text-center text-slate-400 dark:text-slate-300"
+          class="mt-12 border-t border-gray-300 dark:border-gray-700 pt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center"
+        >
+          <div>
+            <h4
+              class="text-lg font-semibold mb-3 text-gray-900 dark:text-white"
+            >
+              Subscribe to Newsletter
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">
+              Get updates on new projects, insights, and exclusive offers.
+            </p>
+          </div>
+          <form class="flex">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="flex-1 px-4 py-3 rounded-l-md bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+            <button
+              type="submit"
+              class="px-6 bg-indigo-600 hover:bg-indigo-700 rounded-r-md text-white font-semibold transition"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+
+        <!-- Bottom Footer -->
+        <div
+          class="border-t border-gray-300 dark:border-gray-800 mt-10 pt-6 text-center text-gray-600 dark:text-gray-400 text-sm"
         >
           <p>
-            &copy; 2025 Wambia Kennedy. All rights reserved. | Crafted with ❤️
-            for amazing experiences
+            &copy; <span id="year"></span> DesignFolio. All rights reserved. |
+            Built with ❤️ by Wambia Kennedy
           </p>
         </div>
+
+        <!-- Back to top button -->
+        <button
+          onclick="window.scrollTo({top:0,behavior:'smooth'})"
+          class="absolute bottom-6 right-6 w-12 h-12 bg-indigo-600 hover:bg-indigo-700 rounded-full flex items-center justify-center shadow-lg transition text-white"
+        >
+          <i class="fas fa-arrow-up"></i>
+        </button>
       </div>
     </footer>
-
     <script src="js/projects.js"></script>
   </body>
 </html>

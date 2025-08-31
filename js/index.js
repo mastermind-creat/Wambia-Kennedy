@@ -35,14 +35,29 @@
             updateThemeIcons();
         });
         
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            mobileMenu.classList.toggle('opacity-0');
-            mobileMenu.classList.toggle('pointer-events-none');
+            // Mobile menu toggle
+        const menuToggle = document.getElementById("menu-toggle");
+        const menuClose = document.getElementById("menu-close");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("opacity-100");
+            mobileMenu.classList.toggle("pointer-events-auto");
+            mobileMenu.classList.toggle("opacity-0");
+            mobileMenu.classList.toggle("pointer-events-none");
+        });
+
+        menuClose.addEventListener("click", () => {
+            mobileMenu.classList.add("opacity-0", "pointer-events-none");
+            mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
+        });
+
+        // Optional: close menu when a link is clicked
+        document.querySelectorAll("#mobile-menu a").forEach(link => {
+            link.addEventListener("click", () => {
+                mobileMenu.classList.add("opacity-0", "pointer-events-none");
+                mobileMenu.classList.remove("opacity-100", "pointer-events-auto");
+            });
         });
         
         // Close mobile menu when clicking a link
@@ -405,3 +420,5 @@
 
         // Call this when loading a blog post editor page
         setupMarkdownEditor();
+
+        
