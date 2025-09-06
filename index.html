@@ -34,9 +34,12 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css">
-    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <!-- <script src="js/nav.js"></script> -->
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chatbot.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -553,7 +556,6 @@
                 </div>
             </div>
 
-            <!-- Other cards remain unchanged but with updated percentages -->
             <!-- Frontend Development Card -->
             <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-blue-500 transform hover:-translate-y-2">
                 <h3 class="text-2xl font-bold mb-6 flex items-center">
@@ -2155,51 +2157,47 @@
             <div class="whatsapp-pulse"></div>
             <div class="whatsapp-tooltip">Chat with me!</div>
         </a>
-    <!-- Chatbot -->
-    <div id="chatbot" class="chatbot-container" style="display: block !important; visibility: visible !important; z-index: 99999 !important;">
-        <div class="chatbot-toggle" id="chatbot-toggle">
-            <i class="fas fa-comments"></i>
-            <!-- Fallback text in case icon doesn't load -->
-            <span style="display: none;">Chat</span>
-            <span class="notification-dot"></span>
-        </div>
-        
-        <div class="chatbot-window" id="chatbot-window">
-            <div class="chatbot-header">
-                <div class="chatbot-avatar">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div class="chatbot-info">
-                    <h3>Wambia Assistant</h3>
-                    <p class="status">Online</p>
-                </div>
-                <button class="chatbot-close" id="chatbot-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
+
+    <!-----------
+     Chatbot
+     ----------->
+        <div id="chatbot" class="chatbot-container" style="display: block !important; visibility: visible !important; z-index: 99999 !important;">
+            <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Open chatbot">
+                <i class="fas fa-comments"></i>
+                <!-- Fallback text in case icon doesn't load -->
+                <span style="display: none;">Chat</span>
+                <span class="notification-dot"></span>
+            </button>
             
-            <div class="chatbot-messages" id="chatbot-messages">
-                <div class="message bot-message">
-                    <div class="message-content">
-                        <p>👋 Hi there! I'm Wambia's AI assistant. How can I help you today?</p>
-                        <div class="quick-replies">
-                            <button class="quick-reply" data-message="Tell me about your services">Services</button>
-                            <button class="quick-reply" data-message="What are your prices?">Pricing</button>
-                            <button class="quick-reply" data-message="How can I contact you?">Contact</button>
-                            <button class="quick-reply" data-message="Show me your portfolio">Portfolio</button>
-                        </div>
+            <div class="chatbot-window" id="chatbot-window" role="dialog" aria-label="Wambia Assistant chatbot">
+                <div class="chatbot-header">
+                    <div class="chatbot-avatar">
+                        <!-- Using your profile picture for the avatar -->
+                        <img src="images/logo/profile.jpg" alt="Wambia Assistant Avatar" class="avatar-image">
+                        <!-- Fallback robot icon if image fails -->
+                        <i class="fas fa-robot fallback-icon"></i>
                     </div>
+                    <div class="chatbot-info">
+                        <h3>Wambia Assistant</h3>
+                        <p class="status">Online</p>
+                    </div>
+                    <button class="chatbot-close" id="chatbot-close" aria-label="Close chatbot">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="chatbot-messages" id="chatbot-messages" role="log" aria-live="polite">
+                    <!-- Initial message will be added dynamically via JavaScript -->
+                </div>
+                
+                <div class="chatbot-input">
+                    <input type="text" id="chatbot-input-field" placeholder="Type your message..." maxlength="200" aria-label="Chatbot input field">
+                    <button id="chatbot-send" aria-label="Send message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
                 </div>
             </div>
-            
-            <div class="chatbot-input">
-                <input type="text" id="chatbot-input-field" placeholder="Type your message..." maxlength="200">
-                <button id="chatbot-send">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
         </div>
-    </div>
 
     <!-- Service Modals -->
     <div id="service-modal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
