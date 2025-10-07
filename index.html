@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -166,9 +166,9 @@
         
         <!-- Theme Toggle & Mobile Toggle -->
         <div class="flex items-center space-x-2 sm:space-x-4">
-            <button id="theme-toggle" type="button" title="Toggle dark mode" class="p-1.5 sm:p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                <i class="fas fa-moon text-sm sm:text-base" id="icon-moon"></i>
-                <i class="fas fa-sun hidden text-sm sm:text-base" id="icon-sun"></i>
+            <button id="theme-toggle" type="button" title="Toggle light mode" class="p-1.5 sm:p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                <i class="fas fa-moon hidden text-sm sm:text-base" id="icon-moon"></i>
+                <i class="fas fa-sun text-sm sm:text-base" id="icon-sun"></i>
             </button>
             
             <!-- Hamburger Button -->
@@ -1467,18 +1467,18 @@
                     <div class="gallery-carousel-track flex transition-transform duration-500 ease-in-out" id="gallery-carousel-track">
                         <!-- Slide 1: Logo Design -->
                         <div class="gallery-carousel-slide w-full flex-shrink-0">
-                            <div class="relative h-96 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl overflow-hidden">
-                                <img loading="lazy" src="images/graphics/Designer (1).jpeg" alt="Logo Design" class="w-full h-full object-cover">
+                            <div class="relative h-96 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl overflow-hidden cursor-pointer" onclick="openLightbox(0)">
+                                <img loading="lazy" src="images/graphics/logo.png" alt="Logo Design" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
                                     <div class="text-center text-white p-6">
                                         <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                             <i class="fas fa-brush text-2xl"></i>
                                         </div>
                                         <h3 class="text-3xl font-bold mb-2">Logo Design</h3>
-                                        <p class="text-lg mb-6">Modern logo for branding purposes</p>
+                                        <p class="text-lg mb-6">Professional logo for brand identity</p>
                                         <div class="flex gap-3 justify-center">
                                             <button class="btn btn-primary" onclick="scrollToContact()">Hire Me</button>
-                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+logo+design+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1487,38 +1487,38 @@
 
                         <!-- Slide 2: Birthday Card -->
                         <div class="gallery-carousel-slide w-full flex-shrink-0">
-                            <div class="relative h-96 bg-gradient-to-br from-pink-500 to-red-500 rounded-2xl overflow-hidden">
-                                <img loading="lazy" src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Birthday Card" class="w-full h-full object-cover">
+                            <div class="relative h-96 bg-gradient-to-br from-pink-500 to-red-500 rounded-2xl overflow-hidden cursor-pointer" onclick="openLightbox(1)">
+                                <img loading="lazy" src="images/graphics/Birthday.jpg" alt="Birthday Card" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
                                     <div class="text-center text-white p-6">
                                         <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <i class="fas fa-envelope text-2xl"></i>
+                                            <i class="fas fa-birthday-cake text-2xl"></i>
                                         </div>
                                         <h3 class="text-3xl font-bold mb-2">Birthday Card</h3>
                                         <p class="text-lg mb-6">Celebratory card for special occasions</p>
                                         <div class="flex gap-3 justify-center">
                                             <button class="btn btn-primary" onclick="scrollToContact()">Hire Me</button>
-                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+birthday+card+design+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Slide 3: Event Poster -->
+                        <!-- Slide 3: Digital Skills Training -->
                         <div class="gallery-carousel-slide w-full flex-shrink-0">
-                            <div class="relative h-96 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl overflow-hidden">
-                                <img loading="lazy" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Event Poster" class="w-full h-full object-cover">
+                            <div class="relative h-96 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl overflow-hidden cursor-pointer" onclick="openLightbox(2)">
+                                <img loading="lazy" src="images/graphics/digitalskills.png" alt="Digital Skills Training" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
                                     <div class="text-center text-white p-6">
                                         <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <i class="fas fa-image text-2xl"></i>
+                                            <i class="fas fa-laptop-code text-2xl"></i>
                                         </div>
-                                        <h3 class="text-3xl font-bold mb-2">Event Poster</h3>
-                                        <p class="text-lg mb-6">Dynamic poster for event promotion</p>
+                                        <h3 class="text-3xl font-bold mb-2">Digital Skills</h3>
+                                        <p class="text-lg mb-6">Training poster for digital skills development</p>
                                         <div class="flex gap-3 justify-center">
                                             <button class="btn btn-primary" onclick="scrollToContact()">Hire Me</button>
-                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+digital+skills+poster+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1527,7 +1527,7 @@
 
                         <!-- Slide 4: Success Card -->
                         <div class="gallery-carousel-slide w-full flex-shrink-0">
-                            <div class="relative h-96 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl overflow-hidden">
+                            <div class="relative h-96 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl overflow-hidden cursor-pointer" onclick="openLightbox(3)">
                                 <img loading="lazy" src="images/graphics/success.jpg" alt="Success Card Graphic" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
                                     <div class="text-center text-white p-6">
@@ -1538,47 +1538,87 @@
                                         <p class="text-lg mb-6">Motivational card for achievements</p>
                                         <div class="flex gap-3 justify-center">
                                             <button class="btn btn-primary" onclick="scrollToContact()">Hire Me</button>
-                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+success+card+design+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Slide 5: Cup Design -->
+                        <!-- Slide 5: African Cup Design -->
                         <div class="gallery-carousel-slide w-full flex-shrink-0">
-                            <div class="relative h-96 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl overflow-hidden">
-                                <img loading="lazy" src="images/graphics/African_cup.png" alt="Cup Design" class="w-full h-full object-cover">
+                            <div class="relative h-96 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-2xl overflow-hidden cursor-pointer" onclick="openLightbox(4)">
+                                <img loading="lazy" src="images/graphics/African_cup.png" alt="African Cup Design" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
                                     <div class="text-center text-white p-6">
                                         <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <i class="fas fa-coffee text-2xl"></i>
+                                            <i class="fas fa-trophy text-2xl"></i>
                                         </div>
-                                        <h3 class="text-3xl font-bold mb-2">Cup Design</h3>
-                                        <p class="text-lg mb-6">Elegant cup design for cultural themes</p>
+                                        <h3 class="text-3xl font-bold mb-2">African Cup</h3>
+                                        <p class="text-lg mb-6">Cultural cup design with African themes</p>
                                         <div class="flex gap-3 justify-center">
                                             <button class="btn btn-primary" onclick="scrollToContact()">Hire Me</button>
-                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+African+cup+design+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Slide 6: Business Poster -->
+                        <!-- Slide 6: Ajira Digital -->
                         <div class="gallery-carousel-slide w-full flex-shrink-0">
-                            <div class="relative h-96 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl overflow-hidden">
-                                <img loading="lazy" src="images/graphics/Alicia.jpg" alt="Business Poster" class="w-full h-full object-cover">
+                            <div class="relative h-96 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl overflow-hidden cursor-pointer" onclick="openLightbox(5)">
+                                <img loading="lazy" src="images/graphics/ajira.jpg" alt="Ajira Digital" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
                                     <div class="text-center text-white p-6">
                                         <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                             <i class="fas fa-briefcase text-2xl"></i>
                                         </div>
-                                        <h3 class="text-3xl font-bold mb-2">Business Poster</h3>
-                                        <p class="text-lg mb-6">Professional poster for business promotion</p>
+                                        <h3 class="text-3xl font-bold mb-2">Ajira Digital</h3>
+                                        <p class="text-lg mb-6">Professional poster for digital opportunities</p>
                                         <div class="flex gap-3 justify-center">
                                             <button class="btn btn-primary" onclick="scrollToContact()">Hire Me</button>
-                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+design+gallery+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+Ajira+Digital+poster+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 7: Fullstack Foundry -->
+                        <div class="gallery-carousel-slide w-full flex-shrink-0">
+                            <div class="relative h-96 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl overflow-hidden cursor-pointer" onclick="openLightbox(6)">
+                                <img loading="lazy" src="images/graphics/Fullstack Foundry.png" alt="Fullstack Foundry" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                    <div class="text-center text-white p-6">
+                                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <i class="fas fa-code text-2xl"></i>
+                                        </div>
+                                        <h3 class="text-3xl font-bold mb-2">Fullstack Foundry</h3>
+                                        <p class="text-lg mb-6">Tech training program branding</p>
+                                        <div class="flex gap-3 justify-center">
+                                            <button class="btn btn-primary" onclick="scrollToContact()">Hire Me</button>
+                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+Fullstack+Foundry+design+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 8: Project Tracko -->
+                        <div class="gallery-carousel-slide w-full flex-shrink-0">
+                            <div class="relative h-96 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl overflow-hidden cursor-pointer" onclick="openLightbox(7)">
+                                <img loading="lazy" src="images/graphics/projectTracko.jpg" alt="Project Tracko" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                    <div class="text-center text-white p-6">
+                                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <i class="fas fa-project-diagram text-2xl"></i>
+                                        </div>
+                                        <h3 class="text-3xl font-bold mb-2">Project Tracko</h3>
+                                        <p class="text-lg mb-6">Project management application design</p>
+                                        <div class="flex gap-3 justify-center">
+                                            <button class="btn btn-primary" onclick="scrollToContact()">Hire Me</button>
+                                            <a href="https://wa.me/254743394373?text=Hi,+I+saw+your+Project+Tracko+design+and+I+want+to+work+with+you!" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                                         </div>
                                     </div>
                                 </div>
@@ -1603,6 +1643,8 @@
                     <button class="gallery-indicator w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all duration-300" data-slide="3"></button>
                     <button class="gallery-indicator w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all duration-300" data-slide="4"></button>
                     <button class="gallery-indicator w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all duration-300" data-slide="5"></button>
+                    <button class="gallery-indicator w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all duration-300" data-slide="6"></button>
+                    <button class="gallery-indicator w-3 h-3 rounded-full bg-gray-300 dark:bg-gray-600 transition-all duration-300" data-slide="7"></button>
                 </div>
             </div>
         <div class="text-center mt-12">
@@ -1610,6 +1652,51 @@
                     View All Graphics <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
+        </div>
+
+        <!-- Gallery Lightbox -->
+        <div id="gallery-lightbox" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center opacity-0 invisible transition-all duration-300">
+            <div class="relative max-w-4xl max-h-[90vh] mx-4">
+                <!-- Close Button -->
+                <button id="lightbox-close" class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <!-- Lightbox Content -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+                    <div class="relative">
+                        <img id="lightbox-image" src="" alt="" class="w-full h-auto max-h-[70vh] object-contain">
+                        
+                        <!-- Lightbox Info -->
+                        <div class="p-6">
+                            <h3 id="lightbox-title" class="text-2xl font-bold mb-2 text-gray-800 dark:text-white"></h3>
+                            <p id="lightbox-description" class="text-gray-600 dark:text-gray-300 mb-4"></p>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex flex-wrap gap-3">
+                                <button onclick="scrollToContact()" class="px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors">
+                                    <i class="fas fa-paper-plane mr-2"></i>Hire Me
+                                </button>
+                                <a id="lightbox-whatsapp" href="#" target="_blank" class="px-6 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors">
+                                    <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                                </a>
+                                <a id="lightbox-download" href="#" download class="px-6 py-2 bg-gray-500 text-white rounded-full hover:bg-gray-600 transition-colors">
+                                    <i class="fas fa-download mr-2"></i>Download
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <button id="lightbox-prev" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-white rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-700 transition-all duration-300 flex items-center justify-center">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="lightbox-next" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-white rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-700 transition-all duration-300 flex items-center justify-center">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
 
         <!-- CTA Banner -->
         <div class="relative mt-3 mb-3 py-16 px-6 text-center bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 

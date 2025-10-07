@@ -686,6 +686,159 @@
         }
 
         // ==========================
+        // GALLERY LIGHTBOX FUNCTIONALITY
+        // ==========================
+
+        // Gallery data for lightbox
+        const galleryData = [
+            {
+                image: '../images/graphics/logo.png',
+                title: 'Logo Design',
+                description: 'Professional logo design for brand identity and recognition.',
+                whatsapp: 'Hi,+I+saw+your+logo+design+and+I+want+to+work+with+you!'
+            },
+            {
+                image: '../images/graphics/Birthday.jpg',
+                title: 'Birthday Card',
+                description: 'Celebratory birthday card design for special occasions.',
+                whatsapp: 'Hi,+I+saw+your+birthday+card+design+and+I+want+to+work+with+you!'
+            },
+            {
+                image: '../images/graphics/digitalskills.png',
+                title: 'Digital Skills Training',
+                description: 'Training poster design for digital skills development programs.',
+                whatsapp: 'Hi,+I+saw+your+digital+skills+poster+and+I+want+to+work+with+you!'
+            },
+            {
+                image: '../images/graphics/success.jpg',
+                title: 'Success Card',
+                description: 'Motivational success card design for achievements and milestones.',
+                whatsapp: 'Hi,+I+saw+your+success+card+design+and+I+want+to+work+with+you!'
+            },
+            {
+                image: '../images/graphics/African_cup.png',
+                title: 'African Cup Design',
+                description: 'Cultural cup design featuring African themes and heritage.',
+                whatsapp: 'Hi,+I+saw+your+African+cup+design+and+I+want+to+work+with+you!'
+            },
+            {
+                image: '../images/graphics/ajira.jpg',
+                title: 'Ajira Digital',
+                description: 'Professional poster design for digital opportunities and programs.',
+                whatsapp: 'Hi,+I+saw+your+Ajira+Digital+poster+and+I+want+to+work+with+you!'
+            },
+            {
+                image: '../images/graphics/Fullstack Foundry.png',
+                title: 'Fullstack Foundry',
+                description: 'Tech training program branding and visual identity design.',
+                whatsapp: 'Hi,+I+saw+your+Fullstack+Foundry+design+and+I+want+to+work+with+you!'
+            },
+            {
+                image: '../images/graphics/projectTracko.jpg',
+                title: 'Project Tracko',
+                description: 'Project management application UI/UX design and branding.',
+                whatsapp: 'Hi,+I+saw+your+Project+Tracko+design+and+I+want+to+work+with+you!'
+            }
+        ];
+
+        let currentLightboxIndex = 0;
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('gallery-lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxDescription = document.getElementById('lightbox-description');
+            const lightboxWhatsapp = document.getElementById('lightbox-whatsapp');
+            const lightboxDownload = document.getElementById('lightbox-download');
+
+            const data = galleryData[index];
+            
+            lightboxImage.src = data.image;
+            lightboxImage.alt = data.title;
+            lightboxTitle.textContent = data.title;
+            lightboxDescription.textContent = data.description;
+            lightboxWhatsapp.href = `https://wa.me/254743394373?text=${data.whatsapp}`;
+            lightboxDownload.href = data.image;
+            lightboxDownload.download = data.title.replace(/\s+/g, '_') + '.jpg';
+
+            lightbox.classList.remove('opacity-0', 'invisible');
+            lightbox.classList.add('opacity-100', 'visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('gallery-lightbox');
+            lightbox.classList.add('opacity-0', 'invisible');
+            lightbox.classList.remove('opacity-100', 'visible');
+            document.body.style.overflow = 'auto';
+        }
+
+        function showLightboxSlide(index) {
+            if (index >= 0 && index < galleryData.length) {
+                currentLightboxIndex = index;
+                const data = galleryData[index];
+                const lightboxImage = document.getElementById('lightbox-image');
+                const lightboxTitle = document.getElementById('lightbox-title');
+                const lightboxDescription = document.getElementById('lightbox-description');
+                const lightboxWhatsapp = document.getElementById('lightbox-whatsapp');
+                const lightboxDownload = document.getElementById('lightbox-download');
+
+                lightboxImage.src = data.image;
+                lightboxImage.alt = data.title;
+                lightboxTitle.textContent = data.title;
+                lightboxDescription.textContent = data.description;
+                lightboxWhatsapp.href = `https://wa.me/254743394373?text=${data.whatsapp}`;
+                lightboxDownload.href = data.image;
+                lightboxDownload.download = data.title.replace(/\s+/g, '_') + '.jpg';
+            }
+        }
+
+        function initGalleryLightbox() {
+            const lightbox = document.getElementById('gallery-lightbox');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+
+            // Close lightbox
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Navigation
+            lightboxPrev.addEventListener('click', () => {
+                const prevIndex = currentLightboxIndex > 0 ? currentLightboxIndex - 1 : galleryData.length - 1;
+                showLightboxSlide(prevIndex);
+            });
+
+            lightboxNext.addEventListener('click', () => {
+                const nextIndex = currentLightboxIndex < galleryData.length - 1 ? currentLightboxIndex + 1 : 0;
+                showLightboxSlide(nextIndex);
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.classList.contains('visible')) {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    } else if (e.key === 'ArrowLeft') {
+                        const prevIndex = currentLightboxIndex > 0 ? currentLightboxIndex - 1 : galleryData.length - 1;
+                        showLightboxSlide(prevIndex);
+                    } else if (e.key === 'ArrowRight') {
+                        const nextIndex = currentLightboxIndex < galleryData.length - 1 ? currentLightboxIndex + 1 : 0;
+                        showLightboxSlide(nextIndex);
+                    }
+                }
+            });
+        }
+
+        // Make openLightbox globally available
+        window.openLightbox = openLightbox;
+
+        // ==========================
         // INITIALIZE ALL FEATURES
         // ==========================
 
@@ -694,6 +847,7 @@
             showLoadingScreen();
             initTextReveal();
             initGalleryCarousel();
+            initGalleryLightbox();
             initCardTilt();
             animateProgressBars();
             animateSkillsProgress();
