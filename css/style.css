@@ -403,6 +403,464 @@
             pointer-events: auto;
             cursor: pointer;
         }
+
+        /* ==========================
+           GALLERY CAROUSEL STYLES
+           ========================== */
+        
+        .gallery-carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .gallery-carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .gallery-carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .gallery-carousel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+
+        .gallery-carousel-prev,
+        .gallery-carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3rem;
+            height: 3rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: #374151;
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-carousel-prev:hover,
+        .gallery-carousel-next:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-carousel-prev {
+            left: 1rem;
+        }
+
+        .gallery-carousel-next {
+            right: 1rem;
+        }
+
+        .gallery-indicator {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #d1d5db;
+        }
+
+        .gallery-indicator.active {
+            background-color: #3b82f6;
+            transform: scale(1.2);
+        }
+
+        .gallery-indicator:hover {
+            background-color: #6b7280;
+            transform: scale(1.1);
+        }
+
+        /* Dark mode styles */
+        .dark .gallery-carousel-prev,
+        .dark .gallery-carousel-next {
+            background: rgba(31, 41, 55, 0.9);
+            color: #f9fafb;
+        }
+
+        .dark .gallery-carousel-prev:hover,
+        .dark .gallery-carousel-next:hover {
+            background: rgba(31, 41, 55, 1);
+        }
+
+        .dark .gallery-indicator {
+            background-color: #4b5563;
+        }
+
+        .dark .gallery-indicator.active {
+            background-color: #60a5fa;
+        }
+
+        .dark .gallery-indicator:hover {
+            background-color: #9ca3af;
+        }
+
+        /* Responsive carousel styles */
+        @media (max-width: 768px) {
+            .gallery-carousel-prev,
+            .gallery-carousel-next {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+
+            .gallery-carousel-prev {
+                left: 0.5rem;
+            }
+
+            .gallery-carousel-next {
+                right: 0.5rem;
+            }
+
+            .gallery-carousel-slide .text-3xl {
+                font-size: 1.875rem;
+            }
+
+            .gallery-carousel-slide .text-lg {
+                font-size: 1rem;
+            }
+
+            .gallery-carousel-slide .w-16 {
+                width: 3rem;
+            }
+
+            .gallery-carousel-slide .h-16 {
+                height: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-carousel-prev,
+            .gallery-carousel-next {
+                width: 2rem;
+                height: 2rem;
+            }
+
+            .gallery-carousel-prev {
+                left: 0.25rem;
+            }
+
+            .gallery-carousel-next {
+                right: 0.25rem;
+            }
+
+            .gallery-carousel-slide .text-3xl {
+                font-size: 1.5rem;
+            }
+
+            .gallery-carousel-slide .text-lg {
+                font-size: 0.875rem;
+            }
+
+            .gallery-carousel-slide .w-16 {
+                width: 2.5rem;
+            }
+
+            .gallery-carousel-slide .h-16 {
+                height: 2.5rem;
+            }
+
+            .gallery-carousel-slide .gap-3 {
+                gap: 0.5rem;
+            }
+        }
+
+        /* Carousel slide animations */
+        .gallery-carousel-slide {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Auto-play indicator */
+        .gallery-carousel-container.auto-play .gallery-carousel-track {
+            animation: autoSlide 20s infinite;
+        }
+
+        @keyframes autoSlide {
+            0%, 16.66% { transform: translateX(0%); }
+            16.67%, 33.33% { transform: translateX(-100%); }
+            33.34%, 50% { transform: translateX(-200%); }
+            50.01%, 66.66% { transform: translateX(-300%); }
+            66.67%, 83.33% { transform: translateX(-400%); }
+            83.34%, 100% { transform: translateX(-500%); }
+        }
+
+        /* ==========================
+           MOBILE RESPONSIVENESS FIXES
+           ========================== */
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+
+        /* Ensure all containers fit within viewport */
+        .container {
+            max-width: 100vw;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+
+        /* Enhanced glassmorphism for navbar */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark header {
+            background: rgba(17, 24, 39, 0.85);
+            border-bottom: 1px solid rgba(55, 65, 81, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mobile-specific navbar adjustments */
+        @media (max-width: 640px) {
+            header {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            
+            nav {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            
+            .hamburger {
+                padding: 0.25rem;
+            }
+            
+            .hamburger span {
+                width: 1.25rem;
+                height: 0.125rem;
+            }
+        }
+
+        /* Fix floating elements positioning on mobile */
+        @media (max-width: 640px) {
+            .fixed.bottom-6.right-20 {
+                right: 1rem;
+                bottom: 1rem;
+            }
+            
+            .fixed.bottom-6.left-6 {
+                left: 1rem;
+                bottom: 1rem;
+            }
+            
+            .fixed.bottom-6.right-6 {
+                right: 1rem;
+                bottom: 1rem;
+            }
+            
+            /* Stack floating elements vertically on very small screens */
+            .fixed.bottom-6.right-6 {
+                bottom: 5rem;
+            }
+        }
+
+        /* Ensure all sections fit mobile width */
+        section {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        /* Mobile text sizing improvements */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+                line-height: 1.1;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+                line-height: 1.2;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+                line-height: 1.3;
+            }
+            
+            p {
+                font-size: 0.875rem;
+                line-height: 1.5;
+            }
+        }
+
+        /* Fix button sizing on mobile */
+        @media (max-width: 640px) {
+            .btn, button, a[class*="btn"] {
+                min-height: 2.5rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Fix grid layouts on mobile */
+        @media (max-width: 768px) {
+            .grid {
+                gap: 1rem;
+            }
+            
+            .grid-cols-1 {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 640px) and (max-width: 768px) {
+            .grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .grid-cols-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Fix carousel on mobile */
+        @media (max-width: 640px) {
+            .gallery-carousel-container {
+                margin: 0 -0.75rem;
+                padding: 0 0.75rem;
+            }
+            
+            .gallery-carousel-slide {
+                padding: 0 0.5rem;
+            }
+        }
+
+        /* Fix form elements on mobile */
+        @media (max-width: 640px) {
+            input, textarea, select {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 0.75rem;
+            }
+        }
+
+        /* Fix modal and overlay positioning */
+        @media (max-width: 640px) {
+            .modal, .overlay {
+                padding: 1rem;
+            }
+            
+            .modal-content {
+                margin: 1rem;
+                max-height: calc(100vh - 2rem);
+                overflow-y: auto;
+            }
+        }
+
+        /* Ensure images don't overflow */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Fix table responsiveness */
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+
+        /* Fix flex layouts on mobile */
+        @media (max-width: 640px) {
+            .flex-wrap {
+                flex-wrap: wrap;
+            }
+            
+            .flex-col {
+                flex-direction: column;
+            }
+            
+            .space-x-4 > * + * {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            
+            .space-x-6 > * + * {
+                margin-left: 0;
+                margin-top: 1.5rem;
+            }
+        }
+
+        /* Fix shadow and border issues on mobile */
+        @media (max-width: 640px) {
+            .shadow-xl, .shadow-2xl {
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            }
+            
+            .rounded-2xl {
+                border-radius: 1rem;
+            }
+        }
+
+        /* Fix z-index issues on mobile */
+        @media (max-width: 640px) {
+            .z-50 {
+                z-index: 50;
+            }
+            
+            .z-40 {
+                z-index: 40;
+            }
+            
+            .z-30 {
+                z-index: 30;
+            }
+        }
         
         .gradient-bg {
             background-image: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);

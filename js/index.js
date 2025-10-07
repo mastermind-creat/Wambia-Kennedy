@@ -486,6 +486,206 @@
         }
 
         // ==========================
+        // GALLERY CAROUSEL
+        // ==========================
+
+        function initGalleryCarousel() {
+            const track = document.getElementById('gallery-carousel-track');
+            const prevBtn = document.getElementById('gallery-prev');
+            const nextBtn = document.getElementById('gallery-next');
+            const indicators = document.querySelectorAll('.gallery-indicator');
+            
+            if (!track || !prevBtn || !nextBtn) {
+                console.log('Gallery carousel elements not found');
+                return;
+            }
+
+            let currentSlide = 0;
+            const totalSlides = track.children.length;
+            let isTransitioning = false;
+            let autoPlayInterval;
+
+            // Update carousel position
+            function updateCarousel() {
+                if (isTransitioning) return;
+                
+                const translateX = -currentSlide * 100;
+                track.style.transform = `translateX(${translateX}%)`;
+                
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentSlide);
+                    indicator.classList.toggle('bg-blue-500', index === currentSlide);
+                    indicator.classList.toggle('bg-gray-300', index !== currentSlide);
+                    if (document.documentElement.classList.contains('dark')) {
+                        indicator.classList.toggle('dark:bg-gray-600', index !== currentSlide);
+                    }
+                });
+            }
+
+            // Go to specific slide
+            function goToSlide(slideIndex) {
+                if (isTransitioning || slideIndex === currentSlide) return;
+                
+                isTransitioning = true;
+                currentSlide = slideIndex;
+                updateCarousel();
+                
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 500);
+            }
+
+            // Next slide
+            function nextSlide() {
+                const next = (currentSlide + 1) % totalSlides;
+                goToSlide(next);
+            }
+
+            // Previous slide
+            function prevSlide() {
+                const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+                goToSlide(prev);
+            }
+
+            // Auto-play functionality
+            function startAutoPlay() {
+                autoPlayInterval = setInterval(nextSlide, 5000);
+            }
+
+            function stopAutoPlay() {
+                clearInterval(autoPlayInterval);
+            }
+
+            // Event listeners
+            nextBtn.addEventListener('click', () => {
+                stopAutoPlay();
+                nextSlide();
+                startAutoPlay();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                stopAutoPlay();
+                prevSlide();
+                startAutoPlay();
+            });
+
+            // Indicator clicks
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    stopAutoPlay();
+                    goToSlide(index);
+                    startAutoPlay();
+                });
+            });
+
+            // Touch/swipe support
+            let startX = 0;
+            let startY = 0;
+            let isDragging = false;
+
+            track.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                isDragging = true;
+                stopAutoPlay();
+            });
+
+            track.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+            });
+
+            track.addEventListener('touchend', (e) => {
+                if (!isDragging) return;
+                
+                const endX = e.changedTouches[0].clientX;
+                const endY = e.changedTouches[0].clientY;
+                const diffX = startX - endX;
+                const diffY = startY - endY;
+                
+                // Only trigger if horizontal swipe is more significant than vertical
+                if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+                
+                isDragging = false;
+                startAutoPlay();
+            });
+
+            // Mouse drag support
+            let mouseStartX = 0;
+            let isMouseDragging = false;
+
+            track.addEventListener('mousedown', (e) => {
+                mouseStartX = e.clientX;
+                isMouseDragging = true;
+                stopAutoPlay();
+                e.preventDefault();
+            });
+
+            track.addEventListener('mousemove', (e) => {
+                if (!isMouseDragging) return;
+                e.preventDefault();
+            });
+
+            track.addEventListener('mouseup', (e) => {
+                if (!isMouseDragging) return;
+                
+                const mouseEndX = e.clientX;
+                const diffX = mouseStartX - mouseEndX;
+                
+                if (Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+                
+                isMouseDragging = false;
+                startAutoPlay();
+            });
+
+            // Pause auto-play on hover
+            const carouselContainer = track.closest('.gallery-carousel-container');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+                carouselContainer.addEventListener('mouseleave', startAutoPlay);
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    stopAutoPlay();
+                    prevSlide();
+                    startAutoPlay();
+                } else if (e.key === 'ArrowRight') {
+                    stopAutoPlay();
+                    nextSlide();
+                    startAutoPlay();
+                }
+            });
+
+            // Initialize
+            updateCarousel();
+            startAutoPlay();
+
+            // Pause auto-play when page is not visible
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    stopAutoPlay();
+                } else {
+                    startAutoPlay();
+                }
+            });
+        }
+
+        // ==========================
         // INITIALIZE ALL FEATURES
         // ==========================
 
@@ -493,6 +693,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             showLoadingScreen();
             initTextReveal();
+            initGalleryCarousel();
             initCardTilt();
             animateProgressBars();
             animateSkillsProgress();
