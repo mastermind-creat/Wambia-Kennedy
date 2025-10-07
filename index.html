@@ -74,11 +74,76 @@
     </script>
 </head>
 <body class="text-gray-800 dark:text-gray-200">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 flex items-center justify-center z-50">
+        <div class="text-center text-white">
+            <div class="w-20 h-20 mx-auto mb-4 relative">
+                <div class="absolute inset-0 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                <div class="absolute inset-2 border-4 border-white border-b-transparent rounded-full animate-spin" style="animation-direction: reverse; animation-duration: 0.8s;"></div>
+            </div>
+            <h2 class="text-2xl font-bold mb-2">Wambia Kennedy</h2>
+            <p class="text-lg opacity-80">Loading amazing experience...</p>
+            <div class="w-64 h-1 bg-white bg-opacity-30 rounded-full mt-4 overflow-hidden">
+                <div id="loading-bar" class="h-full bg-white rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
     <div id="particles-js" class="absolute inset-0"></div>
     <!-- Floating background shapes -->
-    <div class="floating-shape shape-1"></div>
-    <div class="floating-shape shape-2"></div>
-    <div class="floating-shape shape-3"></div>
+    <div class="floating-shape shape-1 float-animation"></div>
+    <div class="floating-shape shape-2 float-animation"></div>
+    <div class="floating-shape shape-3 float-animation"></div>
+    
+    <!-- Scroll Progress Indicator -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 z-50">
+        <div id="scroll-progress" class="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 ease-out" style="width: 0%"></div>
+    </div>
+    
+    <!-- Floating Action Menu - Main Menu -->
+    <div class="fixed bottom-6 right-6 z-40">
+        <div id="fab-menu" class="relative">
+            <button id="fab-toggle" class="w-16 h-16 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center pulse-glow floating-icon">
+                <i class="fas fa-plus text-2xl transition-transform duration-300" id="fab-icon"></i>
+            </button>
+            <div id="fab-options" class="absolute bottom-20 right-0 space-y-4 opacity-0 invisible transform scale-75 transition-all duration-300">
+                <a href="#contact" class="w-12 h-12 bg-green-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group floating-icon" title="Contact">
+                    <i class="fas fa-envelope group-hover:scale-110 transition-transform duration-200"></i>
+                </a>
+                <a href="portfolio.html" class="w-12 h-12 bg-purple-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group floating-icon" title="Portfolio">
+                    <i class="fas fa-briefcase group-hover:scale-110 transition-transform duration-200"></i>
+                </a>
+                <a href="#services" class="w-12 h-12 bg-orange-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group floating-icon" title="Services">
+                    <i class="fas fa-cogs group-hover:scale-110 transition-transform duration-200"></i>
+                </a>
+                <a href="#skills" class="w-12 h-12 bg-cyan-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group floating-icon" title="Skills">
+                    <i class="fas fa-code group-hover:scale-110 transition-transform duration-200"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Elements - Left Side -->
+    <div class="fixed bottom-6 left-6 z-40 flex flex-col space-y-4">
+        <!-- WhatsApp Float -->
+        <a href="https://wa.me/254743394373?text=Hi%20Wambia!%20I%20saw%20your%20portfolio%20and%20I'd%20like%20to%20discuss%20a%20project." class="w-14 h-14 bg-green-500 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group floating-icon" title="WhatsApp">
+            <i class="fab fa-whatsapp text-xl group-hover:scale-110 transition-transform duration-200"></i>
+        </a>
+        
+        <!-- Back to Top Button -->
+        <button id="back-to-top" class="w-14 h-14 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 opacity-0 invisible pulse-glow floating-icon">
+            <i class="fas fa-arrow-up text-lg"></i>
+        </button>
+    </div>
+
+    <!-- Floating Elements - Right Side -->
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-4">
+        <!-- Chatbot Toggle - Positioned higher -->
+        <button id="chatbot-toggle" class="w-14 h-14 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group floating-icon pulse-glow" title="Chat with Assistant" aria-label="Open chatbot" style="margin-bottom: 60px;">
+            <i class="fas fa-comments text-xl group-hover:scale-110 transition-transform duration-200"></i>
+            <span class="notification-dot"></span>
+        </button>
+    </div>
     
    <!-- Header & Navigation -->
 <header class="fixed w-full z-50 transition-all duration-300" id="header">
@@ -140,32 +205,42 @@
         <div class="absolute inset-0 gradient-bg opacity-10"></div>
         <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
         
-        <div class="container mx-auto px-6 z-10">
-            <div class="flex flex-col items-center text-center md:text-left md:items-start md:flex-row md:justify-between">
-                <div class="md:w-1/2 animate-fade-in">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Hi, I'm <span class="gradient-text">Wambia Kennedy</span></h1>
-                    <div class="text-xl md:text-2xl mb-8 h-8">
-                        <span id="role-text" class="animate-role font-medium">Web Developer | Graphic Designer | Tech Enthusiast</span>
+        <div class="container mx-auto px-4 sm:px-6 z-10">
+            <div class="flex flex-col items-center text-center lg:text-left lg:items-start lg:flex-row lg:justify-between">
+                <div class="lg:w-1/2 animate-fade-in">
+                    <div class="mb-4">
+                        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold leading-tight bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-lg">
+                            Hi, I'm <span class="bg-gradient-to-r from-pink-500 via-yellow-400 to-green-400 bg-clip-text text-transparent animate-gradient">Wambia Kennedy</span>
+                        </h1>
                     </div>
-                    <p class="text-lg mb-8 max-w-lg">I create beautiful, functional digital experiences that help businesses grow and individuals shine online.</p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-medium hover:opacity-90 transition-opacity shadow-lg">Hire Me</a>
-                        <a href="#services" class="px-8 py-3 border-2 border-blue-500 text-blue-500 dark:text-blue-400 dark:border-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-colors">View Services</a>
-                        <a href="portfolio.html" class="px-8 py-3 border-2 border-blue-500 text-blue-500 dark:text-blue-400 dark:border-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-colors">View Portfolio</a>
+                    <div class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 h-6 sm:h-8">
+                        <span id="role-text" class="animate-role font-medium gradient-text-role">Web Developer | Graphic Designer | Tech Enthusiast</span>
+                    </div>
+                    <p class="text-base sm:text-lg mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 animate-on-scroll delay-200">I create <span class="gradient-text-subtitle">beautiful, functional digital experiences</span> that help businesses grow and individuals shine online.</p>
+                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start animate-on-scroll delay-300">
+                        <a href="#contact" class="px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white rounded-full font-medium hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 btn-magnetic floating-text">
+                            <i class="fas fa-paper-plane mr-2 group-hover:scale-110 transition-transform duration-200"></i>Hire Me
+                        </a>
+                        <a href="#services" class="px-6 sm:px-8 py-3 border-2 border-blue-500 text-blue-500 dark:text-blue-400 dark:border-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-all duration-300 transform hover:-translate-y-1 btn-magnetic floating-text delay-100">
+                            <i class="fas fa-cogs mr-2 group-hover:scale-110 transition-transform duration-200"></i>View Services
+                        </a>
+                        <a href="portfolio.html" class="px-6 sm:px-8 py-3 border-2 border-blue-500 text-blue-500 dark:text-blue-400 dark:border-blue-400 rounded-full font-medium hover:bg-blue-500 hover:text-white dark:hover:bg-blue-900 transition-all duration-300 transform hover:-translate-y-1 btn-magnetic floating-text delay-200">
+                            <i class="fas fa-briefcase mr-2 group-hover:scale-110 transition-transform duration-200"></i>View Portfolio
+                        </a>
                     </div>
                 </div>
                 
-                <div class="mt-12 md:mt-0 md:w-2/5 relative">
-                    <div class="relative">
-                        <img src="images/logo/logo.png" alt="Wambia Kennedy" class="w-100 h-[24rem] md:h-[28rem] rounded-2xl overflow-hidden shadow-xl">
-                        <div class="absolute -bottom-4 -right-4 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-xl">
+                <div class="mt-8 sm:mt-12 lg:mt-0 lg:w-2/5 relative">
+                    <div class="relative max-w-sm mx-auto lg:max-w-none scale-in">
+                        <img src="images/logo/logo.png" alt="Wambia Kennedy" class="w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] object-cover rounded-2xl shadow-xl card-tilt">
+                        <div class="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-xl shadow-xl">
                             <div class="flex items-center">
-                                <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3">
-                                    <i class="fas fa-code text-blue-500 dark:text-blue-400 text-xl"></i>
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-2 sm:mr-3">
+                                    <i class="fas fa-code text-blue-500 dark:text-blue-400 text-lg sm:text-xl"></i>
                                 </div>
                                 <div>
-                                    <p class="font-bold">5+ Years</p>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">Experience</p>
+                                    <p class="font-bold text-sm sm:text-base">5+ Years</p>
+                                    <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Experience</p>
                                 </div>
                             </div>
                         </div>
@@ -176,19 +251,19 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-900 section">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">About Me</h2>
+    <section id="about" class="py-16 sm:py-20 bg-gray-50 dark:bg-gray-900 section section-transition">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 sm:mb-16 gradient-text scroll-reveal">About Me</h2>
             
-            <div class="flex flex-col lg:flex-row items-center lg:items-start lg:justify-between">
-                <div class="lg:w-5/12 mb-12 lg:mb-0">
-                    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
-                        <h3 class="text-2xl font-bold mb-4">Who am I?</h3>
-                        <p class="mb-6">I'm a passionate web developer and designer with over 5 years of experience creating digital solutions that make an impact. I specialize in building responsive, user-friendly websites and applications that help businesses and individuals establish their online presence.</p>
-                        <p class="mb-6">My approach combines technical expertise with creative design thinking to deliver solutions that are not only functional but also visually appealing and engaging for users.</p>
-                        <p>When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or mentoring aspiring developers.</p>
-                        <h3 class="text-2xl font-bold mt-3 mb-4 gradient-text">Fun Fact</h3>
-                        <p>I once designed a personal website that looked so good, I almost hired myself. 😂</p>
+            <div class="flex flex-col lg:flex-row items-center lg:items-start lg:justify-between gap-8 lg:gap-12">
+                <div class="lg:w-5/12 w-full slide-in-left">
+                    <div class="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-xl shadow-lg glass">
+                        <h3 class="text-xl sm:text-2xl font-bold mb-4">Who am I?</h3>
+                        <p class="mb-4 sm:mb-6 text-sm sm:text-base">I'm a passionate web developer and designer with over 5 years of experience creating digital solutions that make an impact. I specialize in building responsive, user-friendly websites and applications that help businesses and individuals establish their online presence.</p>
+                        <p class="mb-4 sm:mb-6 text-sm sm:text-base">My approach combines technical expertise with creative design thinking to deliver solutions that are not only functional but also visually appealing and engaging for users.</p>
+                        <p class="text-sm sm:text-base">When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or mentoring aspiring developers.</p>
+                        <h3 class="text-xl sm:text-2xl font-bold mt-4 sm:mt-6 mb-4 gradient-text">Fun Fact</h3>
+                        <p class="text-sm sm:text-base">I once designed a personal website that looked so good, I almost hired myself. 😂</p>
                     </div>
                     
                     <!-- Leadership -->
@@ -526,482 +601,322 @@
     </section>
 
  <!-- Skills & Technologies Section -->
-<section id="skills" class="py-20 bg-gray-50 dark:bg-gray-900">
-    <div class="container mx-auto px-6 md:px-12 lg:px-24">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">Skills & Technologies</h2>
+<section id="skills" class="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 section-transition relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, #3b82f6 1px, transparent 0); background-size: 20px 20px;"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 gradient-text scroll-reveal">Skills & Technologies</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto scroll-reveal delay-200">Mastering the tools and technologies that power modern web experiences</p>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            <!-- Database Card (Updated with MySQL and GraphQL) -->
-            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-cyan-500 transform hover:-translate-y-2">
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="w-8 h-8 bg-cyan-100 dark:bg-cyan-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-cyan-200 dark:group-hover:bg-cyan-800">
-                        <i class="fas fa-database text-cyan-500 dark:text-cyan-400 transition-transform duration-300 group-hover:rotate-6"></i>
-                    </span>
-                    Database
-                </h3>
-                <div class="space-y-5">
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">MongoDB</span>
-                            <span class="text-sm font-semibold text-green-500 dark:text-green-400">85%</span>
+        <!-- Skills Categories -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            <!-- Frontend Development -->
+            <div class="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/50 dark:border-gray-700/50 transform hover:-translate-y-3 animate-on-scroll card-3d relative overflow-hidden">
+                <!-- Gradient Background -->
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-code text-white text-xl"></i>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[85%]' : 'w-0'"></div>
-                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Frontend Development</h3>
                     </div>
                     
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">PostgreSQL</span>
-                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">80%</span>
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">React & Next.js</span>
+                                <span class="text-sm font-bold text-blue-500">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="95%"></div>
+                            </div>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[80%]' : 'w-0'"></div>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">Vue.js & Nuxt</span>
+                                <span class="text-sm font-bold text-green-500">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-green-500 to-teal-600 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="90%"></div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">MySQL</span>
-                            <span class="text-sm font-semibold text-orange-500 dark:text-orange-400">90%</span>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">TypeScript</span>
+                                <span class="text-sm font-bold text-blue-600">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="88%"></div>
+                            </div>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-orange-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[90%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">GraphQL</span>
-                            <span class="text-sm font-semibold text-pink-500 dark:text-pink-400">75%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-pink-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[75%]' : 'w-0'"></div>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">Tailwind CSS</span>
+                                <span class="text-sm font-bold text-cyan-500">92%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="92%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Frontend Development Card -->
-            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-blue-500 transform hover:-translate-y-2">
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-blue-200 dark:group-hover:bg-blue-800">
-                        <i class="fas fa-laptop-code text-blue-500 dark:text-blue-400 transition-transform duration-300 group-hover:rotate-6"></i>
-                    </span>
-                    Frontend Development
-                </h3>
-                <div class="space-y-5">
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">React.js</span>
-                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">92%</span>
+            <!-- Backend Development -->
+            <div class="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/50 dark:border-gray-700/50 transform hover:-translate-y-3 animate-on-scroll card-3d relative overflow-hidden delay-200">
+                <!-- Gradient Background -->
+                <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-server text-white text-xl"></i>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[92%]' : 'w-0'"></div>
-                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Backend Development</h3>
                     </div>
                     
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Next.js</span>
-                            <span class="text-sm font-semibold text-gray-500 dark:text-gray-400">88%</span>
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">Node.js & Express</span>
+                                <span class="text-sm font-bold text-green-500">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-green-500 to-emerald-600 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="90%"></div>
+                            </div>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-gray-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[88%]' : 'w-0'"></div>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">Python & Django</span>
+                                <span class="text-sm font-bold text-yellow-500">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="85%"></div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Tailwind CSS</span>
-                            <span class="text-sm font-semibold text-cyan-500 dark:text-cyan-400">90%</span>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">PHP & Laravel</span>
+                                <span class="text-sm font-bold text-purple-500">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="88%"></div>
+                            </div>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-cyan-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[90%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Bootstrap</span>
-                            <span class="text-sm font-semibold text-purple-500 dark:text-purple-400">85%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-purple-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[85%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">AJAX</span>
-                            <span class="text-sm font-semibold text-green-500 dark:text-green-400">87%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[87%]' : 'w-0'"></div>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">RESTful APIs</span>
+                                <span class="text-sm font-bold text-indigo-500">92%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="92%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Backend Development Card -->
-            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-green-500 transform hover:-translate-y-2">
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-green-200 dark:group-hover:bg-green-800">
-                        <i class="fas fa-server text-green-500 dark:text-green-400 transition-transform duration-300 group-hover:rotate-6"></i>
-                    </span>
-                    Backend Development
-                </h3>
-                <div class="space-y-5">
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">PHP</span>
-                            <span class="text-sm font-semibold text-purple-500 dark:text-purple-400">85%</span>
+            <!-- Database & Cloud -->
+            <div class="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/50 dark:border-gray-700/50 transform hover:-translate-y-3 animate-on-scroll card-3d relative overflow-hidden delay-300">
+                <!-- Gradient Background -->
+                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-database text-white text-xl"></i>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-purple-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[85%]' : 'w-0'"></div>
-                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Database & Cloud</h3>
                     </div>
                     
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Node.js</span>
-                            <span class="text-sm font-semibold text-green-500 dark:text-green-400">80%</span>
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">MongoDB</span>
+                                <span class="text-sm font-bold text-green-500">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-green-500 to-emerald-600 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="90%"></div>
+                            </div>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[80%]' : 'w-0'"></div>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">PostgreSQL</span>
+                                <span class="text-sm font-bold text-blue-500">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="85%"></div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Express.js</span>
-                            <span class="text-sm font-semibold text-gray-500 dark:text-gray-400">78%</span>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">AWS & Vercel</span>
+                                <span class="text-sm font-bold text-orange-500">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-orange-500 to-red-500 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="88%"></div>
+                            </div>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-gray-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[78%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    <!-- NEW Languages -->
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">C++</span>
-                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">85%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[85%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">C#</span>
-                            <span class="text-sm font-semibold text-indigo-500 dark:text-indigo-400">83%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-indigo-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[83%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">C</span>
-                            <span class="text-sm font-semibold text-red-500 dark:text-red-400">80%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-red-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[80%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">ASP.NET Core</span>
-                            <span class="text-sm font-semibold text-teal-500 dark:text-teal-400">78%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-teal-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[78%]' : 'w-0'"></div>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">Docker & Kubernetes</span>
+                                <span class="text-sm font-bold text-blue-600">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="80%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Mobile Fullstack Card -->
-            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-yellow-500 transform hover:-translate-y-2">
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="w-8 h-8 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-yellow-200 dark:group-hover:bg-yellow-800">
-                        <i class="fas fa-mobile-alt text-yellow-500 dark:text-yellow-400 transition-transform duration-300 group-hover:rotate-6"></i>
-                    </span>
-                    Mobile Fullstack
-                </h3>
-                <div class="space-y-5">
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">MERN Stack</span>
-                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">82%</span>
+            <!-- Design & Tools -->
+            <div class="group bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-200/50 dark:border-gray-700/50 transform hover:-translate-y-3 animate-on-scroll card-3d relative overflow-hidden delay-400">
+                <!-- Gradient Background -->
+                <div class="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div class="relative z-10">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-palette text-white text-xl"></i>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[82%]' : 'w-0'"></div>
-                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Design & Tools</h3>
                     </div>
                     
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Responsive Design</span>
-                            <span class="text-sm font-semibold text-green-500 dark:text-green-400">90%</span>
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">Figma & Adobe XD</span>
+                                <span class="text-sm font-bold text-pink-500">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-pink-500 to-purple-600 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="95%"></div>
+                            </div>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[90%]' : 'w-0'"></div>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">Photoshop & Illustrator</span>
+                                <span class="text-sm font-bold text-orange-500">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-orange-500 to-pink-500 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="90%"></div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Progressive Web Apps</span>
-                            <span class="text-sm font-semibold text-purple-500 dark:text-purple-400">75%</span>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">Git & GitHub</span>
+                                <span class="text-sm font-bold text-gray-600">92%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-gray-600 to-gray-800 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="92%"></div>
+                            </div>
                         </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-purple-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[75%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">RESTful APIs</span>
-                            <span class="text-sm font-semibold text-red-500 dark:text-red-400">85%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-red-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[85%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DevOps & Tools Card -->
-            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-orange-500 transform hover:-translate-y-2">
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="w-8 h-8 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-orange-200 dark:group-hover:bg-orange-800">
-                        <i class="fas fa-tools text-orange-500 dark:text-orange-400 transition-transform duration-300 group-hover:rotate-6"></i>
-                    </span>
-                    DevOps & Tools
-                </h3>
-                <div class="space-y-5">
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Git & GitHub</span>
-                            <span class="text-sm font-semibold text-gray-500 dark:text-gray-400">90%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-gray-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[90%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">AWS Basics</span>
-                            <span class="text-sm font-semibold text-orange-500 dark:text-orange-400">70%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-orange-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[70%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">CI/CD</span>
-                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">75%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[75%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Linux/Ubuntu</span>
-                            <span class="text-sm font-semibold text-yellow-500 dark:text-yellow-400">80%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-yellow-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[80%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    <!-- NEW Tools -->
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Supabase</span>
-                            <span class="text-sm font-semibold text-green-500 dark:text-green-400">80%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[80%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Firebase</span>
-                            <span class="text-sm font-semibold text-yellow-500 dark:text-yellow-400">82%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-yellow-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[82%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">WordPress</span>
-                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">85%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[85%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Lovable</span>
-                            <span class="text-sm font-semibold text-pink-500 dark:text-pink-400">75%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-pink-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[75%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Vercel / Netlify / GitHub Pages</span>
-                            <span class="text-sm font-semibold text-indigo-500 dark:text-indigo-400">90%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-indigo-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[90%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Hosting & Deployments</span>
-                            <span class="text-sm font-semibold text-red-500 dark:text-red-400">88%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-red-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[88%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Computer Training Card -->
-            <div class="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-l-4 border-pink-500 transform hover:-translate-y-2">
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="w-8 h-8 bg-pink-100 dark:bg-pink-900 rounded-full flex items-center justify-center mr-3 transition-colors duration-300 group-hover:bg-pink-200 dark:group-hover:bg-pink-800">
-                        <i class="fas fa-chalkboard-teacher text-pink-500 dark:text-pink-400 transition-transform duration-300 group-hover:rotate-6"></i>
-                    </span>
-                    Computer Training
-                </h3>
-                <div class="space-y-5">
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Programming Basics</span>
-                            <span class="text-sm font-semibold text-blue-500 dark:text-blue-400">95%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-blue-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[95%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Technical Documentation</span>
-                            <span class="text-sm font-semibold text-green-500 dark:text-green-400">90%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-green-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[90%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Student Mentoring</span>
-                            <span class="text-sm font-semibold text-purple-500 dark:text-purple-400">92%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-purple-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[92%]' : 'w-0'"></div>
-                        </div>
-                    </div>
-                    
-                    <div x-data="{ shown: false }" x-intersect="shown = true">
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="font-medium">Curriculum Development</span>
-                            <span class="text-sm font-semibold text-red-500 dark:text-red-400">88%</span>
-                        </div>
-                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div class="bg-red-500 h-2.5 rounded-full transition-all duration-1000 ease-out" :class="shown ? 'w-[88%]' : 'w-0'"></div>
+                        
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-semibold text-gray-700 dark:text-gray-300">VS Code & Terminal</span>
+                                <span class="text-sm font-bold text-blue-500">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full transition-all duration-1000 ease-out skill-progress" data-width="95%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tools I Love Using -->
-        <h3 class="text-2xl font-bold text-center mb-12 relative">
-            <span class="relative z-10 px-4 bg-gray-50 dark:bg-gray-900">Tools I ❤️ Using</span>
-            <span class="absolute top-1/2 left-0 right-0 h-px bg-gray-300 dark:bg-gray-700 -z-0"></span>
-        </h3>
-        
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-            <!-- Git & GitHub (Featured) -->
-            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-gray-300 dark:border-gray-600">
-                <div class="absolute inset-0 bg-gradient-to-br from-gray-500 to-gray-800 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                <div class="relative z-10 flex flex-col items-center">
-                    <i class="fab fa-github text-4xl mb-3 transition-transform duration-300 group-hover:scale-110" style="color: #333;"></i>
-                    <span class="text-gray-800 dark:text-white font-medium block text-center">Git & GitHub</span>
-                    <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">Daily Driver</span>
+        <!-- Tech Stack Grid -->
+        <div class="text-center mb-12">
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-8 scroll-reveal">Tech Stack</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6">
+                <!-- Tech Icons -->
+                <div class="tech-icon group">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-2">
+                        <i class="fab fa-react text-2xl text-blue-500"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mt-2 block">React</span>
                 </div>
-                <div class="absolute bottom-0 left-0 right-0 h-1 bg-gray-500 dark:bg-gray-400 group-hover:h-2 transition-all duration-300"></div>
-            </div>
-            
-            <!-- VS Code -->
-            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
-                <div class="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                <i class="fas fa-code text-blue-500 dark:text-blue-400 text-4xl mb-3 transition-transform duration-300 group-hover:scale-110"></i>
-                <span class="text-gray-800 dark:text-white font-medium block text-center">VS Code</span>
-            </div>
-            
-            <!-- Docker -->
-            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
-                <div class="absolute inset-0 bg-blue-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                <i class="fab fa-docker text-blue-400 dark:text-blue-300 text-4xl mb-3 transition-transform duration-300 group-hover:scale-110"></i>
-                <span class="text-gray-800 dark:text-white font-medium block text-center">Docker</span>
-            </div>
-            
-            <!-- Postman -->
-            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
-                <div class="absolute inset-0 bg-orange-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                <i class="fas fa-cloud text-orange-500 dark:text-orange-400 text-4xl mb-3 transition-transform duration-300 group-hover:scale-110"></i>
-                <span class="text-gray-800 dark:text-white font-medium block text-center">Postman</span>
-            </div>
-            
-            <!-- Figma -->
-            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
-                <div class="absolute inset-0 bg-pink-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                <i class="fab fa-figma text-pink-500 dark:text-pink-400 text-4xl mb-3 transition-transform duration-300 group-hover:scale-110"></i>
-                <span class="text-gray-800 dark:text-white font-medium block text-center">Figma</span>
-            </div>
-            
-            <!-- Terminal -->
-            <div class="group relative overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-gray-700">
-                <div class="absolute inset-0 bg-gray-700 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                <i class="fas fa-terminal text-gray-700 dark:text-gray-300 text-4xl mb-3 transition-transform duration-300 group-hover:scale-110"></i>
-                <span class="text-gray-800 dark:text-white font-medium block text-center">Terminal</span>
+                
+                <div class="tech-icon group">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-2">
+                        <i class="fab fa-vue text-2xl text-green-500"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mt-2 block">Vue.js</span>
+                </div>
+                
+                <div class="tech-icon group">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-2">
+                        <i class="fab fa-node-js text-2xl text-green-600"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mt-2 block">Node.js</span>
+                </div>
+                
+                <div class="tech-icon group">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-2">
+                        <i class="fab fa-python text-2xl text-yellow-500"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mt-2 block">Python</span>
+                </div>
+                
+                <div class="tech-icon group">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-2">
+                        <i class="fab fa-php text-2xl text-purple-500"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mt-2 block">PHP</span>
+                </div>
+                
+                <div class="tech-icon group">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-2">
+                        <i class="fab fa-aws text-2xl text-orange-500"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mt-2 block">AWS</span>
+                </div>
+                
+                <div class="tech-icon group">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-2">
+                        <i class="fab fa-docker text-2xl text-blue-600"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mt-2 block">Docker</span>
+                </div>
+                
+                <div class="tech-icon group">
+                    <div class="w-16 h-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group-hover:scale-110 group-hover:-translate-y-2">
+                        <i class="fab fa-git-alt text-2xl text-red-500"></i>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600 dark:text-gray-400 mt-2 block">Git</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-gray-50 dark:bg-gray-900 section">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">My Services</h2>
+    <section id="services" class="py-16 sm:py-20 bg-gray-50 dark:bg-gray-900 section">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 sm:mb-16 gradient-text">My Services</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 <!-- Service 1 -->
-                <div class="service-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-all duration-300">
+                <div class="service-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md transition-all duration-300 animate-on-scroll delay-100 card-tilt">
                     <div class="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-6">
                         <i class="fas fa-file-invoice-dollar text-blue-500 dark:text-blue-400 text-2xl"></i>
                     </div>
@@ -1213,12 +1128,12 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 section">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">My Projects</h2>
+    <section id="projects" class="py-16 sm:py-20 section">
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 sm:mb-16 gradient-text">My Projects</h2>
 
             <!-- Project Pricing Tiers -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-12 sm:mb-16">
                 <!-- Basic Tier -->
                 <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border-2 border-gray-200 dark:border-gray-700">
                     <h3 class="text-xl font-bold mb-4 text-center">Basic</h3>
@@ -2169,31 +2084,11 @@
 
 
 
-    <!-- WhatsApp Floating Button -->
-        <a href="https://wa.me/254743394373?text=Hi%20Wambia!%20I%20saw%20your%20portfolio%20and%20I'd%20like%20to%20discuss%20a%20project." 
-        target="_blank" 
-        class="whatsapp-float"
-        title="Chat on WhatsApp"
-        style="position: fixed !important; bottom: 2rem !important; left: 2rem !important; display: flex !important; visibility: visible !important; opacity: 1 !important; z-index: 99999 !important; pointer-events: auto !important;">
-            <div class="whatsapp-icon">
-                <i class="fab fa-whatsapp"></i>
-                <!-- Fallback text in case icon doesn't load -->
-                <span style="display: none;">WhatsApp</span>
-            </div>
-            <div class="whatsapp-pulse"></div>
-            <div class="whatsapp-tooltip">Chat with me!</div>
-        </a>
 
     <!-----------
      Chatbot
      ----------->
         <div id="chatbot" class="chatbot-container" style="display: block !important; visibility: visible !important; z-index: 99999 !important;">
-            <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Open chatbot">
-                <i class="fas fa-comments"></i>
-                <!-- Fallback text in case icon doesn't load -->
-                <span style="display: none;">Chat</span>
-                <span class="notification-dot"></span>
-            </button>
             
             <div class="chatbot-window" id="chatbot-window" role="dialog" aria-label="Wambia Assistant chatbot">
                 <div class="chatbot-header">
