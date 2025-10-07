@@ -349,6 +349,60 @@
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
         }
+
+        /* Mobile Navigation Fixes */
+        @media (max-width: 768px) {
+            header {
+                padding: 0.5rem 0;
+            }
+            
+            nav {
+                padding: 0.5rem 1rem;
+            }
+            
+            .hamburger {
+                cursor: pointer;
+                z-index: 1000;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+        }
+
+        /* FAB Clickability Fix */
+        #fab-toggle {
+            cursor: pointer;
+            pointer-events: auto;
+            z-index: 1000;
+        }
+
+        #fab-toggle:active {
+            transform: scale(0.95);
+        }
+
+        #fab-options {
+            pointer-events: auto;
+        }
+
+        #fab-options a {
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        /* Ensure FAB is always clickable */
+        .floating-icon {
+            pointer-events: auto;
+            cursor: pointer;
+        }
         
         .gradient-bg {
             background-image: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);

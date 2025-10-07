@@ -101,7 +101,7 @@
     </div>
     
     <!-- Floating Action Menu - Main Menu -->
-    <div class="fixed bottom-6 right-6 z-40">
+    <div class="fixed bottom-6 right-20 z-40">
         <div id="fab-menu" class="relative">
             <button id="fab-toggle" class="w-16 h-16 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center pulse-glow floating-icon">
                 <i class="fas fa-plus text-2xl transition-transform duration-300" id="fab-icon"></i>
@@ -146,11 +146,11 @@
     </div>
     
    <!-- Header & Navigation -->
-<header class="fixed w-full z-50 transition-all duration-300" id="header">
-    <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+<header class="fixed w-full z-50 transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm" id="header">
+    <nav class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
         <a href="#home" class="flex items-center gap-2">
-            <img src="images/logo/logo.png" alt="Wambia Kennedy Logo" class="w-10 h-10 rounded-full shadow-lg">
-            <span class="text-2xl font-bold gradient-text hidden md:inline">Wambia</span>
+            <img src="images/logo/logo.png" alt="Wambia Kennedy Logo" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full shadow-lg">
+            <span class="text-lg sm:text-xl md:text-2xl font-bold gradient-text hidden sm:inline">Wambia</span>
         </a>
         
         <!-- Desktop Menu -->
@@ -165,17 +165,17 @@
         </div>
         
         <!-- Theme Toggle & Mobile Toggle -->
-        <div class="flex items-center space-x-4">
-            <button id="theme-toggle" type="button" title="Toggle dark mode" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                <i class="fas fa-moon" id="icon-moon"></i>
-                <i class="fas fa-sun hidden" id="icon-sun"></i>
+        <div class="flex items-center space-x-2 sm:space-x-4">
+            <button id="theme-toggle" type="button" title="Toggle dark mode" class="p-1.5 sm:p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                <i class="fas fa-moon text-sm sm:text-base" id="icon-moon"></i>
+                <i class="fas fa-sun hidden text-sm sm:text-base" id="icon-sun"></i>
             </button>
             
             <!-- Hamburger Button -->
-            <button class="md:hidden hamburger" id="menu-toggle" type="button" title="Open mobile menu">
-                <span class="block w-6 h-0.5 bg-gray-800 dark:bg-white mb-1.5"></span>
-                <span class="block w-6 h-0.5 bg-gray-800 dark:bg-white mb-1.5"></span>
-                <span class="block w-6 h-0.5 bg-gray-800 dark:bg-white"></span>
+            <button class="md:hidden hamburger p-1.5 sm:p-2" id="menu-toggle" type="button" title="Open mobile menu">
+                <span class="block w-5 h-0.5 bg-gray-800 dark:bg-white mb-1.5"></span>
+                <span class="block w-5 h-0.5 bg-gray-800 dark:bg-white mb-1.5"></span>
+                <span class="block w-5 h-0.5 bg-gray-800 dark:bg-white"></span>
             </button>
         </div>
     </nav>
@@ -2071,10 +2071,10 @@
         <p>&copy; <span id="year"></span> DesignFolio. All rights reserved. | Built with ❤️ by Wambia Kennedy</p>
         </div>
 
-        <!-- Back to top button -->
+        <!-- Back to top button
         <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="absolute bottom-6 right-6 w-12 h-12 bg-indigo-600 hover:bg-indigo-700 rounded-full flex items-center justify-center shadow-lg transition text-white">
         <i class="fas fa-arrow-up"></i>
-        </button>
+        </button> -->
     </div>
     </footer>
 

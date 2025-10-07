@@ -384,13 +384,12 @@
 
             // Close menu when clicking outside
             document.addEventListener('click', (e) => {
-                if (!fabToggle.contains(e.target) && !fabOptions.contains(e.target)) {
-                    if (isOpen) {
-                        fabOptions.classList.add('opacity-0', 'invisible', 'scale-75');
-                        fabOptions.classList.remove('opacity-100', 'visible', 'scale-100');
-                        fabIcon.style.transform = 'rotate(0deg)';
-                        isOpen = false;
-                    }
+                if (isOpen && !fabToggle.contains(e.target) && !fabOptions.contains(e.target)) {
+                    isOpen = false;
+                    fabOptions.classList.add('opacity-0', 'invisible', 'scale-75');
+                    fabOptions.classList.remove('opacity-100', 'visible', 'scale-100');
+                    fabOptions.style.pointerEvents = 'none';
+                    fabIcon.style.transform = 'rotate(0deg)';
                 }
             });
         }
