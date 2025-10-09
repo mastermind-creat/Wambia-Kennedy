@@ -505,11 +505,12 @@
             let isTransitioning = false;
             let autoPlayInterval;
 
-            // Update carousel position
+            // Update carousel position with smooth transition
             function updateCarousel() {
                 if (isTransitioning) return;
                 
                 const translateX = -currentSlide * 100;
+                track.style.transition = 'transform 0.5s ease-in-out';
                 track.style.transform = `translateX(${translateX}%)`;
                 
                 // Update indicators
@@ -523,9 +524,9 @@
                 });
             }
 
-            // Go to specific slide
+            // Go to specific slide with proper loop handling
             function goToSlide(slideIndex) {
-                if (isTransitioning || slideIndex === currentSlide) return;
+                if (isTransitioning) return;
                 
                 isTransitioning = true;
                 currentSlide = slideIndex;
@@ -536,16 +537,30 @@
                 }, 500);
             }
 
-            // Next slide
+            // Next slide with infinite loop
             function nextSlide() {
-                const next = (currentSlide + 1) % totalSlides;
-                goToSlide(next);
+                if (isTransitioning) return;
+                
+                isTransitioning = true;
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel();
+                
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 500);
             }
 
-            // Previous slide
+            // Previous slide with infinite loop
             function prevSlide() {
-                const prev = (currentSlide - 1 + totalSlides) % totalSlides;
-                goToSlide(prev);
+                if (isTransitioning) return;
+                
+                isTransitioning = true;
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+                
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 500);
             }
 
             // Auto-play functionality

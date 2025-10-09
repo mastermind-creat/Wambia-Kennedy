@@ -595,18 +595,23 @@
             }
         }
 
-        /* Auto-play indicator */
+        /* Auto-play indicator - removed CSS animation in favor of JavaScript control */
         .gallery-carousel-container.auto-play .gallery-carousel-track {
-            animation: autoSlide 20s infinite;
+            /* CSS animation removed - using JavaScript for better control */
         }
 
-        @keyframes autoSlide {
-            0%, 16.66% { transform: translateX(0%); }
-            16.67%, 33.33% { transform: translateX(-100%); }
-            33.34%, 50% { transform: translateX(-200%); }
-            50.01%, 66.66% { transform: translateX(-300%); }
-            66.67%, 83.33% { transform: translateX(-400%); }
-            83.34%, 100% { transform: translateX(-500%); }
+        /* Smooth carousel transitions */
+        .gallery-carousel-track {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        /* Enhanced carousel slide animations */
+        .gallery-carousel-slide {
+            transition: all 0.3s ease;
+        }
+
+        .gallery-carousel-slide:hover {
+            transform: scale(1.02);
         }
 
         /* ==========================
