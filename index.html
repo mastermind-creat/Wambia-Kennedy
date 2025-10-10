@@ -2124,14 +2124,23 @@
 
         <!-- Newsletter -->
         <div class="mt-12 border-t border-gray-300 dark:border-gray-700 pt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        <div>
-            <h4 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Subscribe to Newsletter</h4>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">Get updates on new projects, insights, and exclusive offers.</p>
-        </div>
-        <form class="flex">
-            <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-l-md bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <button type="submit" class="px-6 bg-indigo-600 hover:bg-indigo-700 rounded-r-md text-white font-semibold transition">Subscribe</button>
-        </form>
+            <div>
+                <h4 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Subscribe to Newsletter</h4>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">Get updates on new projects, insights, and exclusive offers.</p>
+            </div>
+            <form class="w-full flex flex-col sm:flex-row gap-3">
+                <input 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    class="w-full sm:w-auto flex-1 px-4 py-3 rounded-md sm:rounded-l-md sm:rounded-r-none bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+                >
+                <button 
+                    type="submit" 
+                    class="w-full sm:w-auto px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-md sm:rounded-r-md sm:rounded-l-none text-white font-semibold transition duration-200"
+                >
+                    Subscribe
+                </button>
+            </form>
         </div>
 
         <!-- Bottom Footer -->
